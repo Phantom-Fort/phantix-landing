@@ -1,0 +1,97 @@
+import React, { useEffect, useState } from "react";
+import { ArrowRight, BookOpen, PlayCircle } from "lucide-react";
+import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, PLATFORM_URL } from "@/lib/links";
+import { cx } from "@/lib/utils";
+
+export function Nav() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", fn, { passive: true });
+    fn();
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  return (
+    <header
+      className={cx(
+        "fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl transition-all duration-300",
+        scrolled ? "border-white/10 bg-phantix-950/85 py-0" : "border-white/5 bg-phantix-950/60",
+      )}
+    >
+      <div className="mx-auto flex max-w-7xl items-center gap-3 px-6 py-3.5">
+        <img src="/logo-white.png" alt="Phantix" className="h-11 w-12 object-contain" />
+        <div className="leading-tight">
+          <p className="font-display text-[15px] font-bold text-white">Phantix</p>
+          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-gold-400">Security Solutions</p>
+        </div>
+        <nav className="ml-10 hidden items-center gap-6 text-sm text-slate-400 lg:flex">
+          <a href="#privacy" className="transition-colors hover:text-white">Privacy-first</a>
+          <a href="#capabilities" className="transition-colors hover:text-white">Capabilities</a>
+          <a href="#pipeline" className="transition-colors hover:text-white">Pipeline</a>
+          <a href="#ai" className="transition-colors hover:text-white">AI</a>
+          <a href="#engines" className="transition-colors hover:text-white">Engines</a>
+          <a href="#pricing" className="transition-colors hover:text-white">Pricing</a>
+          <a href={APP_DOCS_URL} className="transition-colors hover:text-white">Docs</a>
+        </nav>
+        <div className="ml-auto flex items-center gap-2.5">
+          <a href={APP_DOCS_URL} className="btn-ghost hidden !py-2 sm:inline-flex">
+            <BookOpen size={15} /> Documentation
+          </a>
+          <a href={APP_LOGIN_URL} className="btn-secondary hidden !py-2 sm:inline-flex">Sign in</a>
+          <a href={APP_DEMO_URL} className="btn-primary !py-2">
+            <PlayCircle size={15} /> Live demo
+          </a>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer className="border-t border-phantix-700/30 py-10">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="flex flex-wrap items-start justify-between gap-8">
+          <div className="max-w-sm">
+            <div className="flex items-center gap-2.5">
+              <img src="/logo-transparent.png" alt="" className="h-10 w-10 object-contain" />
+              <div>
+                <p className="font-display text-sm font-bold text-white">Phantix Security Solutions</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+              </div>
+            </div>
+            <p className="mt-4 text-xs leading-5 text-slate-500">
+              Privacy-first security operations. Your security data lives in your database — Phantix runs the
+              tooling, never touches the record.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-x-14 gap-y-2 text-xs text-slate-500 sm:grid-cols-3">
+            <div className="space-y-2">
+              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Product</p>
+              <a href="#capabilities" className="block hover:text-slate-300">Capabilities</a>
+              <a href="#pipeline" className="block hover:text-slate-300">Pipeline</a>
+              <a href="#pricing" className="block hover:text-slate-300">Pricing</a>
+            </div>
+            <div className="space-y-2">
+              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Surfaces</p>
+              <a href="https://app.phantix.site" className="block hover:text-slate-300">app.phantix.site</a>
+              <a href={PLATFORM_URL} className="block hover:text-slate-300">platform.phantix.site</a>
+              <a href={APP_DOCS_URL} className="block hover:text-slate-300">Documentation</a>
+            </div>
+            <div className="space-y-2">
+              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Start</p>
+              <a href={APP_DEMO_URL} className="block hover:text-slate-300">Live demo</a>
+              <a href={APP_LOGIN_URL} className="block hover:text-slate-300">Sign in</a>
+              <a href={`${PLATFORM_URL}/register`} className="block hover:text-slate-300">Register</a>
+            </div>
+          </div>
+        </div>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-6 text-[11px] text-slate-600">
+          <span>© 2026 Phantix Security Solutions</span>
+          <span className="font-mono">api/v1 · 326 routes · 11 engines</span>
+        </div>
+      </div>
+    </footer>
+  );
+}
