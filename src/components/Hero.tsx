@@ -75,7 +75,10 @@ export default function Hero() {
             transition={{ delay: 0.75 }}
             className="mt-3.5 text-xs text-slate-600"
           >
-            No account needed — full product on a simulated tenant. Switch to your real organization anytime from the demo.
+            No account needed — full product on a simulated tenant.{" "}
+            <span className="text-slate-500">
+              Live orgs: register on the Platform, generate login links for your operators.
+            </span>
           </motion.p>
 
           <motion.div

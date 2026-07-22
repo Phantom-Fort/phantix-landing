@@ -275,18 +275,18 @@ export function EnginesGrid() {
 // ── Surfaces ──────────────────────────────────────────────────────────────────
 export function Surfaces() {
   const surfaces = [
-    { name: "Org Setup", desc: "Privacy acceptance, email OTP, domain & CAC verification wizard.", token: "Company JWT", href: `${PLATFORM_URL}/login` },
-    { name: "Platform", desc: "Tenant identity, service keys, people, connections and all product modules.", token: "Company / org-user JWT", href: PLATFORM_URL },
-    { name: "Application", desc: "Operator day-to-day: campaigns, findings, risks, reports on app dual tokens.", token: "app_session + device", href: APP_URL },
-    { name: "Docs", desc: "The full implementation canon — auth realms, module deep-dives, 326 routes.", token: "Public", href: APP_DOCS_URL },
+    { name: "Org Setup", desc: "Register your organization, accept privacy, verify email and complete onboarding — all on the management surface.", token: "Company JWT", href: `${PLATFORM_URL}/login` },
+    { name: "Platform", desc: "Manage tenant identity, create service keys, assign dual‑control, and connect your security database.", token: "Company / org‑user JWT", href: PLATFORM_URL },
+    { name: "Application", desc: "Operator day‑to‑day: scans, findings, risks, reports. Sign in with a login link from your admin — no company password needed.", token: "app_session + device", href: APP_URL },
+    { name: "Docs", desc: "The full implementation canon — auth realms, module deep‑dives, 326 API routes.", token: "Public", href: APP_DOCS_URL },
   ];
   return (
     <Section id="platform" className="py-24">
       <motion.div {...fadeUp}>
         <SectionHeading
-          kicker="One platform, four surfaces"
-          title="Purpose-built realms, cleanly separated"
-          body="Management and operations never share a token blob — each surface has its own auth realm, storage and rules."
+          kicker="One platform, two surfaces"
+          title="Management · Operations — cleanly separated"
+          body="Your admin signs in on the Platform (company JWT). Operators get login links — they never touch a company password. Each surface has its own auth realm, storage and rules."
         />
       </motion.div>
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -81,10 +81,10 @@ export function FinalCTA() {
           Take command of your security posture
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-[15px] text-slate-400">
-          Explore the full console on a simulated tenant — no account needed. When you're ready,
-          switch to your real organization from right inside the demo.
+          Explore the product on a simulated demo tenant — no account needed. Ready for real work?
+          Register on the Platform and issue login links for your operators to access the Application.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3.5">
           <a href={APP_DEMO_URL} className="btn-primary !px-7 !py-3 !text-[15px]">
             <PlayCircle size={16} /> Launch the live demo
           </a>
@@ -92,6 +92,10 @@ export function FinalCTA() {
             Register your organization
           </a>
         </div>
+        <p className="mt-4 text-[11px] text-slate-600">
+          Registration happens on <strong className="text-slate-500">platform.phantix.site</strong>.{" "}
+          After setup, you generate login links from the Platform — your team signs in on <strong className="text-slate-500">app.phantix.site</strong>.
+        </p>
       </motion.div>
     </Section>
   );
