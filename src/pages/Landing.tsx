@@ -1,8 +1,8 @@
 import React from "react";
 import { Nav, Footer } from "@/components/chrome";
 import Hero from "@/components/Hero";
-import { Doctrine, PrivacyModel, BoardFluency, Pipeline, Modularity } from "@/components/sections-marketing";
-import { Capabilities, VerificationGate, AIGovernance, EnginesGrid, Surfaces } from "@/components/sections-product";
+import { ProblemCards, Doctrine, PrivacyModel, BoardFluency, Pipeline, HowItWorks, OutcomesSection } from "@/components/sections-marketing";
+import { VerificationGate, AIGovernance } from "@/components/sections-product";
 import { Pricing, FinalCTA } from "@/components/Pricing";
 
 export default function Landing() {
@@ -17,18 +17,40 @@ export default function Landing() {
 
       <Nav />
       <main className="relative">
+        {/* 1. Hero — outcome-first */}
         <Hero />
+
+        {/* 2. Trust (doctrine) — stays early */}
         <Doctrine />
+
+        {/* 3. Problem — pain before gain */}
+        <ProblemCards />
+
+        {/* 4. Privacy model — core differentiator */}
         <PrivacyModel />
-        <Capabilities />
-        <Pipeline />
+
+        {/* 5. Outcomes — 4 pillars, what you get */}
+        <OutcomesSection />
+
+        {/* 6. How it works — user-action steps */}
+        <HowItWorks />
+
+        {/* 7. Verification gate — what ships */}
         <VerificationGate />
+
+        {/* 8. Pipeline — technical proof */}
+        <Pipeline />
+
+        {/* 9. Board fluency — dual audience */}
         <BoardFluency />
+
+        {/* 10. AI governance — trust signal */}
         <AIGovernance />
-        <Modularity />
-        <EnginesGrid />
-        <Surfaces />
+
+        {/* 11. Pricing — live API, NGN */}
         <Pricing />
+
+        {/* 12. Final CTA */}
         <FinalCTA />
       </main>
       <Footer />

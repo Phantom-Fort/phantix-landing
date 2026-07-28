@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Layers, Fingerprint, KeyRound, FileLock2, Database, Eye, EyeOff, CheckCircle2,
   Presentation, LineChart, GraduationCap, Terminal, Radar, Crosshair, ShieldCheck,
-  GitBranch, ArrowDown, Boxes, Share2, Scale,
+  GitBranch, ArrowDown, Boxes, Share2, Scale, Search, Target, FileText, AlertTriangle, TrendingUp, Zap,
 } from "lucide-react";
 import { Section, SectionHeading, fadeUp } from "./Section";
 
@@ -266,6 +266,91 @@ export function Modularity() {
           </div>
         </motion.div>
       </div>
+    </Section>
+  );
+}
+
+// ── Problem / pain cards (3) ───────────────────────────────────────────────────
+export function ProblemCards() {
+  const items = [
+    { icon: <Search size={18} />, title: "Blind spots cost trust", body: "You can't protect what you can't inventory. Most organizations don't have a complete, current picture of what's exposed to the internet." },
+    { icon: <AlertTriangle size={18} />, title: "Scans that cry wolf kill confidence", body: "Raw scanner output buries your team in noise. Without verification, every alert becomes background — and real threats slip through." },
+    { icon: <FileText size={18} />, title: "Reports nobody reads", body: "Executives need business impact and cost of inaction. Engineers need reproduction steps. Most tools deliver neither — just PDFs full of CVEs." },
+  ];
+  return (
+    <Section className="py-20">
+      <motion.div {...fadeUp}>
+        <SectionHeading kicker="The problem" title="Security fails when it's noisy, opaque, or lives on someone else's laptop" body="Three gaps every team faces — before Phantix." />
+      </motion.div>
+      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
+        {items.map((it, i) => (
+          <motion.div key={it.title} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.08 }} className="card p-6">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-severity-critical/10 text-severity-critical">{it.icon}</span>
+            <h3 className="mt-4 font-display text-base font-semibold text-white">{it.title}</h3>
+            <p className="mt-2 text-[13px] leading-6 text-slate-400">{it.body}</p>
+          </motion.div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ── Outcomes (not features) — 4 pillars ────────────────────────────────────────
+export function OutcomesSection() {
+  const pillars = [
+    { icon: <Search size={19} />, label: "Know", title: "See your attack surface clearly", desc: "Continuous asset inventory — domains, subdomains, IPs, APIs, mobile. One dashboard. No surprises.", plan: "Free  >  Premium intel", accent: "blue" as const },
+    { icon: <Target size={19} />, label: "Test", title: "Assess apps, APIs, and hosts", desc: "Scoped scans, VAPT campaigns, web/API/infra testing. Run what you need, when you need it — with time budgets.", plan: "Premium + engagements", accent: "gold" as const },
+    { icon: <TrendingUp size={19} />, label: "Prioritize", title: "Fix what matters first", desc: "Hybrid LikelihoodxImpact scoring + rules engine. P1—P5 priority queue tells you exactly where to start.", plan: "Premium", accent: "red" as const },
+    { icon: <CheckCircle2 size={19} />, label: "Prove", title: "Show the board and the auditor", desc: "Verified-only PDF/DOCX reports, compliance mapping, and a remediation tracker. Walk into every meeting with confidence.", plan: "Premium + packs", accent: "green" as const },
+  ];
+  const colors = { blue: "from-phantix-400/20 to-transparent text-phantix-300", gold: "from-gold-400/20 to-transparent text-gold-400", red: "from-severity-critical/20 to-transparent text-severity-critical", green: "from-emerald-400/20 to-transparent text-emerald-400" };
+  return (
+    <Section id="outcomes" className="py-24">
+      <motion.div {...fadeUp}>
+        <SectionHeading kicker="What you get" title="From blind spots to board-ready reports" body="Every capability maps to an outcome your business cares about — not just another tool checkbox." />
+      </motion.div>
+      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {pillars.map((p, i) => (
+          <motion.div key={p.label} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.55, delay: i * 0.08 }} className="card relative overflow-hidden p-6">
+            <div className={colors[p.accent]} />
+            <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${p.accent === "blue" ? "bg-phantix-600/30 text-phantix-300" : p.accent === "gold" ? "bg-gold-400/15 text-gold-400" : p.accent === "red" ? "bg-severity-critical/10 text-severity-critical" : "bg-emerald-400/10 text-emerald-400"}`}>{p.icon}</span>
+            <div className="mt-4 flex items-center gap-2"><span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{p.label}</span></div>
+            <h3 className="mt-1 font-display text-base font-semibold text-white">{p.title}</h3>
+            <p className="mt-2 text-[13px] leading-6 text-slate-400">{p.desc}</p>
+            <p className="mt-3 text-[11px] font-semibold text-gold-400">{p.plan}</p>
+          </motion.div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ── How it works (pipeline, user-action focused) ───────────────────────────────
+export function HowItWorks() {
+  const steps = [
+    { step: "01", title: "Register & verify", desc: "Create your organization on the Platform. Email OTP verification — no phone number required." },
+    { step: "02", title: "Connect security DB", desc: "Provision a dedicated Postgres. Phantix writes assets, scans, and findings there — never your production database." },
+    { step: "03", title: "Discover assets", desc: "Subdomain enumeration, IP discovery, port scanning, API docs, APK uploads. One inventory, always current." },
+    { step: "04", title: "Run assessments", desc: "Scoped scans and VAPT campaigns. Permissioned, sandboxed, one active job per org. No unintended exposure." },
+    { step: "05", title: "Ship the report", desc: "Verified findings become a board-ready PDF. Risk scores, compliance maps, and a remediation tracker in one package." },
+  ];
+  return (
+    <Section id="how-it-works" className="py-24">
+      <motion.div {...fadeUp}>
+        <SectionHeading kicker="How it works" title="Five steps from signup to delivery" body="Scoped by you. Run by the engines. No PhD required." />
+      </motion.div>
+      <div className="mt-16 space-y-6">
+        {steps.map((s, i) => (
+          <motion.div key={s.step} initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.5, delay: i * 0.07 }} className="flex items-start gap-5 rounded-2xl border border-phantix-700/40 bg-phantix-900/40 p-5">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold-400/15 font-display text-lg font-bold text-gold-400">{s.step}</span>
+            <div>
+              <h3 className="font-display text-base font-semibold text-white">{s.title}</h3>
+              <p className="mt-1 text-[13px] leading-6 text-slate-400">{s.desc}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+      <p className="mt-6 text-center text-xs text-slate-600">Scoped by you. Run by the engines. The record stays under your keys.</p>
     </Section>
   );
 }

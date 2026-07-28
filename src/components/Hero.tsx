@@ -1,7 +1,13 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck, Lock, Database, Eye, PlayCircle, BookOpen } from "lucide-react";
-import { APP_DEMO_URL, APP_DOCS_URL } from "@/lib/links";
+import { ShieldCheck, Lock, Database, Eye, PlayCircle, BookOpen, ArrowRight } from "lucide-react";
+import { APP_DEMO_URL, APP_DOCS_URL, PLATFORM_REGISTER_URL } from "@/lib/links";
+
+const stats = [
+  ["No card", "Free tier"],
+  ["Dual control", "Sensitive actions"],
+  ["Verified only", "Findings that ship"],
+];
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -11,7 +17,7 @@ export default function Hero() {
 
   return (
     <div ref={heroRef} className="relative flex min-h-[100svh] items-center pt-24">
-      <motion.div style={{ y: heroY, opacity: heroOpacity }} className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1.15fr_0.85fr]">
+      <motion.div style={{ y: heroY, opacity: heroOpacity }} className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -20,19 +26,19 @@ export default function Hero() {
             className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-gold-400/8 px-4 py-1.5 text-xs font-medium text-gold-300"
           >
             <ShieldCheck size={13} />
-            Privacy-first security operations — your data never leaves your database
+            Phantix Security Solutions
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.2 }}
-            className="font-display text-[44px] font-bold leading-[1.04] tracking-tight text-white sm:text-[64px]"
+            className="font-display text-[40px] font-bold leading-[1.06] tracking-tight text-white sm:text-[60px]"
           >
-            The command centre for your{" "}
+            Take command of your attack surface{" "}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600 bg-clip-text text-transparent">
-                entire attack surface
+                and own your security data
               </span>
               <motion.span
                 initial={{ scaleX: 0 }}
@@ -51,9 +57,8 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.38 }}
             className="mt-6 max-w-xl text-[17px] leading-8 text-slate-400"
           >
-            Discover assets, run verified VAPT campaigns, prioritize risk with explainable scoring,
-            prove compliance, and ship board-ready reports — from one console built on a
-            <span className="text-slate-200"> dedicated-database privacy model</span>.
+            Discover what you own, test what matters, and deliver verified findings as board-ready reports.{" "}
+            <span className="text-slate-200">Your security inventory lives in your database</span> — Phantix orchestrates the engines.
           </motion.p>
 
           <motion.div
@@ -62,23 +67,22 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.55 }}
             className="mt-9 flex flex-wrap items-center gap-3.5"
           >
-            <a href={APP_DEMO_URL} className="btn-primary !px-6 !py-3 !text-[15px]">
-              <PlayCircle size={16} /> Explore the live demo
+            <a href={PLATFORM_REGISTER_URL} className="btn-primary !px-6 !py-3 !text-[15px]">
+              Get started free <ArrowRight size={16} />
             </a>
-            <a href={APP_DOCS_URL} className="btn-secondary !px-6 !py-3 !text-[15px]">
-              <BookOpen size={16} /> Browse the docs
+            <a href={APP_DEMO_URL} className="btn-secondary !px-6 !py-3 !text-[15px]">
+              <PlayCircle size={16} /> Try the live demo
             </a>
           </motion.div>
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75 }}
-            className="mt-3.5 text-xs text-slate-600"
+            className="mt-4 text-xs text-slate-600"
           >
-            No account needed — full product on a simulated tenant.{" "}
-            <span className="text-slate-500">
-              Live orgs: register on the Platform, generate login links for your operators.
-            </span>
+            No card required for Free. Live orgs register on the Platform.{" "}
+            <span className="text-slate-500">Operators sign in with login links — no shared company password.</span>
           </motion.p>
 
           <motion.div
@@ -87,12 +91,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.85 }}
             className="mt-10 flex flex-wrap gap-x-10 gap-y-4"
           >
-            {[
-              ["326", "API routes"],
-              ["11", "Product engines"],
-              ["100%", "Verified-only reporting"],
-              ["3 min", "Dual-control sessions"],
-            ].map(([v, l]) => (
+            {stats.map(([v, l]) => (
               <div key={l}>
                 <p className="font-display text-2xl font-bold text-white">{v}</p>
                 <p className="text-xs text-slate-500">{l}</p>
@@ -101,7 +100,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Hero visual — eagle + orbiting badges */}
+        {/* Hero visual */}
         <motion.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
