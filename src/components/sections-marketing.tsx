@@ -56,6 +56,86 @@ export function Doctrine() {
   );
 }
 
+// ── Social proof strip ─────────────────────────────────────────────────────────
+export function SocialProof() {
+  const items = [
+    { stat: "326 API routes", label: "one command centre" },
+    { stat: "11 engines", label: "assets → board reports" },
+    { stat: "Verified only", label: "if it isn't verified, it doesn't ship" },
+    { stat: "NGN pricing", label: "built for Nigerian SMEs & security providers" },
+  ];
+  return (
+    <Section className="py-10">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        {items.map((it, i) => (
+          <motion.div
+            key={it.stat}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.45, delay: i * 0.06 }}
+            className="rounded-2xl border border-phantix-700/40 bg-phantix-900/40 px-5 py-4 text-center"
+          >
+            <p className="font-display text-lg font-bold text-gold-400">{it.stat}</p>
+            <p className="mt-0.5 text-[11px] text-slate-500">{it.label}</p>
+          </motion.div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+// ── Trust doctrine (3 principles, sell-first) ─────────────────────────────────
+export function TrustDoctrine() {
+  const items = [
+    {
+      icon: <Layers size={18} />,
+      title: "Defense in depth",
+      body: "No single control is the last line. Scans, verification, correlation and dual control each assume another layer can fail.",
+    },
+    {
+      icon: <Fingerprint size={18} />,
+      title: "Zero trust defaults",
+      body: "Identity on every request — no implicit trust from network location, and every sensitive mutation is gated by dual control.",
+    },
+    {
+      icon: <FileLock2 size={18} />,
+      title: "Least privilege & audit",
+      body: "Least privilege, fail-safe defaults, and an immutable audit trail you can export for compliance — never editable.",
+    },
+  ];
+  return (
+    <Section className="py-20">
+      <div className="mx-auto max-w-3xl text-center">
+        <SectionHeading
+          kicker="Trust doctrine"
+          title="Three principles, one promise"
+          body="Security you can show the board without surrendering your security data."
+        />
+      </div>
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {items.map((it, i) => (
+          <motion.div
+            key={it.title}
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.55, delay: i * 0.08 }}
+            className="rounded-2xl border border-phantix-700/40 bg-phantix-900/50 p-5"
+          >
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-phantix-700/50 text-gold-400">{it.icon}</span>
+            <h3 className="mt-3.5 font-display text-[15px] font-semibold text-white">{it.title}</h3>
+            <p className="mt-1.5 text-[12.5px] leading-5 text-slate-400">{it.body}</p>
+          </motion.div>
+        ))}
+      </div>
+      <motion.p {...fadeUp} className="mt-6 text-center text-xs text-slate-600">
+        The same rules that govern the platform govern the product you use.
+      </motion.p>
+    </Section>
+  );
+}
+
 // ── Privacy model ─────────────────────────────────────────────────────────────
 export function PrivacyModel() {
   const ref = useRef<HTMLDivElement>(null);
@@ -194,24 +274,47 @@ export function Pipeline() {
           body="Every engagement follows the same disciplined flow. Nothing reaches your report without passing the verification gate."
         />
       </motion.div>
-      <div className="relative mt-16">
-        <div className="absolute left-0 right-0 top-[26px] hidden h-px bg-gradient-to-r from-transparent via-phantix-500/50 to-transparent lg:block" />
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-6">
+      <div className="mt-16">
+        {/* Desktop icons + segment lines between nodes only */}
+        <div className="mb-5 hidden grid-cols-6 lg:grid">
+          {steps.map((s, i) => (
+            <div key={s.name} className="relative flex justify-center">
+              {i < steps.length - 1 && (
+                <div
+                  aria-hidden
+                  className="pipeline-line absolute top-1/2 left-[calc(50%+30px)] z-0 h-px w-[calc(100%-60px)] -translate-y-1/2 bg-gradient-to-r from-phantix-400/45 via-phantix-400/70 to-phantix-400/45"
+                />
+              )}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                className="pipeline-node relative z-10 flex h-[52px] w-[52px] items-center justify-center rounded-2xl border border-phantix-600/50 bg-phantix-900 text-gold-400 shadow-card"
+              >
+                {s.icon}
+              </motion.div>
+            </div>
+          ))}
+        </div>
+
+        {/* Labels + copy (icons shown on mobile/tablet only) */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-6 lg:gap-4">
           {steps.map((s, i) => (
             <motion.div
               key={s.name}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-              className="relative"
+              transition={{ duration: 0.5, delay: i * 0.07 }}
+              className="flex flex-col items-center"
             >
-              <div className="relative z-10 mx-auto flex h-[52px] w-[52px] items-center justify-center rounded-2xl border border-phantix-600/50 bg-phantix-900 text-gold-400 shadow-card">
+              <div className="pipeline-node mb-4 flex h-[52px] w-[52px] items-center justify-center rounded-2xl border border-phantix-600/50 bg-phantix-900 text-gold-400 shadow-card lg:hidden">
                 {s.icon}
               </div>
-              <p className="mt-3 text-center font-display text-sm font-semibold text-white">{s.name}</p>
-              <p className="mt-1 text-center font-mono text-[9px] uppercase tracking-wider text-gold-400/70">{s.tools}</p>
-              <p className="mt-2 text-center text-[11.5px] leading-4 text-slate-500">{s.desc}</p>
+              <p className="text-center font-display text-sm font-semibold text-white">{s.name}</p>
+              <p className="mt-1.5 text-center font-mono text-[9px] uppercase tracking-wider text-gold-400/80">{s.tools}</p>
+              <p className="mt-2.5 max-w-[11.5rem] text-center text-[11.5px] leading-relaxed text-slate-500 lg:max-w-none">{s.desc}</p>
             </motion.div>
           ))}
         </div>

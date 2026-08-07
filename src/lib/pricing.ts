@@ -53,7 +53,32 @@ const enterpriseFeatures = [
   "Dedicated success engineer",
 ];
 
+const engagementOffers = [
+  {
+    title: "Full VAPT engagement",
+    detail: "Broad, multi-party approved assessment with correlated attack paths and verified findings.",
+    tag: "Most requested",
+  },
+  {
+    title: "Dynamic mobile / AVD testing",
+    detail: "Deep runtime analysis of Android apps and virtual devices — beyond static APK checks.",
+    tag: "Project",
+  },
+  {
+    title: "AI Pentest Agent",
+    detail: "Autonomous, governed investigation with skills minted only after anonymization + review.",
+    tag: "New",
+  },
+  {
+    title: "White-label deliverables",
+    detail: "MSSP / partner branded reports — your logo on the board-ready package.",
+    tag: "Partners",
+  },
+];
+
 export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTier[] {
+  // NOTE: fallback numbers below are used ONLY when the billing API is unreachable.
+  // The landing must prefer live `/billing/pricing` so prices never go stale in production.
   const fallback = raw ?? { monthly_list_price_ngn: 100000, first_month_price_ngn: 50000, subsequent_monthly_price_ngn: 100000, yearly_price_ngn: 1000000, first_month_discount_percent: 50 };
   const monthly = fallback.monthly_list_price_ngn;
   const firstMonth = fallback.first_month_price_ngn;
@@ -85,6 +110,8 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
     },
   ];
 }
+
+export { engagementOffers };
 
 export const pricingFootnote =
   "Prices in Nigerian Naira (NGN), per company per month. Subscribe on the Platform — pricing updates from Phantix billing. No hidden fees.";

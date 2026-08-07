@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { ArrowRight, BookOpen, PlayCircle } from "lucide-react";
 import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, PLATFORM_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { BrandLogo } from "@/components/BrandLogo";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -20,7 +22,7 @@ export function Nav() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-6 py-3.5">
-        <img src="/logo-white.png" alt="Phantix" className="h-11 w-12 object-contain" />
+        <BrandLogo className="h-11 w-12" lightSrc="/logo-transparent.png" />
         <div className="leading-tight">
           <p className="font-display text-[15px] font-bold text-white">Phantix</p>
           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-gold-400">Security Solutions</p>
@@ -35,6 +37,7 @@ export function Nav() {
           <a href={APP_DOCS_URL} className="transition-colors hover:text-white">Docs</a>
         </nav>
         <div className="ml-auto flex items-center gap-2.5">
+          <ThemeToggle />
           <a href={APP_DOCS_URL} className="btn-ghost hidden !py-2 sm:inline-flex">
             <BookOpen size={15} /> Documentation
           </a>
@@ -55,7 +58,7 @@ export function Footer() {
         <div className="flex flex-wrap items-start justify-between gap-8">
           <div className="max-w-sm">
             <div className="flex items-center gap-2.5">
-              <img src="/logo-transparent.png" alt="" className="h-10 w-10 object-contain" />
+              <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
               <div>
                 <p className="font-display text-sm font-bold text-white">Phantix Security Solutions</p>
                 <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>

@@ -1,15 +1,17 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck, Lock, Database, Eye, PlayCircle, BookOpen, ArrowRight } from "lucide-react";
-import { APP_DEMO_URL, APP_DOCS_URL, PLATFORM_REGISTER_URL } from "@/lib/links";
+import { ShieldCheck, Lock, Database, Eye, BookOpen, ArrowRight } from "lucide-react";
+import { PLATFORM_REGISTER_URL } from "@/lib/links";
+import { useTheme } from "@/lib/theme";
 
 const stats = [
-  ["No card", "Free tier"],
-  ["Dual control", "Sensitive actions"],
-  ["Verified only", "Findings that ship"],
+  ["Privacy-first", "security DB"],
+  ["Dual control", "sensitive actions"],
+  ["Verified only", "findings that ship"],
 ];
 
 export default function Hero() {
+  const { theme } = useTheme();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 140]);
@@ -33,29 +35,30 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.2 }}
-            className="font-display text-[40px] font-bold leading-[1.06] tracking-tight text-white sm:text-[60px]"
+            className="font-display text-[40px] font-bold leading-[1.14] tracking-tight text-white sm:text-[56px] sm:leading-[1.12]"
           >
-            Take command of your attack surface{" "}
-            <span className="relative inline-block">
+            <span className="block">Take command of your attack surface</span>
+            <span className="relative mt-1 inline-block max-w-full pb-3">
               <span className="bg-gradient-to-r from-gold-300 via-gold-400 to-gold-600 bg-clip-text text-transparent">
-                and own your security data
+                without surrendering your security data
               </span>
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ duration: 0.9, delay: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-gold-400 to-transparent"
+                className="absolute bottom-0 left-0 h-[3px] w-full origin-left rounded-full bg-gradient-to-r from-gold-400 to-transparent"
+                aria-hidden
               />
             </span>
           </motion.h1>
 
-          <p className="mt-3 text-[11px] font-mono uppercase tracking-[0.3em] text-gold-400">PROTECT. PREVENT. PERFORM.</p>
+          <p className="mt-5 text-[11px] font-mono uppercase tracking-[0.3em] text-gold-400">PROTECT. PREVENT. PERFORM.</p>
 
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.38 }}
-            className="mt-6 max-w-xl text-[17px] leading-8 text-slate-400"
+            className="mt-5 max-w-xl text-[17px] leading-7 text-slate-400"
           >
             Discover what you own, test what matters, and deliver verified findings as board-ready reports.{" "}
             <span className="text-slate-200">Your security inventory lives in your database</span> — Phantix orchestrates the engines.
@@ -65,13 +68,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="mt-9 flex flex-wrap items-center gap-3.5"
+            className="mt-8 flex flex-wrap items-center gap-3.5"
           >
             <a href={PLATFORM_REGISTER_URL} className="btn-primary !px-6 !py-3 !text-[15px]">
               Get started free <ArrowRight size={16} />
             </a>
-            <a href={APP_DEMO_URL} className="btn-secondary !px-6 !py-3 !text-[15px]">
-              <PlayCircle size={16} /> Try the live demo
+            <a href="#how-it-works" className="btn-secondary !px-6 !py-3 !text-[15px]">
+              <BookOpen size={16} /> See how it works
             </a>
           </motion.div>
 
@@ -79,7 +82,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75 }}
-            className="mt-4 text-xs text-slate-600"
+            className="mt-3.5 max-w-lg text-xs leading-5 text-slate-600"
           >
             No card required for Free. Live orgs register on the Platform.{" "}
             <span className="text-slate-500">Operators sign in with login links — no shared company password.</span>
@@ -89,7 +92,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.85 }}
-            className="mt-10 flex flex-wrap gap-x-10 gap-y-4"
+            className="mt-9 flex flex-wrap gap-x-10 gap-y-4"
           >
             {stats.map(([v, l]) => (
               <div key={l}>
@@ -111,7 +114,8 @@ export default function Hero() {
           <div className="absolute inset-8 rounded-full border border-phantix-600/25" />
           <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_45%,rgba(51,85,181,0.35),transparent_65%)]" />
           <motion.img
-            src="/logo-white.png"
+            key={theme === "dark" ? "logo-dark" : "logo-light"}
+            src={theme === "dark" ? "/logo-white.png" : "/logo-transparent.png"}
             alt="Phantix eagle"
             className="absolute inset-0 m-auto w-[62%] object-contain drop-shadow-[0_0_60px_rgba(51,85,181,0.55)]"
             animate={{ y: [0, -10, 0] }}
