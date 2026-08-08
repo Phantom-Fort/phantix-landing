@@ -117,7 +117,10 @@ export const pricingFootnote =
   "Prices in Nigerian Naira (NGN), per company per month. Subscribe on the Platform — pricing updates from Phantix billing. No hidden fees.";
 
 let _cachedTiers: PricingTier[] | null = null;
-const API_BASE = import.meta.env.VITE_API_BASE as string | undefined;
+const RAW_API_BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
+const API_BASE = RAW_API_BASE
+  ? RAW_API_BASE.replace(/\/+$/, "").replace(/^(?!https?:\/\/|\/)/i, "https://")
+  : RAW_API_BASE;
 
 export async function loadPricing(): Promise<PricingTier[]> {
   if (_cachedTiers) return _cachedTiers;
