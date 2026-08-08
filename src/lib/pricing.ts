@@ -116,7 +116,6 @@ export { engagementOffers };
 export const pricingFootnote =
   "Prices in Nigerian Naira (NGN), per company per month. Subscribe on the Platform — pricing updates from Phantix billing. No hidden fees.";
 
-let _cachedTiers: PricingTier[] | null = null;
 const RAW_API_BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
 const API_BASE = (() => {
   if (!RAW_API_BASE) return RAW_API_BASE;
@@ -126,17 +125,27 @@ const API_BASE = (() => {
   return base;
 })();
 
-export async function loadPricing(): Promise<PricingTier[]> {
-  if (_cachedTiers) return _cachedTiers;
+// The landing must ALWAYS hit `/billing/pricing` so prices never go stale in
+// production. A short in-memory cache (2 min) prevents repeat fetches on every
+// re-render while still refreshing the current billing price over time.
+const CACHE_TTL_MS = 2 * 60_000;
+let _cache: { tiers: PricingTier[]; ts: number } | null = null;
+
+export async function loadPricing(force = false): Promise<PricingTier[]> {
+  const now = Date.now();
+  if (!force && _cache && now - _cache.ts < CACHE_TTL_MS) return _cache.tiers;
+
+  let tiers: PricingTier[];
   try {
-    if (!API_BASE) throw null;
-    const res = await fetch(`${API_BASE}/billing/pricing`);
-    if (!res.ok) throw null;
+    if (!API_BASE) throw new Error("no API base");
+    const res = await fetch(`${API_BASE}/billing/pricing`, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    _cachedTiers = buildPricingTiers(data as BillingPricingResponse);
-    return _cachedTiers;
+    tiers = buildPricingTiers(data as BillingPricingResponse);
   } catch {
-    _cachedTiers = buildPricingTiers(null);
-    return _cachedTiers;
+    // Billing endpoint unreachable — fall back to defaults so the page still renders.
+    tiers = buildPricingTiers(null);
   }
+  _cache = { tiers, ts: now };
+  return tiers;
 }

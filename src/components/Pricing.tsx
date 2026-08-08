@@ -13,7 +13,13 @@ const engagementIcons = [<Crosshair size={16} key="vapt" />, <Smartphone size={1
 export function Pricing() {
   const [tiers, setTiers] = useState<PricingTier[]>([]);
   const [engagementsOpen, setEngagementsOpen] = useState(false);
-  useEffect(() => { loadPricing().then(setTiers); }, []);
+  // Always fetch the current billing price on mount (force bypasses any warm
+  // cache), then re-check every 2 minutes so prices never go stale.
+  useEffect(() => {
+    loadPricing(true).then(setTiers);
+    const t = window.setInterval(() => { loadPricing(true).then(setTiers); }, 2 * 60_000);
+    return () => window.clearInterval(t);
+  }, []);
 
   return (
     <Section id="pricing" className="scroll-mt-20 py-24">
