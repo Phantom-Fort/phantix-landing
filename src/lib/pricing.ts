@@ -118,9 +118,13 @@ export const pricingFootnote =
 
 let _cachedTiers: PricingTier[] | null = null;
 const RAW_API_BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
-const API_BASE = RAW_API_BASE
-  ? RAW_API_BASE.replace(/\/+$/, "").replace(/^(?!https?:\/\/|\/)/i, "https://")
-  : RAW_API_BASE;
+const API_BASE = (() => {
+  if (!RAW_API_BASE) return RAW_API_BASE;
+  let base = RAW_API_BASE.replace(/\/+$/, "").replace(/^(?!https?:\/\/|\/)/i, "https://");
+  if (base.startsWith("/")) return base;
+  if (!/\/api\/v1(?:\/|$)/i.test(base)) base = `${base}/api/v1`;
+  return base;
+})();
 
 export async function loadPricing(): Promise<PricingTier[]> {
   if (_cachedTiers) return _cachedTiers;
