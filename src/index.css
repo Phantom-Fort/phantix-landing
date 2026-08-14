@@ -379,10 +379,14 @@
     @apply my-3 pl-5 space-y-1.5 text-sm text-slate-300 leading-6;
   }
   .prose-doc ul {
-    @apply list-disc marker:text-gold-500;
+    @apply list-disc;
   }
   .prose-doc ol {
-    @apply list-decimal marker:text-gold-500;
+    @apply list-decimal;
+  }
+  .prose-doc ul li::marker,
+  .prose-doc ol li::marker {
+    color: rgb(var(--gold-500));
   }
   .prose-doc a {
     @apply text-gold-400 underline decoration-gold-400/30 underline-offset-2 hover:decoration-gold-400;
