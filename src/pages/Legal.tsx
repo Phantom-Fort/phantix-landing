@@ -31,12 +31,17 @@ function SectionBody({ section }: { section: LegalSection }) {
 
 export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "privacy" }) {
   const [doc, setDoc] = useState<LegalDocument | null>(null);
+  const [loading, setLoading] = useState(true);
   const meta = DOC_META[docKey];
 
   useEffect(() => {
     let active = true;
+    setLoading(true);
     void loadLegalDocument(docKey).then((d) => {
-      if (active) setDoc(d);
+      if (active) {
+        setDoc(d);
+        setLoading(false);
+      }
     });
     return () => {
       active = false;
@@ -83,7 +88,9 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
           )}
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="mt-6 space-y-5">
-            {sections.length > 0 ? (
+            {loading ? (
+              <div className="card p-6 text-sm text-slate-400">Loading {meta.kicker}...</div>
+            ) : sections.length > 0 ? (
               sections.map((s, i) => (
                 <div key={s.id ?? i} className="card p-6">
                   <h2 className="font-display text-base font-semibold text-white">{s.title || `Section ${i + 1}`}</h2>
@@ -94,7 +101,7 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
               <div className="card p-6 text-sm text-slate-400">
                 {doc
                   ? "No sections to display."
-                  : "Could not load the policy from the API. Check that VITE_API_BASE points to a live backend."}
+                  : "Could not load this document right now. Please try again later."}
               </div>
             )}
           </motion.div>
