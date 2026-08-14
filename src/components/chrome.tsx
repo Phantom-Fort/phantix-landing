@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight, BookOpen, PlayCircle } from "lucide-react";
-import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, PLATFORM_URL } from "@/lib/links";
+import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BrandLogo } from "@/components/BrandLogo";
@@ -69,7 +69,7 @@ export function Footer() {
               tooling, never touches the record.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-x-14 gap-y-2 text-xs text-slate-500 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-x-14 gap-y-2 text-xs text-slate-500 sm:grid-cols-4">
             <div className="space-y-2">
               <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Product</p>
               <a href="#capabilities" className="block hover:text-slate-300">Capabilities</a>
@@ -78,7 +78,7 @@ export function Footer() {
             </div>
             <div className="space-y-2">
               <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Surfaces</p>
-              <a href="https://app.phantix.site" className="block hover:text-slate-300">app.phantix.site</a>
+              <a href={APP_URL} className="block hover:text-slate-300">app.phantix.site</a>
               <a href={PLATFORM_URL} className="block hover:text-slate-300">platform.phantix.site</a>
               <a href={APP_DOCS_URL} className="block hover:text-slate-300">Documentation</a>
             </div>
@@ -87,6 +87,12 @@ export function Footer() {
               <a href={APP_DEMO_URL} className="block hover:text-slate-300">Live demo</a>
               <a href={APP_LOGIN_URL} className="block hover:text-slate-300">Sign in</a>
               <a href={`${PLATFORM_URL}/register`} className="block hover:text-slate-300">Register</a>
+            </div>
+            <div className="space-y-2">
+              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Legal</p>
+              <a href="/terms" className="block hover:text-slate-300">Terms of Service</a>
+              <a href="/aup" className="block hover:text-slate-300">Acceptable Use Policy</a>
+              <a href="/privacy" className="block hover:text-slate-300">Privacy Notice</a>
             </div>
           </div>
         </div>
