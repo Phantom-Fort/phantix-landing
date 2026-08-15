@@ -60,8 +60,8 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.38 }}
             className="mt-5 max-w-xl text-[17px] leading-7 text-slate-400"
           >
-            Discover what you own, test what matters, and deliver verified findings as board-ready reports.{" "}
-            <span className="text-slate-200">Your security inventory lives in your database</span> — Phantix orchestrates the engines.
+            Discover what you own, find what actually matters, and get clear next steps.{" "}
+            <span className="text-slate-200">Your security data lives in your database</span> — Without needing a security team. 
           </motion.p>
 
           <motion.div

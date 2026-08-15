@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Layers, Fingerprint, KeyRound, FileLock2, Database, Eye, EyeOff, CheckCircle2,
   Presentation, LineChart, GraduationCap, Terminal, Radar, Crosshair, ShieldCheck,
-  GitBranch, ArrowDown, Boxes, Share2, Scale, Search, Target, FileText, AlertTriangle, TrendingUp, Zap,
+  GitBranch, ArrowDown, Boxes, Share2, Scale, Search, Target, FileText, AlertTriangle, TrendingUp, Zap, Users,
 } from "lucide-react";
 import { Section, SectionHeading, fadeUp } from "./Section";
 
@@ -454,6 +454,62 @@ export function HowItWorks() {
         ))}
       </div>
       <p className="mt-6 text-center text-xs text-slate-600">Scoped by you. Run by the engines. The record stays under your keys.</p>
+    </Section>
+  );
+}
+
+// ── Advisors & Contributors (local credibility) ────────────────────────────────
+// ⚠️ REPLACE the placeholders below with real, PERMISSIONED contributors (4–6 max).
+// Only list people who have explicitly agreed to be named. Frame as community
+// input — never as formal employment.
+const CONTRIBUTORS = [
+  { initials: "••", name: "Contributor name", role: "Offensive security practitioner", org: "Organization" },
+  { initials: "••", name: "Contributor name", role: "GRC & compliance lead", org: "Organization" },
+  { initials: "••", name: "Contributor name", role: "Cloud & identity architect", org: "Organization" },
+  { initials: "••", name: "Contributor name", role: "Application security researcher", org: "Organization" },
+];
+
+export function ContributorsSection() {
+  return (
+    <Section id="contributors" className="py-20">
+      <motion.div {...fadeUp}>
+        <SectionHeading
+          kicker="Community"
+          title="Advisors & Contributors"
+          body="Built with input from the Nigerian security community — practitioners and leaders who helped shape how Phantix works and what ships."
+        />
+      </motion.div>
+
+      <div className="mx-auto mt-14 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-2">
+        {CONTRIBUTORS.map((c, i) => (
+          <motion.div
+            key={`${c.name}-${i}`}
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.07 }}
+            className="flex items-center gap-4 rounded-2xl border border-phantix-700/40 bg-phantix-900/40 p-4"
+          >
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gold-400/40 bg-gold-400/10 font-display text-sm font-bold tracking-widest text-gold-300">
+              {c.initials}
+            </span>
+            <div className="min-w-0">
+              <p className="truncate font-medium text-slate-100">{c.name}</p>
+              <p className="truncate text-xs text-gold-400/90">{c.role}</p>
+              <p className="truncate text-[11px] text-slate-500">{c.org}</p>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div {...fadeUp} className="mx-auto mt-8 flex max-w-xl items-center justify-center gap-2 rounded-2xl border border-phantix-700/40 bg-phantix-900/30 px-4 py-3 text-center">
+        <Users size={14} className="shrink-0 text-gold-400" />
+        <p className="text-xs leading-5 text-slate-400">
+          Contributors are listed with their explicit permission. Interested in reviewing Phantix or shaping a module?
+          <a href="mailto:posiayoola102@gmail.com?subject=Contributor" className="ml-1 font-semibold text-gold-400 hover:text-gold-300">Get in touch</a>.
+        </p>
+        <ShieldCheck size={14} className="shrink-0 text-gold-400" />
+      </motion.div>
     </Section>
   );
 }

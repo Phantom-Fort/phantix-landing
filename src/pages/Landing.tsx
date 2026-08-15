@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav, Footer } from "@/components/chrome";
 import Hero from "@/components/Hero";
-import { ProblemCards, TrustDoctrine, PrivacyModel, BoardFluency, Pipeline, HowItWorks, OutcomesSection, SocialProof } from "@/components/sections-marketing";
+import { ProblemCards, TrustDoctrine, PrivacyModel, BoardFluency, Pipeline, HowItWorks, OutcomesSection, SocialProof, ContributorsSection } from "@/components/sections-marketing";
 import { Capabilities, VerificationGate, AIGovernance } from "@/components/sections-product";
 import { Pricing, FinalCTA } from "@/components/Pricing";
 
@@ -56,7 +56,10 @@ export default function Landing() {
         {/* 13. Trust doctrine — 3 principles before the final CTA */}
         <TrustDoctrine />
 
-        {/* 14. Final CTA */}
+        {/* 14. Advisors & contributors — local community credibility */}
+        <ContributorsSection />
+
+        {/* 15. Final CTA */}
         <FinalCTA />
       </main>
       <Footer />
