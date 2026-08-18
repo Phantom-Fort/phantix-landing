@@ -27,27 +27,35 @@ export function Nav() {
           <p className="font-display text-[15px] font-bold text-white">Phantix</p>
           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-gold-400">Security Solutions</p>
         </div>
-        <nav className="ml-10 hidden items-center gap-6 text-sm text-slate-400 lg:flex">
+        <nav className="ml-8 hidden items-center gap-5 text-sm text-slate-400 xl:flex">
           <a href="#privacy" className="transition-colors hover:text-white">Privacy-first</a>
           <a href="#capabilities" className="transition-colors hover:text-white">Capabilities</a>
           <a href="#pipeline" className="transition-colors hover:text-white">Pipeline</a>
           <a href="#ai" className="transition-colors hover:text-white">AI</a>
           <a href="#engines" className="transition-colors hover:text-white">Engines</a>
           <a href="#pricing" className="transition-colors hover:text-white">Pricing</a>
-          <a href="/#sandbox-apply" className="transition-colors hover:text-gold-300">Sandbox</a>
-          <a href={APP_DOCS_URL} className="transition-colors hover:text-white">Docs</a>
         </nav>
-        <div className="ml-auto flex items-center gap-2.5">
+        <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
-          <a href="/#sandbox-apply" className="btn-ghost hidden !py-2 md:inline-flex">
-            <FlaskConical size={15} /> Sandbox
+          <a
+            href="/#sandbox-apply"
+            title="Sandbox"
+            aria-label="Sandbox"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-gold-400/40 hover:text-gold-300"
+          >
+            <FlaskConical size={16} />
           </a>
-          <a href={APP_DOCS_URL} className="btn-ghost hidden !py-2 sm:inline-flex">
-            <BookOpen size={15} /> Documentation
+          <a
+            href={APP_DOCS_URL}
+            title="Documentation"
+            aria-label="Documentation"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-phantix-500/50 hover:text-white"
+          >
+            <BookOpen size={16} />
           </a>
-          <a href={APP_LOGIN_URL} className="btn-secondary hidden !py-2 sm:inline-flex">Sign in</a>
-          <a href={APP_DEMO_URL} className="btn-primary !py-2">
-            <PlayCircle size={15} /> Live demo
+          <a href={APP_LOGIN_URL} className="btn-secondary hidden !px-3.5 !py-2 sm:inline-flex">Sign in</a>
+          <a href={APP_DEMO_URL} className="btn-primary !px-3.5 !py-2">
+            <PlayCircle size={15} /> <span className="hidden sm:inline">Live demo</span>
           </a>
         </div>
       </div>
