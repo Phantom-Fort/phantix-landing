@@ -1,4 +1,5 @@
 // Pricing catalog — fetches live pricing from backend. Fallback to defaults when offline.
+import { API_BASE } from "./config";
 
 export interface PricingTier {
   id: string;
@@ -115,15 +116,6 @@ export { engagementOffers };
 
 export const pricingFootnote =
   "Prices in Nigerian Naira (NGN), per company per month. Subscribe on the Platform — pricing updates from Phantix billing. No hidden fees.";
-
-const RAW_API_BASE = (import.meta.env.VITE_API_BASE as string | undefined) ?? "";
-const API_BASE = (() => {
-  if (!RAW_API_BASE) return RAW_API_BASE;
-  let base = RAW_API_BASE.replace(/\/+$/, "").replace(/^(?!https?:\/\/|\/)/i, "https://");
-  if (base.startsWith("/")) return base;
-  if (!/\/api\/v1(?:\/|$)/i.test(base)) base = `${base}/api/v1`;
-  return base;
-})();
 
 // The landing must ALWAYS hit `/billing/pricing` so prices never go stale in
 // production. A short in-memory cache (2 min) prevents repeat fetches on every

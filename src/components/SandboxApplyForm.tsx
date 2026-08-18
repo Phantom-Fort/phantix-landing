@@ -186,7 +186,7 @@ export default function SandboxApplyForm({ leaveOnSuccess = true, compact = fals
           </div>
           <div>
             <label className="label">Why sandbox? What will you test? *</label>
-            <textarea className="input min-h-[88px]" required minLength={10} value={form.use_case} onChange={set("use_case")} placeholder="SOC, assets, reports, AGI…" />
+            <textarea className="input min-h-[88px]" required minLength={10} value={form.use_case} onChange={set("use_case")} placeholder="SOC, assets, reports, Pentest Agent…" />
           </div>
           {!compact && (
             <div>

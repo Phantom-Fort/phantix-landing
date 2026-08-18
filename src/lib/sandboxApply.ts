@@ -1,5 +1,4 @@
-const RAW =
-  (import.meta.env.VITE_SANDBOX_APPLY_API as string | undefined)?.replace(/\/+$/, "") ?? "";
+import { SANDBOX_APPLY_API as RAW } from "./config";
 
 export const SANDBOX_APPLY_API = RAW;
 
@@ -26,22 +25,17 @@ export type ApplyBody = {
 };
 
 export async function fetchSandboxStatus(): Promise<SandboxPublicStatus | null> {
-  if (!SANDBOX_APPLY_API) {
-    return { max: 20, seatsUsed: 0, seatsRemaining: 20, open: true, enrolled: 0, label: "0 enrolled · 0/20 seats held" };
-  }
   try {
     const res = await fetch(`${SANDBOX_APPLY_API}/api/sandbox/status`);
     if (!res.ok) return null;
     return (await res.json()) as SandboxPublicStatus;
   } catch {
-    return null;
+    // Proxy down — show empty open cohort so the form still renders
+    return { max: 20, seatsUsed: 0, seatsRemaining: 20, open: true, enrolled: 0, label: "0 enrolled · 0/20 seats held" };
   }
 }
 
 export async function submitSandboxApply(body: ApplyBody): Promise<{ ok: boolean; detail?: string; application_id?: string }> {
-  if (!SANDBOX_APPLY_API) {
-    return { ok: false, detail: "Sandbox apply API is not configured (VITE_SANDBOX_APPLY_API)." };
-  }
   const res = await fetch(`${SANDBOX_APPLY_API}/api/sandbox/apply`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
