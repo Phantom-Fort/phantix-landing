@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck, Lock, Database, Eye, BookOpen, ArrowRight } from "lucide-react";
+import { ShieldCheck, Lock, Database, Eye, BookOpen, ArrowRight, FlaskConical } from "lucide-react";
 import { PLATFORM_REGISTER_URL } from "@/lib/links";
 import { useTheme } from "@/lib/theme";
 
@@ -73,8 +73,11 @@ export default function Hero() {
             <a href={PLATFORM_REGISTER_URL} className="btn-primary !px-6 !py-3 !text-[15px]">
               Get started free <ArrowRight size={16} />
             </a>
-            <a href="#how-it-works" className="btn-secondary !px-6 !py-3 !text-[15px]">
-              <BookOpen size={16} /> See how it works
+            <a href="#sandbox-apply" className="btn-secondary !px-6 !py-3 !text-[15px]">
+              <FlaskConical size={16} /> Apply for sandbox
+            </a>
+            <a href="#how-it-works" className="btn-ghost !px-5 !py-3 !text-[14px] text-slate-400">
+              <BookOpen size={15} /> How it works
             </a>
           </motion.div>
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ArrowRight, BookOpen, PlayCircle } from "lucide-react";
+import { ArrowRight, BookOpen, PlayCircle, FlaskConical } from "lucide-react";
 import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -34,10 +34,14 @@ export function Nav() {
           <a href="#ai" className="transition-colors hover:text-white">AI</a>
           <a href="#engines" className="transition-colors hover:text-white">Engines</a>
           <a href="#pricing" className="transition-colors hover:text-white">Pricing</a>
+          <a href="/#sandbox-apply" className="transition-colors hover:text-gold-300">Sandbox</a>
           <a href={APP_DOCS_URL} className="transition-colors hover:text-white">Docs</a>
         </nav>
         <div className="ml-auto flex items-center gap-2.5">
           <ThemeToggle />
+          <a href="/#sandbox-apply" className="btn-ghost hidden !py-2 md:inline-flex">
+            <FlaskConical size={15} /> Sandbox
+          </a>
           <a href={APP_DOCS_URL} className="btn-ghost hidden !py-2 sm:inline-flex">
             <BookOpen size={15} /> Documentation
           </a>
@@ -85,6 +89,7 @@ export function Footer() {
             <div className="space-y-2">
               <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Start</p>
               <a href={APP_DEMO_URL} className="block hover:text-slate-300">Live demo</a>
+              <a href="/#sandbox-apply" className="block hover:text-slate-300">Sandbox apply</a>
               <a href={APP_LOGIN_URL} className="block hover:text-slate-300">Sign in</a>
               <a href={`${PLATFORM_URL}/register`} className="block hover:text-slate-300">Register</a>
             </div>

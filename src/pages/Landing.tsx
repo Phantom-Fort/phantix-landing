@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import { ProblemCards, TrustDoctrine, PrivacyModel, BoardFluency, Pipeline, HowItWorks, OutcomesSection, SocialProof, ContributorsSection } from "@/components/sections-marketing";
 import { Capabilities, VerificationGate, AIGovernance } from "@/components/sections-product";
 import { Pricing, FinalCTA } from "@/components/Pricing";
+import SandboxSection from "@/components/SandboxSection";
 
 export default function Landing() {
   return (
@@ -19,6 +20,9 @@ export default function Landing() {
       <main className="relative">
         {/* 1. Hero — outcome-first */}
         <Hero />
+
+        {/* 1b. Sandbox seats counter + inline apply form */}
+        <SandboxSection />
 
         {/* 2. Social proof strip */}
         <SocialProof />

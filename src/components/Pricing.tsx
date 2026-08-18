@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight, PlayCircle, Crosshair, Smartphone, Sparkles, FileText, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle2, ArrowRight, PlayCircle, Crosshair, Smartphone, Sparkles, FileText, ChevronDown, ChevronUp, FlaskConical } from "lucide-react";
 import { Section, SectionHeading, fadeUp } from "./Section";
 import { loadPricing, pricingFootnote, engagementOffers } from "@/lib/pricing";
 import type { PricingTier } from "@/lib/pricing";
@@ -150,7 +150,8 @@ export function FinalCTA() {
         </p>
         <div className="relative mt-7 flex flex-wrap items-center justify-center gap-3.5">
           <a href={APP_DEMO_URL} className="btn-primary !px-7 !py-3 !text-[15px]"><PlayCircle size={16} /> Launch the live demo</a>
-          <a href={PLATFORM_REGISTER_URL} className="btn-secondary !px-7 !py-3 !text-[15px]">Register your organization</a>
+          <a href="#sandbox-apply" className="btn-secondary !px-7 !py-3 !text-[15px]"><FlaskConical size={16} /> Apply for sandbox</a>
+          <a href={PLATFORM_REGISTER_URL} className="btn-ghost !px-6 !py-3 !text-[14px] text-slate-300">Register your organization</a>
         </div>
         <p className="relative mt-5 text-[12px] leading-5 text-slate-400">
           Registration happens on <strong>platform.phantix.site</strong>. After setup, you generate login links from the Platform — your team signs in on <strong>app.phantix.site</strong>.

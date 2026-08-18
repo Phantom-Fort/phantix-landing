@@ -2,12 +2,14 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "@/pages/Landing";
 import LegalPage from "@/pages/Legal";
+import SandboxApply from "@/pages/SandboxApply";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/sandbox-apply" element={<SandboxApply />} />
         <Route path="/terms" element={<LegalPage docKey="terms" />} />
         <Route path="/aup" element={<LegalPage docKey="aup" />} />
         <Route path="/privacy" element={<LegalPage docKey="privacy" />} />
