@@ -1,8 +1,7 @@
 {
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://staging.phantix.site/api/:path*" },
-    { "source": "/sandbox-apply/:path*", "destination": "https://staging.phantix.site/sandbox-apply/:path*" },
-    { "source": "/((?!api/|sandbox-apply/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [
     {

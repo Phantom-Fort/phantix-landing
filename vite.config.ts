@@ -1,35 +1,40 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-const UPSTREAM = "https://staging.phantix.site";
-const SANDBOX_APPLY = "http://127.0.0.1:8787";
+/**
+ * Landing dev server (phantix.site).
+ * No sandbox-apply proxy — landing only links out to APP_URL/sandbox-apply.
+ *
+ *   API_PROXY_TARGET   default https://staging.phantix.site  (pricing / legal)
+ *   DEV_PORT           default 5175
+ */
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  const apiTarget = env.API_PROXY_TARGET || process.env.API_PROXY_TARGET || "https://staging.phantix.site";
+  const port = Number(env.DEV_PORT || process.env.DEV_PORT || 5175);
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  server: {
-    port: 5175,
-    host: true,
-    proxy: {
-      "/api": {
-        target: UPSTREAM,
-        changeOrigin: true,
-        secure: true,
-        ws: true,
-      },
-      "/sandbox-apply": {
-        target: SANDBOX_APPLY,
-        changeOrigin: true,
-        rewrite: (p) => p.replace(/^\/sandbox-apply/, ""),
+  return {
+    plugins: [react()],
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
       },
     },
-  },
-  build: {
-    chunkSizeWarningLimit: 1600,
-  },
+    server: {
+      port,
+      host: true,
+      proxy: {
+        "/api": {
+          target: apiTarget,
+          changeOrigin: true,
+          secure: true,
+          ws: true,
+        },
+      },
+    },
+    build: {
+      chunkSizeWarningLimit: 1600,
+    },
+  };
 });

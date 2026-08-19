@@ -4,7 +4,7 @@ import { CheckCircle2, ArrowRight, PlayCircle, Crosshair, Smartphone, Sparkles, 
 import { Section, SectionHeading, fadeUp } from "./Section";
 import { loadPricing, pricingFootnote, engagementOffers } from "@/lib/pricing";
 import type { PricingTier } from "@/lib/pricing";
-import { PLATFORM_REGISTER_URL, APP_DEMO_URL } from "@/lib/links";
+import { PLATFORM_REGISTER_URL, APP_DEMO_URL, SANDBOX_APPLY_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { BrandLogo } from "@/components/BrandLogo";
 
@@ -150,7 +150,7 @@ export function FinalCTA() {
         </p>
         <div className="relative mt-7 flex flex-wrap items-center justify-center gap-3.5">
           <a href={APP_DEMO_URL} className="btn-primary !px-7 !py-3 !text-[15px]"><PlayCircle size={16} /> Launch the live demo</a>
-          <a href="#sandbox-apply" className="btn-secondary !px-7 !py-3 !text-[15px]"><FlaskConical size={16} /> Apply for sandbox</a>
+          <a href={SANDBOX_APPLY_URL} className="btn-secondary !px-7 !py-3 !text-[15px]"><FlaskConical size={16} /> Apply for sandbox</a>
           <a href={PLATFORM_REGISTER_URL} className="btn-ghost !px-6 !py-3 !text-[14px] text-slate-300">Register your organization</a>
         </div>
         <p className="relative mt-5 text-[12px] leading-5 text-slate-400">

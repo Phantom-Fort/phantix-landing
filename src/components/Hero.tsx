@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ShieldCheck, Lock, Database, Eye, BookOpen, ArrowRight, FlaskConical } from "lucide-react";
-import { PLATFORM_REGISTER_URL } from "@/lib/links";
+import { PLATFORM_REGISTER_URL, SANDBOX_APPLY_URL } from "@/lib/links";
 import { useTheme } from "@/lib/theme";
 
 const stats = [
@@ -73,7 +73,7 @@ export default function Hero() {
             <a href={PLATFORM_REGISTER_URL} className="btn-primary !px-6 !py-3 !text-[15px]">
               Get started free <ArrowRight size={16} />
             </a>
-            <a href="#sandbox-apply" className="btn-secondary !px-6 !py-3 !text-[15px]">
+            <a href={SANDBOX_APPLY_URL} className="btn-secondary !px-6 !py-3 !text-[15px]">
               <FlaskConical size={16} /> Apply for sandbox
             </a>
             <a href="#how-it-works" className="btn-ghost !px-5 !py-3 !text-[14px] text-slate-400">

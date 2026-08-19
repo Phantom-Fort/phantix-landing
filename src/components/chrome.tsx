@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ArrowRight, BookOpen, PlayCircle, FlaskConical } from "lucide-react";
-import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL } from "@/lib/links";
+import { APP_DEMO_URL, APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { BrandLogo } from "@/components/BrandLogo";
@@ -38,7 +38,7 @@ export function Nav() {
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
           <a
-            href="/#sandbox-apply"
+            href={SANDBOX_APPLY_URL}
             title="Sandbox"
             aria-label="Sandbox"
             className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-gold-400/40 hover:text-gold-300"
@@ -97,7 +97,7 @@ export function Footer() {
             <div className="space-y-2">
               <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Start</p>
               <a href={APP_DEMO_URL} className="block hover:text-slate-300">Live demo</a>
-              <a href="/#sandbox-apply" className="block hover:text-slate-300">Sandbox apply</a>
+              <a href={SANDBOX_APPLY_URL} className="block hover:text-slate-300">Sandbox apply</a>
               <a href={APP_LOGIN_URL} className="block hover:text-slate-300">Sign in</a>
               <a href={`${PLATFORM_URL}/register`} className="block hover:text-slate-300">Register</a>
             </div>
