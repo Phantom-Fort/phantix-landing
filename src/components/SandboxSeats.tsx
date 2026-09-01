@@ -6,7 +6,7 @@ const APPLY_URL = SANDBOX_APPLY_URL;
 
 /**
  * Landing does not collect applications.
- * CTA redirects to Command Centre public form (app.phantix.site/sandbox-apply).
+ * CTA redirects to Command Centre public form (app.phantixlabs.com/sandbox-apply).
  */
 export default function SandboxSeats() {
   return (
@@ -18,11 +18,11 @@ export default function SandboxSeats() {
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-400">BETA design partners</p>
           <h2 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
-            Sandbox cohort · up to <span className="text-gold-300">20</span> organizations
+            Sandbox cohort Â· up to <span className="text-gold-300">20</span> organizations
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-6 text-slate-400">
             Apply on Command Centre for staging access to Platform + product tools. Phantix staff review every
-            application — no account required to submit.
+            application â€” no account required to submit.
           </p>
         </div>
         <div className="shrink-0">

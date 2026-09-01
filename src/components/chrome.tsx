@@ -77,7 +77,7 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-4 text-xs leading-5 text-slate-500">
-              Privacy-first security operations. Your security data lives in your database — Phantix runs the
+              Privacy-first security operations. Your security data lives in your database â€” Phantix runs the
               tooling, never touches the record.
             </p>
           </div>
@@ -90,8 +90,8 @@ export function Footer() {
             </div>
             <div className="space-y-2">
               <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Surfaces</p>
-              <a href={APP_URL} className="block hover:text-slate-300">app.phantix.site</a>
-              <a href={PLATFORM_URL} className="block hover:text-slate-300">platform.phantix.site</a>
+              <a href={APP_URL} className="block hover:text-slate-300">app.phantixlabs.com</a>
+              <a href={PLATFORM_URL} className="block hover:text-slate-300">platform.phantixlabs.com</a>
               <a href={APP_DOCS_URL} className="block hover:text-slate-300">Documentation</a>
             </div>
             <div className="space-y-2">
@@ -110,8 +110,8 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-6 text-[11px] text-slate-600">
-          <span>© 2026 Phantix Security Solutions</span>
-          <span className="font-mono">api/v1 · 326 routes · 11 engines</span>
+          <span>Â© 2026 Phantix Security Solutions</span>
+          <span className="font-mono">api/v1 Â· 326 routes Â· 11 engines</span>
         </div>
       </div>
     </footer>

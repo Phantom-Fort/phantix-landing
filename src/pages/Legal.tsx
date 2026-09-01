@@ -60,7 +60,7 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
       <main className="relative px-4 py-16">
         <div className="mx-auto max-w-3xl">
           <a href="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-200">
-            <ArrowLeft size={15} /> Back to phantix.site
+            <ArrowLeft size={15} /> Back to phantixlabs.com
           </a>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mt-6">

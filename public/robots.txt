@@ -1,0 +1,15 @@
+# Phantix Labs — phantixlabs.com
+User-agent: *
+Allow: /
+
+# Common AI/answer engines — welcome to cite the marketing site
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://phantixlabs.com/sitemap.xml

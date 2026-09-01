@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 /**
- * Landing dev server (phantix.site).
- * No sandbox-apply proxy — landing only links out to APP_URL/sandbox-apply.
+ * Landing dev server (phantixlabs.com).
+ * No sandbox-apply proxy Ã¢â‚¬â€ landing only links out to APP_URL/sandbox-apply.
  *
  *   API_PROXY_TARGET   default https://staging.phantix.site  (pricing / legal)
  *   DEV_PORT           default 5175

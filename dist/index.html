@@ -6,9 +6,16 @@
       // Apply the saved theme before first paint (dark is the default).
       (function () {
         try {
-          var t = localStorage.getItem("phantix_theme");
-          if (t === "light") document.documentElement.setAttribute("data-theme", "light");
-          else document.documentElement.removeAttribute("data-theme");
+          var stored = localStorage.getItem("phantix_theme");
+          var dark;
+          if (stored === "light") dark = false;
+          else if (stored === "system")
+            dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          else dark = true; // "dark" or unset -> dark (historical default)
+          if (dark) document.documentElement.removeAttribute("data-theme");
+          else document.documentElement.setAttribute("data-theme", "light");
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", dark ? "#0D1B3D" : "#F4F6FA");
         } catch (e) { /* ignore */ }
       })();
     </script>
@@ -18,26 +25,99 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0D1B3D" />
+
+    <!-- Primary SEO -->
+    <title>Phantix Labs — AI-Powered Security Platform | Attack Surface, VAPT, Risk &amp; Compliance</title>
     <meta
       name="description"
-      content="Privacy-first security command centre. Inventory, VAPT, risk and verified reports — your data in your database. Free to start. Priced in NGN."
+      content="Phantix Labs (Phantix Security) is the privacy-first, AI-powered security command centre. Attack surface management, automated VAPT, AI pentest agents, risk register, compliance and board-ready verified reports — your data stays in your database. Free to start."
     />
+    <meta
+      name="keywords"
+      content="phantix, phantix labs, phantix labs com, phantix security, phantixlabs, phantixlabs.com, phantom labs, phantom security, phatix, phantix secirity, security with AI, AI security platform, AI penetration testing, automated VAPT, attack surface management, cybersecurity platform, privacy-first security, vulnerability assessment, penetration testing, risk management, security compliance, NDPR, SOC 2, threat intelligence, AI agent pentest"
+    />
+    <meta name="author" content="Phantix Labs (Phantix Security Solutions)" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <link rel="canonical" href="https://phantixlabs.com/" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Phantix Security — Attack surface, VAPT & board-ready reports | PROTECT. PREVENT. PERFORM." />
-    <meta property="og:description" content="Privacy-first security command centre. Inventory, VAPT, risk and verified reports — your data in your database. Free to start. Priced in NGN." />
-    <meta property="og:image" content="/logo-transparent.png" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Phantix Security — Attack surface, VAPT & board-ready reports | PROTECT. PREVENT. PERFORM." />
-    <meta name="twitter:description" content="Privacy-first security command centre. Inventory, VAPT, risk and verified reports — your data in your database. Free to start. Priced in NGN." />
-    <title>Phantix Security — Attack surface, VAPT &amp; board-ready reports | PROTECT. PREVENT. PERFORM.</title>
+    <meta property="og:site_name" content="Phantix Labs" />
+    <meta property="og:url" content="https://phantixlabs.com/" />
+    <meta property="og:title" content="Phantix Labs — AI-Powered Security Platform | Attack Surface, VAPT, Risk &amp; Compliance" />
+    <meta property="og:description" content="Privacy-first, AI-powered security command centre. Attack surface management, automated VAPT, AI pentest agents, risk and board-ready verified reports — your data in your database. Free to start." />
+    <meta property="og:image" content="https://phantixlabs.com/logo-transparent.png" />
+    <meta property="og:image:alt" content="Phantix Labs — AI-powered security platform" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Phantix Labs — AI-Powered Security Platform" />
+    <meta name="twitter:description" content="Attack surface, automated VAPT, AI pentest agents, risk and board-ready verified reports. Privacy-first — your data in your database." />
+    <meta name="twitter:image" content="https://phantixlabs.com/logo-transparent.png" />
+
+    <!-- Structured data: organization + site + product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://phantixlabs.com/#organization",
+          "name": "Phantix Labs",
+          "alternateName": [
+            "Phantix",
+            "Phantix Security",
+            "Phantix Security Solutions",
+            "Phantom Labs",
+            "Phantom Security"
+          ],
+          "url": "https://phantixlabs.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://phantixlabs.com/logo-transparent.png"
+          },
+          "description": "Phantix Labs builds Phantix Security — a privacy-first, AI-powered security platform for attack surface management, automated VAPT, risk and compliance.",
+          "slogan": "PROTECT. PREVENT. PERFORM.",
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://phantixlabs.com/#website",
+          "url": "https://phantixlabs.com/",
+          "name": "Phantix Labs",
+          "alternateName": "Phantix Security",
+          "publisher": { "@id": "https://phantixlabs.com/#organization" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://phantixlabs.com/#product",
+          "name": "Phantix Security Command Centre",
+          "applicationCategory": "SecurityApplication",
+          "operatingSystem": "Web",
+          "url": "https://app.phantixlabs.com",
+          "publisher": { "@id": "https://phantixlabs.com/#organization" },
+          "description": "AI-powered attack surface management, automated VAPT campaigns, AI pentest agents, risk register, compliance assessments and board-ready verified reports. Privacy-first: security data stays in your database.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "NGN",
+            "description": "Free tier to start; paid plans priced in NGN"
+          }
+        }
+      ]
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/index-BXIwag98.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CNkAXGhc.css">
+    <script type="module" crossorigin src="/assets/index-DUJOkZmB.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DRPWHDe_.css">
   </head>
   <body>
     <div id="root"></div>
