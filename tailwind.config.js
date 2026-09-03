@@ -47,18 +47,19 @@ export default {
         black: "rgb(var(--color-black) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["'Space Grotesk'", "system-ui", "sans-serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
+        display: ["'Geist Variable'", "system-ui", "sans-serif"],
+        sans: ["'Geist Variable'", "system-ui", "sans-serif"],
+        mono: ["'Geist Mono Variable'", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        glow: "0 0 40px -10px rgba(232, 181, 77, 0.35)",
-        "glow-blue": "0 0 40px -10px rgba(51, 85, 181, 0.5)",
-        card: "0 8px 30px -12px rgba(2, 6, 23, 0.6)",
+        glow: "0 0 0 1px rgba(232, 181, 77, 0.25)",
+        "glow-blue": "0 0 0 1px rgba(63, 63, 70, 0.9)",
+        card: "0 1px 2px 0 rgba(0, 0, 0, 0.5)",
+        bloom: "0 0 60px -12px rgba(232, 181, 77, 0.22)",
       },
       backgroundImage: {
         "grid-faint":
-          "linear-gradient(rgba(143,166,230,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(143,166,230,0.05) 1px, transparent 1px)",
+          "linear-gradient(rgba(113,113,122,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(113,113,122,0.06) 1px, transparent 1px)",
         "radial-fade":
           "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(51,85,181,0.25), transparent)",
       },

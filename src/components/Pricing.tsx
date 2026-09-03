@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight, PlayCircle, Crosshair, Smartphone, Sparkles, FileText, ChevronDown, ChevronUp, FlaskConical } from "lucide-react";
+import { CheckCircle2, ArrowRight, PlayCircle, Crosshair, Smartphone, Sparkles, FileText, ChevronDown, ChevronUp } from "lucide-react";
 import { Section, SectionHeading, fadeUp } from "./Section";
 import { loadPricing, pricingFootnote, engagementOffers } from "@/lib/pricing";
 import type { PricingTier } from "@/lib/pricing";
-import { PLATFORM_REGISTER_URL, APP_DEMO_URL, SANDBOX_APPLY_URL } from "@/lib/links";
+import { PLATFORM_REGISTER_URL, APP_DEMO_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { BrandLogo } from "@/components/BrandLogo";
 
@@ -22,12 +22,12 @@ export function Pricing() {
   }, []);
 
   return (
-    <Section id="pricing" className="scroll-mt-20 py-24">
+    <Section id="pricing" className="py-24">
       <motion.div {...fadeUp}>
         <SectionHeading
           kicker="Pricing"
           title="Simple, per-company pricing"
-          body="Every tier includes the privacy-first architecture, dual control and the immutable audit trail. Plan and rate limits bind to the company â€” all its users and keys share the bucket."
+          body="Every tier includes the privacy-first architecture, dual control and the immutable audit trail. Plan and rate limits bind to the company — all its users and keys share the bucket."
         />
       </motion.div>
 
@@ -49,10 +49,20 @@ export function Pricing() {
             <div className="mt-5">
               {t.monthly_ngn !== null ? (
                 <>
-                  <span className="font-display text-4xl font-bold text-white">{t.monthly_ngn === 0 ? "Free" : `NGN ${t.monthly_ngn.toLocaleString()}`}</span>
-                  {t.monthly_ngn > 0 && <span className="text-sm text-slate-500">/month</span>}
-                  {t.first_month_ngn != null && t.first_month_ngn > 0 && <p className="mt-1 text-xs text-emerald-400">First month NGN {t.first_month_ngn.toLocaleString()} â€” {t.monthly_ngn > 0 ? `${Math.round((1 - t.first_month_ngn / t.monthly_ngn) * 100)}% off` : "free"}</p>}
-                  {t.yearly_price_ngn != null && t.yearly_price_ngn > 0 && <p className="mt-0.5 text-[11px] text-slate-600">{t.yearly_note}</p>}
+                  {/* Unit lives on the price line itself — "per company per month"
+                      was previously only stated in the section subtitle and the footnote. */}
+                  <span className="font-display text-4xl font-bold text-white">
+                    {t.monthly_ngn === 0 ? "NGN 0" : `NGN ${t.monthly_ngn.toLocaleString()}`}
+                  </span>
+                  {t.monthly_ngn > 0 && <span className="text-sm text-slate-500">/company/month</span>}
+                  {t.first_month_ngn != null && t.first_month_ngn > 0 && (
+                    <p className="mt-1 text-xs leading-5 text-emerald-400">
+                      First month NGN {t.first_month_ngn.toLocaleString()} (
+                      {Math.round((1 - t.first_month_ngn / t.monthly_ngn) * 100)}% off) — then NGN{" "}
+                      {t.monthly_ngn.toLocaleString()}/month
+                    </p>
+                  )}
+                  {t.yearly_price_ngn != null && t.yearly_price_ngn > 0 && <p className="mt-0.5 text-xs text-slate-500">{t.yearly_note}</p>}
                 </>
               ) : (
                 <span className="font-display text-4xl font-bold text-white">Custom</span>
@@ -68,7 +78,7 @@ export function Pricing() {
         ))}
       </div>
 
-      {/* Engagements â€” full-width band spanning all three tiers */}
+      {/* Engagements — full-width band spanning all three tiers */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -87,7 +97,7 @@ export function Pricing() {
           <span className="min-w-0 flex-1">
             <span className="block font-display text-lg font-bold text-white">Project engagements</span>
             <span className="block text-sm text-slate-400">
-              When you need a full test or hands-on experts â€” full VAPT, dynamic mobile, AI Pentest Agent, white-label deliverables.
+              When you need a full test or hands-on experts — full VAPT, dynamic mobile, AI Pentest Agent, white-label deliverables.
             </span>
           </span>
           <span className="hidden shrink-0 sm:block">
@@ -117,7 +127,7 @@ export function Pricing() {
             </div>
             <div className="flex flex-wrap items-center gap-3 border-t border-phantix-700/40 px-6 py-4">
               <p className="text-xs text-slate-500">
-                Engagements are quoted per project â€” scoped with a security engineer. Not a self-serve subscription.
+                Engagements are quoted per project — scoped with a security engineer. Not a self-serve subscription.
               </p>
               <a
                 href={PLATFORM_REGISTER_URL}
@@ -130,7 +140,7 @@ export function Pricing() {
         )}
       </motion.div>
 
-      <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-slate-600">{pricingFootnote}</p>
+      <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-slate-500">{pricingFootnote}</p>
     </Section>
   );
 }
@@ -146,15 +156,14 @@ export function FinalCTA() {
         <BrandLogo className="relative mx-auto h-20 w-20" lightSrc="/logo-white.png" darkSrc="/logo-white.png" />
         <h2 className="relative mt-6 font-display text-4xl font-bold tracking-tight text-white">Take command of your security posture</h2>
         <p className="relative mx-auto mt-4 max-w-xl text-[15px] leading-7 text-slate-300">
-          Explore the product on a simulated demo tenant â€” no account needed. Ready for real work? Register on the Platform and issue login links for your operators to access the Application.
+          Explore the product on a simulated demo tenant — no account needed. Ready for real work? Register on the Platform and issue login links for your operators to access the Application.
         </p>
-        <div className="relative mt-7 flex flex-wrap items-center justify-center gap-3.5">
+        <div className="relative mt-7 flex flex-wrap items-center justify-center gap-5">
           <a href={APP_DEMO_URL} className="btn-primary !px-7 !py-3 !text-[15px]"><PlayCircle size={16} /> Launch the live demo</a>
-          <a href={SANDBOX_APPLY_URL} className="btn-secondary !px-7 !py-3 !text-[15px]"><FlaskConical size={16} /> Apply for sandbox</a>
-          <a href={PLATFORM_REGISTER_URL} className="btn-ghost !px-6 !py-3 !text-[14px] text-slate-300">Register your organization</a>
+          <a href={PLATFORM_REGISTER_URL} className="btn-secondary !px-7 !py-3 !text-[15px]">Register your organization</a>
         </div>
         <p className="relative mt-5 text-[12px] leading-5 text-slate-400">
-          Registration happens on <strong>platform.phantixlabs.com</strong>. After setup, you generate login links from the Platform â€” your team signs in on <strong>app.phantixlabs.com</strong>.
+          Registration happens on <strong>platform.phantixlabs.com</strong>. After setup, you generate login links from the Platform — your team signs in on <strong>app.phantixlabs.com</strong>.
         </p>
       </motion.div>
     </Section>

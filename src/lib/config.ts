@@ -1,5 +1,5 @@
 /**
- * Landing (phantixlabs.com) â€” hardcoded browser config (no VITE_*).
+ * Landing (phantixlabs.com) — hardcoded browser config (no VITE_*).
  * Does not collect sandbox data; CTAs open Command Centre apply page.
  */
 export const API_BASE = "/api/v1";

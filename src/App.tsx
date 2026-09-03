@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { MotionConfig } from "framer-motion";
 import Landing from "@/pages/Landing";
 import LegalPage from "@/pages/Legal";
 import { SANDBOX_APPLY_URL } from "@/lib/links";
@@ -19,14 +20,18 @@ function SandboxApplyRedirect() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/sandbox-apply" element={<SandboxApplyRedirect />} />
-        <Route path="/terms" element={<LegalPage docKey="terms" />} />
-        <Route path="/aup" element={<LegalPage docKey="aup" />} />
-        <Route path="/privacy" element={<LegalPage docKey="privacy" />} />
-        <Route path="*" element={<Landing />} />
-      </Routes>
+      {/* reducedMotion="user" makes every whileInView/entrance animation render
+          its final state immediately when the OS asks for reduced motion. */}
+      <MotionConfig reducedMotion="user">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/sandbox-apply" element={<SandboxApplyRedirect />} />
+          <Route path="/terms" element={<LegalPage docKey="terms" />} />
+          <Route path="/aup" element={<LegalPage docKey="aup" />} />
+          <Route path="/privacy" element={<LegalPage docKey="privacy" />} />
+          <Route path="*" element={<Landing />} />
+        </Routes>
+      </MotionConfig>
     </BrowserRouter>
   );
 }

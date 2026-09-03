@@ -3,6 +3,9 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { bootstrapTheme } from "./lib/theme";
 import { initAnalytics } from "./lib/analytics";
+// Geist + Geist Mono — self-hosted variable woff2, matching the Command Centre.
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "./index.css";
 
 bootstrapTheme();

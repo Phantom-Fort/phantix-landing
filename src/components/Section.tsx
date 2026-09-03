@@ -1,10 +1,14 @@
 import React from "react";
 
+/*
+ * Reveals are quick and trigger just inside the viewport: a long fade means a
+ * fast scroller or a full-page capture catches sections half-invisible.
+ */
 export const fadeUp = {
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  viewport: { once: true, margin: "-40px" },
+  transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
 };
 
 export function Section({
@@ -16,8 +20,9 @@ export function Section({
   className?: string;
   id?: string;
 }) {
+  // scroll-mt keeps anchored sections clear of the fixed nav.
   return (
-    <section id={id} className={`relative mx-auto w-full max-w-7xl px-6 ${className ?? ""}`}>
+    <section id={id} className={`relative mx-auto w-full max-w-7xl scroll-mt-24 px-6 ${className ?? ""}`}>
       {children}
     </section>
   );

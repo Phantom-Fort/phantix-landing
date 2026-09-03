@@ -28,11 +28,12 @@ export function Nav() {
           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-gold-400">Security Solutions</p>
         </div>
         <nav className="ml-8 hidden items-center gap-5 text-sm text-slate-400 xl:flex">
-          <a href="#privacy" className="transition-colors hover:text-white">Privacy-first</a>
+          {/* Every target must be a real section id — Pipeline and Engines were
+              retired in the v3 cut, so they don't get nav slots. */}
+          <a href="#privacy-first" className="transition-colors hover:text-white">Privacy-first</a>
           <a href="#capabilities" className="transition-colors hover:text-white">Capabilities</a>
-          <a href="#pipeline" className="transition-colors hover:text-white">Pipeline</a>
+          <a href="#how-it-works" className="transition-colors hover:text-white">How it works</a>
           <a href="#ai" className="transition-colors hover:text-white">AI</a>
-          <a href="#engines" className="transition-colors hover:text-white">Engines</a>
           <a href="#pricing" className="transition-colors hover:text-white">Pricing</a>
         </nav>
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
@@ -65,53 +66,53 @@ export function Nav() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-phantix-700/30 py-10">
+    <footer className="border-t border-phantix-700/30 py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-wrap items-start justify-between gap-8">
-          <div className="max-w-sm">
+        <div className="flex flex-wrap items-start justify-between gap-x-12 gap-y-14">
+          <div className="max-w-md">
             <div className="flex items-center gap-2.5">
-              <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
+              <BrandLogo className="h-14 w-14" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
               <div>
-                <p className="font-display text-sm font-bold text-white">Phantix Security Solutions</p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+                <p className="font-display text-lg font-semibold text-white">Phantix Security Solutions</p>
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
               </div>
             </div>
-            <p className="mt-4 text-xs leading-5 text-slate-500">
-              Privacy-first security operations. Your security data lives in your database â€” Phantix runs the
+            <p className="mt-5 text-sm leading-6 text-slate-400">
+              Privacy-first security operations. Your security data lives in your database — Phantix runs the
               tooling, never touches the record.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-x-14 gap-y-2 text-xs text-slate-500 sm:grid-cols-4">
-            <div className="space-y-2">
-              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Product</p>
-              <a href="#capabilities" className="block hover:text-slate-300">Capabilities</a>
-              <a href="#pipeline" className="block hover:text-slate-300">Pipeline</a>
-              <a href="#pricing" className="block hover:text-slate-300">Pricing</a>
+          <div className="grid grid-cols-2 gap-x-16 gap-y-10 text-sm text-slate-400 sm:grid-cols-4">
+            <div className="space-y-3">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Product</p>
+              <a href="#capabilities" className="block transition-colors hover:text-slate-200">Capabilities</a>
+              <a href="#how-it-works" className="block transition-colors hover:text-slate-200">How it works</a>
+              <a href="#pricing" className="block transition-colors hover:text-slate-200">Pricing</a>
             </div>
-            <div className="space-y-2">
-              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Surfaces</p>
-              <a href={APP_URL} className="block hover:text-slate-300">app.phantixlabs.com</a>
-              <a href={PLATFORM_URL} className="block hover:text-slate-300">platform.phantixlabs.com</a>
-              <a href={APP_DOCS_URL} className="block hover:text-slate-300">Documentation</a>
+            <div className="space-y-3">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Surfaces</p>
+              <a href={APP_URL} className="block transition-colors hover:text-slate-200">app.phantixlabs.com</a>
+              <a href={PLATFORM_URL} className="block transition-colors hover:text-slate-200">platform.phantixlabs.com</a>
+              <a href={APP_DOCS_URL} className="block transition-colors hover:text-slate-200">Documentation</a>
             </div>
-            <div className="space-y-2">
-              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Start</p>
-              <a href={APP_DEMO_URL} className="block hover:text-slate-300">Live demo</a>
-              <a href={SANDBOX_APPLY_URL} className="block hover:text-slate-300">Sandbox apply</a>
-              <a href={APP_LOGIN_URL} className="block hover:text-slate-300">Sign in</a>
-              <a href={`${PLATFORM_URL}/register`} className="block hover:text-slate-300">Register</a>
+            <div className="space-y-3">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Start</p>
+              <a href={APP_DEMO_URL} className="block transition-colors hover:text-slate-200">Live demo</a>
+              <a href={SANDBOX_APPLY_URL} className="block transition-colors hover:text-slate-200">Sandbox apply</a>
+              <a href={APP_LOGIN_URL} className="block transition-colors hover:text-slate-200">Sign in</a>
+              <a href={`${PLATFORM_URL}/register`} className="block transition-colors hover:text-slate-200">Register</a>
             </div>
-            <div className="space-y-2">
-              <p className="mb-2.5 font-semibold uppercase tracking-wider text-slate-400">Legal</p>
-              <a href="/terms" className="block hover:text-slate-300">Terms of Service</a>
-              <a href="/aup" className="block hover:text-slate-300">Acceptable Use Policy</a>
-              <a href="/privacy" className="block hover:text-slate-300">Privacy Notice</a>
+            <div className="space-y-3">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Legal</p>
+              <a href="/terms" className="block transition-colors hover:text-slate-200">Terms of Service</a>
+              <a href="/aup" className="block transition-colors hover:text-slate-200">Acceptable Use Policy</a>
+              <a href="/privacy" className="block transition-colors hover:text-slate-200">Privacy Notice</a>
             </div>
           </div>
         </div>
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-6 text-[11px] text-slate-600">
-          <span>Â© 2026 Phantix Security Solutions</span>
-          <span className="font-mono">api/v1 Â· 326 routes Â· 11 engines</span>
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-10 text-xs text-slate-400">
+          <span>© 2026 Phantix Security Solutions</span>
+          <span className="font-mono">api/v1 · 326 routes · 11 engines</span>
         </div>
       </div>
     </footer>
