@@ -12,6 +12,8 @@ import {
 } from "@/components/sections-v3";
 import { Pricing, FinalCTA } from "@/components/Pricing";
 import SandboxSection from "@/components/SandboxSection";
+import IntegrationsMarquee from "@/components/IntegrationsMarquee";
+import { FAQ } from "@/components/FAQ";
 
 /*
  * Landing — v3 structure (see PHANTIX_LANDING_V3_PLAN.md §5).
@@ -65,10 +67,16 @@ export default function Landing() {
         {/* 9 — Sandbox cohort (real programme, real seat count) */}
         <SandboxSection />
 
-        {/* 10 — Pricing, live from the API in NGN */}
+        {/* 10 — Integration hub: 200+ connectors, two counter-scrolling layers */}
+        <IntegrationsMarquee />
+
+        {/* 11 — Pricing, live from the API in NGN */}
         <Pricing />
 
-        {/* 11 — Close: the card version (demo-first, register secondary) */}
+        {/* 12 — FAQ before final CTA */}
+        <FAQ />
+
+        {/* 13 — Close: the card version (demo-first, register secondary) */}
         <FinalCTA />
       </main>
       <Footer />
