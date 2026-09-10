@@ -14,8 +14,8 @@
     --phantix-900: 10 10 10;     /* flat card fill      #0A0A0A */
     --phantix-850: 16 16 16;
     --phantix-800: 24 24 27;     /* zinc-900 */
-    --phantix-700: 39 39 42;     /* zinc-800 → 1px crisp borders */
-    --phantix-600: 63 63 70;     /* zinc-700 */
+    --phantix-700: 63 63 70;     /* zinc-700 → 1px crisp borders */
+    --phantix-600: 82 82 91;     /* zinc-600 */
     --phantix-500: 82 82 91;     /* zinc-600 */
     --phantix-400: 113 113 122;  /* zinc-500 */
     --phantix-300: 161 161 170;  /* zinc-400 */
@@ -53,8 +53,8 @@
     --surface: 0 0 0;
     --surface-card: 10 10 10;
     --surface-inset: 9 9 11;
-    --border-subtle: 39 39 42;
-    --border-strong: 63 63 70;
+    --border-subtle: 63 63 70;
+    --border-strong: 82 82 91;
   }
 
   :root[data-theme="light"] {
@@ -68,8 +68,8 @@
     --phantix-900: 255 255 255;
     --phantix-850: 248 250 253;
     --phantix-800: 237 241 248;
-    --phantix-700: 228 228 231;
-    --phantix-600: 212 212 216;
+    --phantix-700: 212 212 216;
+    --phantix-600: 161 161 170;
     --phantix-500: 161 161 170;
     --phantix-400: 113 113 122;
     --phantix-300: 82 82 91;
@@ -105,8 +105,8 @@
     --surface: 244 246 250;
     --surface-card: 255 255 255;
     --surface-inset: 237 241 248;
-    --border-subtle: 228 228 231;
-    --border-strong: 212 212 216;
+    --border-subtle: 212 212 216;
+    --border-strong: 161 161 170;
   }
 
   /* Gold-filled CTAs: black label on the dark canvas, white label in light mode. */
