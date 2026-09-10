@@ -4,7 +4,7 @@ import { cx } from "@/lib/utils";
 
 export function BrandLogo({
   className,
-  alt = "Phantix",
+  alt = "SecureGraph",
   lightSrc = "/logo-transparent.png",
   darkSrc = "/logo-white.png",
 }: {

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   motion,
   useMotionTemplate,
@@ -8,7 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { ShieldCheck, ArrowRight, PlayCircle } from "lucide-react";
-import { PLATFORM_REGISTER_URL, APP_DEMO_URL } from "@/lib/links";
+import { PLATFORM_REGISTER_URL } from "@/lib/links";
 import { useTheme } from "@/lib/theme";
 import { GlowBloom } from "@/components/effects";
 
@@ -23,9 +24,9 @@ import { GlowBloom } from "@/components/effects";
  * tilt is additionally gated behind a fine pointer — it's meaningless on touch.
  */
 
-const HEADLINE = {
-  lead: "Take command of your attack surface",
-  accent: "without surrendering your security data",
+const HEADLINE= {
+  lead: "Privacy-first security operations platform.",
+  highlight: "Built for lean security teams.",
 };
 
 /**
@@ -35,35 +36,35 @@ const HEADLINE = {
  */
 const CLAIMS = [
   {
-    value: "Privacy-first",
+    value: "Privacy-First",
     label: "security DB",
     detail: "Findings live in a Postgres you own — the app just reports its connection state.",
     hotspot: { x: 0.703, y: 0.036 },
     align: "below" as const,
   },
   {
-    value: "Verified only",
+    value: "Verified Only",
     label: "findings that ship",
-    detail: "Open findings are the verified ones. Heuristic noise never reaches this number.",
+    detail: "Open findings are the verified ones. Heuristic noise never get here.",
     hotspot: { x: 0.354, y: 0.405 },
     align: "below" as const,
   },
   {
-    value: "Always watching",
+    value: "Real-Time",
     label: "live detection queue",
     detail: "Detections land in a triage queue the SOC engine keeps current — not a nightly digest.",
     hotspot: { x: 0.679, y: 0.405 },
     align: "below" as const,
   },
   {
-    value: "Closed the loop",
+    value: "Tracked Fixes",
     label: "tracked to closure",
     detail: "Remediation is tracked to fixed, and anything that regresses comes straight back onto the queue.",
     hotspot: { x: 0.841, y: 0.405 },
     align: "below" as const,
   },
   {
-    value: "Scored daily",
+    value: "Daily Scoring",
     label: "composite posture",
     detail: "One composite score, recomputed every day, so you can show direction — not just a snapshot.",
     hotspot: { x: 0.228, y: 0.497 },
@@ -78,7 +79,7 @@ const CLAIMS = [
   },
 ];
 
-const ROTATE_MS = 4200;
+const ROTATE_MS = 3000;
 
 function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false);
@@ -221,7 +222,7 @@ function HeroVisual({
           {theme === "light" ? (
             <img
               src="/scenes/command-centre-dashboard-light.jpg"
-              alt="The Phantix Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
+              alt="The SecureGraph Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
               width={2000}
               height={1225}
               className="block w-full"
@@ -236,7 +237,7 @@ function HeroVisual({
               <source srcSet="/scenes/command-centre-dashboard.webp" type="image/webp" />
               <img
                 src="/scenes/command-centre-dashboard.jpg"
-                alt="The Phantix Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
+                alt="The SecureGraph Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
                 width={2000}
                 height={1225}
                 className="block w-full"
@@ -300,14 +301,15 @@ export default function Hero() {
 
       {/* Gradient headline */}
       <h1 className="max-w-4xl text-center font-display text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-        <span className="hero-heading">{HEADLINE.lead}</span>{" "}
-        <span className="hero-accent">{HEADLINE.accent}</span>
+        <span className="hero-heading">{HEADLINE.lead}</span>
+        <br/>
+        <span className="hero-accent">{HEADLINE.highlight}</span>
       </h1>
 
       {/* Subtitle */}
       <p className="mt-6 max-w-2xl text-center text-sm text-slate-400 md:text-base">
-        Security operations without the data custody risk. Phantix runs the
-        tooling — your findings never leave the database you own.
+        AI-powered end-to-end security operations — from setup to continuous security —
+        built for security professionals by security professionals.
       </p>
 
       {/* CTAs */}
@@ -315,9 +317,9 @@ export default function Hero() {
         <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
           Get started free <ArrowRight size={16} />
         </a>
-        <a href={APP_DEMO_URL} className="btn-secondary !px-6 !py-3 !text-base">
+        <Link to="/demo" className="btn-secondary !px-6 !py-3 !text-base">
           <PlayCircle size={16} /> Watch demo
-        </a>
+        </Link>
       </div>
 
       {/* The three claims are the tour controls, not decoration. */}

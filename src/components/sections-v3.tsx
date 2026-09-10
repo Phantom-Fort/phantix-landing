@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
   Radar,
@@ -12,11 +13,23 @@ import {
   Terminal,
   Check,
   Maximize2,
+  ArrowRight,
+  Sparkles,
+  Boxes,
+  Search,
+  GitBranch,
+  LineChart,
+  FileText,
+  UserCheck,
+  Signature,
+  Ban,
 } from "lucide-react";
+import { PLATFORM_PAGES } from "@/lib/platform-content";
 import { Section, fadeUp } from "./Section";
 import { GlowBloom } from "./effects";
 import PrivacyDiagram from "./PrivacyDiagram";
 import { useTheme } from "@/lib/theme";
+import { sceneImg } from "@/lib/scene-image";
 
 /*
  * v3 landing sections — luminous dark-tech.
@@ -61,45 +74,6 @@ function Heading({
   );
 }
 
-/**
- * Product captures ship in both themes — dark is canonical, `-light` variants
- * are captured from the same demo tenant in light mode. If a light capture is
- * missing the img falls back to the dark asset rather than rendering broken.
- */
-/** Intrinsic sizes of the shipped captures, so lazy images reserve their space
- *  instead of collapsing the frame to its border and jumping on load. */
-const SHOT_SIZE: Record<string, { w: number; h: number }> = {
-  assets: { w: 1400, h: 1340 },
-  vapt: { w: 1400, h: 2390 },
-  risks: { w: 1400, h: 1046 },
-  compliance: { w: 1400, h: 1000 },
-  reports: { w: 1400, h: 994 },
-  agent: { w: 1400, h: 1122 },
-};
-
-function sceneImg(name: string, theme: "dark" | "light", alt: string, imgClassName?: string) {
-  const size = SHOT_SIZE[name];
-  const suffix = theme === "light" ? "-light" : "";
-  return (
-    <picture>
-      <source srcSet={`/scenes/product-${name}${suffix}.webp`} type="image/webp" />
-      <img
-        src={`/scenes/product-${name}${suffix}.jpg`}
-        alt={alt}
-        width={size?.w}
-        height={size?.h}
-        loading="lazy"
-        decoding="async"
-        className={imgClassName ?? "block w-full"}
-        onError={(e) => {
-          // A missing light capture must never leave a hole — fall back to dark.
-          if (suffix) e.currentTarget.src = `/scenes/product-${name}.jpg`;
-        }}
-      />
-    </picture>
-  );
-}
-
 function CountUp({ to, duration = 1.4 }: { to: number; duration?: number }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLSpanElement>(null);
@@ -137,7 +111,7 @@ function CountUp({ to, duration = 1.4 }: { to: number; duration?: number }) {
     return () => io.disconnect();
   }, [to, duration, reduce]);
 
-  return <span ref={ref}>{value}</span>;
+  return <span ref={ref} className="tabular-nums">{value}</span>;
 }
 
 /**
@@ -287,8 +261,17 @@ export function Principles() {
   ];
 
   return (
-    <Section className="pb-20">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <Section id="principles" className="pb-20">
+      <motion.div {...fadeUp}>
+        <Heading
+          eyebrow="The four non-negotiables"
+          lead="Guarantees with a "
+          accent="mechanism attached"
+          body="Each promise names the control that enforces it — your data stays yours, actions stay two-person, findings stay verified, history stays replayable."
+        />
+      </motion.div>
+
+      <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((it, i) => {
           const Icon = it.icon;
           return (
@@ -325,7 +308,7 @@ export function PrivacyModel() {
             <span className="hero-accent">leaves your database</span>
           </h2>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">
-            Phantix provisions a dedicated Postgres you control, and writes assets, scans and findings
+            SecureGraph provisions a dedicated Postgres you control, and writes assets, scans and findings
             there. Production business data is never read, copied or stored.
           </p>
 
@@ -366,7 +349,7 @@ export function HowItWorks() {
     {
       n: "02",
       title: "Connect your security database",
-      body: "Provision a dedicated Postgres. Phantix writes assets, scans and findings there — never your production database.",
+      body: "Provision a dedicated Postgres. SecureGraph writes assets, scans and findings there — never your production database.",
     },
     {
       n: "03",
@@ -421,7 +404,7 @@ export function VerificationGate() {
             maps verified signals only, and executive reports collate auto- and human-verified findings
             exclusively. Heuristic probes are held to an appendix — never in your severity rollups.
           </p>
-          <p className="mt-6 inline-flex rounded-md border border-gold-400/25 bg-gold-400/8 px-3 py-2 font-mono text-[12px] text-gold-300">
+          <p className="mt-6 inline-flex rounded-md border border-gold-400/25 bg-gold-400/[0.08] px-3 py-2 font-mono text-[12px] text-gold-300">
             REPORT_REQUIRE_VERIFIED_FINDINGS
           </p>
         </motion.div>
@@ -477,7 +460,7 @@ export function PentestAgent() {
       <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="mt-14">
         <Shot
           name="agent"
-          alt="The Phantix Agent routing to VAPT, SOC, GRC, Threat Intel and Asset specialists, with dual-control required"
+          alt="The SecureGraph Agent routing to VAPT, SOC, GRC, Threat Intel and Asset specialists, with dual-control required"
         />
         {/* The screenshot names the model behind the router — answer the
             data-residency question it raises right here, not a card below. */}
@@ -503,6 +486,308 @@ export function PentestAgent() {
             <p className="mt-1.5 text-[13px] leading-6 text-slate-500">{b}</p>
           </motion.div>
         ))}
+      </div>
+    </Section>
+  );
+}
+
+/** 7. Platform teaser — the homepage's doorway into the per-surface deep dives. */
+export function PlatformTeaser() {
+  return (
+    <Section id="platform" className="py-20">
+      <motion.div {...fadeUp}>
+        <Heading
+          eyebrow="The platform"
+          lead="Four surfaces, tested"
+          accent="the same disciplined way"
+          body="Web, API, mobile and cloud testing run through one pipeline and land in one register — so a finding means the same thing wherever it came from."
+        />
+      </motion.div>
+
+      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {PLATFORM_PAGES.map((p, i) => (
+          <motion.div key={p.slug} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}>
+            <Link to={`/platform/${p.slug}`} className="card-edge card-lift group block h-full p-6">
+              <span className="flex h-10 w-10 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
+                {p.icon}
+              </span>
+              <h3 className="mt-4 font-display text-base font-semibold text-white group-hover:text-gold-300">
+                {p.navLabel}
+              </h3>
+              <p className="mt-2 text-[13px] leading-6 text-slate-500">{p.headline}</p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-gold-400 opacity-0 transition-opacity group-hover:opacity-100">
+                Explore <ArrowRight size={12} />
+              </span>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div {...fadeUp} className="mt-6">
+        <a
+          href="#ai"
+          className="card-edge card-lift group flex flex-wrap items-center gap-4 p-6 sm:flex-nowrap"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
+            <Sparkles size={18} />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block font-display text-base font-semibold text-white group-hover:text-gold-300">
+              AI pentest agent
+            </span>
+            <span className="mt-1 block text-[13px] leading-6 text-slate-500">
+              Domain specialists that route to the engines — and never report a vulnerability without a finding ID.
+            </span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold text-gold-400">
+            See how it works <ArrowRight size={12} />
+          </span>
+        </a>
+      </motion.div>
+    </Section>
+  );
+}
+
+/**
+ * 9. The lifecycle a finding travels — discovery through delivery.
+ *
+ * Distinct from HowItWorks, which is the onboarding path. This is what happens
+ * to a single finding once the engines are running, with the engine that owns
+ * each stage named so the claim is checkable.
+ */
+export function Lifecycle() {
+  const stages = [
+    { n: "01", icon: Search, name: "Discover", engine: "asset engine", body: "Domains, subdomains, IPs, APIs and mobile builds enter inventory. Dead hosts never do." },
+    { n: "02", icon: Crosshair, name: "Assess", engine: "scanner engine", body: "Scoped scans and VAPT campaigns run in sandboxed workers, under the scope you approved." },
+    { n: "03", icon: FileCheck, name: "Verify", engine: "shared classifier", body: "Every result is stamped: auto-verified, human-verified, or held back as heuristic noise." },
+    { n: "04", icon: GitBranch, name: "Correlate", engine: "vapt engine", body: "Related findings chain into attack paths, so you see the route rather than the fragments." },
+    { n: "05", icon: LineChart, name: "Prioritise", engine: "risk engine", body: "Explainable Likelihood × Impact ordering puts the queue in the order you should work it." },
+    { n: "06", icon: FileText, name: "Deliver", engine: "reporting engine", body: "Verified findings become a board-ready package, and remediation is tracked to closure." },
+  ];
+
+  return (
+    <Section id="lifecycle" className="relative py-20">
+      <GlowBloom className="-left-24 top-1/3 h-[380px] w-[380px]" tone="gold" />
+
+      <motion.div {...fadeUp}>
+        <Heading
+          eyebrow="The lifecycle"
+          lead="Security that compounds"
+          accent="with every assessment"
+          body="One disciplined path from an unknown asset to a finding your board can read — and nothing skips a stage."
+        />
+      </motion.div>
+
+      <div className="mt-16 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-6">
+        {stages.map((s, i) => {
+          const Icon = s.icon;
+          return (
+            <motion.div
+              key={s.n}
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: i * 0.07 }}
+              className="relative"
+            >
+              {/* Connector — desktop only, and never after the last node. Runs
+                  from the right edge of this node's tile to the next one, so it
+                  has to clear the 44px tile plus the 1rem grid gap. */}
+              {i < stages.length - 1 && (
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute left-[52px] right-[-1rem] top-[22px] hidden h-px bg-gradient-to-r from-gold-400/40 to-phantix-700 lg:block"
+                />
+              )}
+              <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+                <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-md border border-gold-400/30 bg-phantix-900 text-gold-300">
+                  <Icon size={17} />
+                </span>
+                <span className="mt-3 font-mono text-[10px] tracking-[0.16em] text-gold-400/80">{s.n}</span>
+                <h3 className="mt-1 font-display text-[15px] font-semibold text-white">{s.name}</h3>
+                <p className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-slate-600">{s.engine}</p>
+                <p className="mt-2.5 text-[12.5px] leading-5 text-slate-500">{s.body}</p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <motion.p {...fadeUp} className="mx-auto mt-14 max-w-xl text-center text-[13px] leading-6 text-slate-500">
+        Everything closed becomes the baseline for the next run — and anything that regresses comes
+        straight back onto the queue.
+      </motion.p>
+    </Section>
+  );
+}
+
+/**
+ * 10. Coverage matrix — what the platform actually does, grouped by outcome.
+ *
+ * Counts and plan labels track docs/05-product-capabilities.md exactly. If a
+ * capability is an add-on or an engagement, it says so here rather than in a
+ * footnote nobody reads.
+ */
+export function Coverage() {
+  const groups = [
+    {
+      icon: Radar,
+      title: "Know your surface",
+      items: [
+        ["Asset inventory", "Free"],
+        ["Asset intelligence", "Starter"],
+        ["DNS & network hygiene", "Free"],
+        ["GitHub connection", "Free"],
+      ],
+    },
+    {
+      icon: Crosshair,
+      title: "Assess what matters",
+      items: [
+        ["Vulnerability & network scanning", "Starter"],
+        ["Web application pipeline", "Starter"],
+        ["VAPT campaigns", "Starter"],
+        ["API security checks", "Starter"],
+        ["Mobile static analysis", "Starter"],
+        ["Mobile dynamic / AVD", "Engagement"],
+        ["Cloud & container packs", "Add-on"],
+        ["Secrets / SCA / SAST", "Add-on"],
+        ["Credentialed tests", "Engagement"],
+      ],
+    },
+    {
+      icon: Scale,
+      title: "Prioritise & govern",
+      items: [
+        ["Risk scoring", "Starter"],
+        ["Dual control", "Platform"],
+        ["Audit trail", "Platform"],
+        ["Compliance mapping", "Starter"],
+        ["Org RBAC & MFA", "Platform"],
+      ],
+    },
+    {
+      icon: FileText,
+      title: "Prove & communicate",
+      items: [
+        ["Verification gate", "All plans"],
+        ["Impact analysis", "All plans"],
+        ["JSON / Markdown export", "Free"],
+        ["PDF / DOCX packages", "Starter"],
+        ["Finding tracker", "Starter"],
+        ["Alerts", "Free"],
+      ],
+    },
+    {
+      icon: Sparkles,
+      title: "AI that stays accountable",
+      items: [
+        ["Finding explanation", "Starter"],
+        ["Executive summary assist", "Starter"],
+        ["Domain agents", "Starter"],
+        ["Skill library", "Starter"],
+        ["AI governance & audit", "Platform"],
+        ["Public agent API", "AI Agent plan"],
+      ],
+    },
+  ];
+
+  const total = groups.reduce((n, g) => n + g.items.length, 0);
+
+  return (
+    <Section className="py-20">
+      <motion.div {...fadeUp}>
+        <Heading
+          eyebrow="Coverage"
+          lead={`${total} capabilities across`}
+          accent="five outcomes"
+          body="Grouped by what they get you, not by which engine happens to run them — and labelled honestly, including the ones that are an add-on or an engagement."
+        />
+      </motion.div>
+
+      <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {groups.map((g, i) => {
+          const Icon = g.icon;
+          return (
+            <motion.div
+              key={g.title}
+              {...fadeUp}
+              transition={{ ...fadeUp.transition, delay: (i % 3) * 0.06 }}
+              className="card-edge flex flex-col p-5"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
+                  <Icon size={16} />
+                </span>
+                <span className="font-mono text-[10px] text-slate-600">{g.items.length}</span>
+              </div>
+              <h3 className="mt-3.5 font-display text-[14px] font-semibold leading-5 text-white">{g.title}</h3>
+              <ul className="mt-3.5 space-y-2 border-t border-phantix-800 pt-3.5">
+                {g.items.map(([name, plan]) => (
+                  <li key={name}>
+                    <span className="block text-[12.5px] leading-4 text-slate-300">{name}</span>
+                    <span className="mt-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] text-slate-600">
+                      {plan}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      <motion.p {...fadeUp} className="mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-slate-600">
+        Monitoring surfaces are still growing — we'd rather label "available now" and "coming" separately
+        than sell you a roadmap.
+      </motion.p>
+    </Section>
+  );
+}
+
+/** 8. Why this exists — the one-person-security-team argument, stated once. */
+export function WhyWeBuilt() {
+  const shifts = [
+    ["Scanner output", "Findings that passed a verification gate"],
+    ["A PDF nobody reads", "A report built for the board and the engineer"],
+    ["Your data on someone's cloud", "Your data in a database you own"],
+    ["A tool per problem", "One register, one queue, one audit trail"],
+  ];
+
+  return (
+    <Section className="py-20">
+      <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-2">
+        <motion.div {...fadeUp}>
+          <Eyebrow>Why this exists</Eyebrow>
+          <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Most teams doing this work are{" "}
+            <span className="hero-accent">one person deep</span>
+          </h2>
+          <p className="mt-5 text-[15px] leading-7 text-slate-400">
+            Not a SOC running three shifts — an engineer, an IT manager, or an ops lead who also handles
+            security because somebody has to. That person doesn't need more alerts. They need the tool to
+            do the sorting, and to be right often enough that leadership believes the output.
+          </p>
+          <p className="mt-4 text-[15px] leading-7 text-slate-400">
+            So the product is built around what survives scrutiny: continuous discovery instead of a stale
+            spreadsheet, a verification gate instead of a raw dump, and reports generated from findings
+            that already held up. When you need help, you call a specialist agent for one task — it works
+            beside you, not ahead of you.
+          </p>
+        </motion.div>
+
+        <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="card p-8">
+          <p className="eyebrow text-gold-400">What changes</p>
+          <div className="mt-5 space-y-4">
+            {shifts.map(([before, after]) => (
+              <div key={before} className="border-b border-phantix-800 pb-4 last:border-0 last:pb-0">
+                <p className="text-[13px] leading-5 text-slate-600 line-through decoration-slate-700">{before}</p>
+                <p className="mt-1.5 flex items-start gap-2.5 text-[14px] leading-6 text-slate-200">
+                  <Check size={15} className="mt-1 shrink-0 text-gold-400" />
+                  {after}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </Section>
   );

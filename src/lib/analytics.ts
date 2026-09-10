@@ -1,5 +1,5 @@
 // ── First-party, cookieless analytics (free tier — no third party) ───────────
-// Fire-and-forget page-vision beacons to the Phantix backend. No cookies, no
+// Fire-and-forget page-vision beacons to the SecureGraph backend. No cookies, no
 // fingerprints, no PII: path, referrer, coarse screen and UTM only. Respects
 // Do Not Track and an env kill-switch, and never blocks or logs errors.
 //

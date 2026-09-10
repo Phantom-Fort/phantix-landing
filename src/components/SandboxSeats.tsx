@@ -21,7 +21,7 @@ export default function SandboxSeats() {
             Sandbox cohort · up to <span className="text-gold-300">20</span> organizations
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-6 text-slate-400">
-            Apply on Command Centre for staging access to Platform + product tools. Phantix staff review every
+            Apply on Command Centre for staging access to Platform + product tools. SecureGraph staff review every
             application.
           </p>
         </div>

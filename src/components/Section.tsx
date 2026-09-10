@@ -37,10 +37,15 @@ export function SectionHeading({
   title: React.ReactNode;
   body?: string;
 }) {
+  // Same anatomy as the sections-v3 Heading primitive: pill eyebrow, then a
+  // semibold display heading. Pricing + comparison keep identical rhythm to the
+  // rest of the one-page scroll (similarity rule — same role, same look).
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold-400">{kicker}</p>
-      <h2 className="mt-3 font-display text-4xl font-bold tracking-tight text-white">{title}</h2>
+      <span className="inline-flex items-center gap-2 rounded-full border border-phantix-700 bg-phantix-900 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+        {kicker}
+      </span>
+      <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">{title}</h2>
       {body && <p className="mt-4 text-[15px] leading-7 text-slate-400">{body}</p>}
     </div>
   );

@@ -17,7 +17,7 @@ import {
 /*
  * E9 — organization marquee (v3 plan §5, row 3).
  *
- * Note on content: Phantix has no named customers yet, and the repo's
+ * Note on content: SecureGraph has no named customers yet, and the repo's
  * "contributors" entries are literal placeholders ("Contributor name" /
  * "Organization"). A fabricated logo wall is the fastest way to lose a security
  * buyer, so this ticker runs the *real* sector list the product actually
@@ -48,7 +48,7 @@ export default function Marquee() {
   const track = [...SECTORS, ...SECTORS];
 
   return (
-    <section aria-label="Sectors Phantix is built for" className="relative border-y border-phantix-800/60 py-10">
+    <section aria-label="Sectors SecureGraph is built for" className="relative border-y border-phantix-800/60 py-10">
       <p className="mb-7 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
         Built for security teams across
       </p>

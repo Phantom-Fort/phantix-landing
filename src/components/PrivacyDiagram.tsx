@@ -16,7 +16,7 @@ export default function PrivacyDiagram() {
         viewBox="0 0 520 360"
         className="block w-full"
         role="img"
-        aria-label="Your database on the left connected to the Phantix engine on the right; data flows only from the database into the engine, never back out"
+        aria-label="Your database on the left connected to the SecureGraph engine on the right; data flows only from the database into the engine, never back out"
       >
         <defs>
           <linearGradient id="pd-wire" x1="0" x2="1">
@@ -79,7 +79,7 @@ export default function PrivacyDiagram() {
           YOUR DATABASE
         </text>
         <text x="400" y="272" textAnchor="middle" fill="#71717A" fontSize="12" letterSpacing="1.6">
-          PHANTIX ENGINE
+          SECUREGRAPH ENGINE
         </text>
       </svg>
 

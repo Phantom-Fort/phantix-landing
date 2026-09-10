@@ -52,10 +52,10 @@ const capabilityTabs = [
     ],
   },
   {
-    id: "infra",
-    label: "Infrastructure",
+    id: "cloud",
+    label: "Cloud",
     icon: <Network size={15} />,
-    headline: "Real nmap, admin-pinned, sandboxed",
+    headline: "Assessed with the keys you grant, nothing wider",
     points: [
       "Real Nmap with admin-controlled flags and port policy",
       "TLS posture: legacy protocols, weak ciphers, cert issues",
@@ -88,7 +88,7 @@ export function Capabilities() {
               className={cx(
                 "flex items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition-all",
                 active === t.id
-                  ? "border-gold-400/60 bg-gold-400/12 text-gold-300 shadow-glow"
+                  ? "border-gold-400/60 bg-gold-400/[0.12] text-gold-300 shadow-glow"
                   : "border-phantix-700/50 text-slate-400 hover:border-phantix-500/50 hover:text-slate-200",
               )}
             >
@@ -157,7 +157,7 @@ export function VerificationGate() {
                 <p className="mt-1.5 text-[11px] font-medium uppercase tracking-wider text-slate-500">{s.l}</p>
               </div>
             ))}
-            <div className="col-span-3 rounded-2xl border border-gold-400/25 bg-gold-400/6 p-4 text-center text-[13px] text-gold-300/90">
+            <div className="col-span-3 rounded-2xl border border-gold-400/25 bg-gold-400/[0.06] p-4 text-center text-[13px] text-gold-300/90">
               REPORT_REQUIRE_VERIFIED_FINDINGS · enforced by the shared classifier across engines
             </div>
           </div>

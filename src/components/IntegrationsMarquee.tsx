@@ -4,7 +4,7 @@ import { INTEGRATIONS } from "@/lib/integrations";
 import { FAVICONS } from "@/lib/favicons";
 
 /*
- * IntegrationsMarquee — four counter-scrolling layers of the connectors Phantix
+ * IntegrationsMarquee — four counter-scrolling layers of the connectors SecureGraph
  * ships in the Integration Hub (SOC Enhancement, appendix H).
  *
  * Each entry shows a real icon where one exists:
@@ -93,7 +93,7 @@ export default function IntegrationsMarquee() {
   ];
 
   return (
-    <section aria-label="Phantix integrations" className="relative border-y border-phantix-800/60 py-10">
+    <section aria-label="SecureGraph integrations" className="relative border-y border-phantix-800/60 py-10">
       <p className="mb-7 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
         200+ integrations · connect the tools you already run
       </p>

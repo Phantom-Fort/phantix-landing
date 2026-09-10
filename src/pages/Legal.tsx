@@ -65,7 +65,7 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
             <div className="flex items-center gap-4">
-              <img src="/logo-white.png" alt="Phantix" className="h-16 w-16 object-contain" />
+              <img src="/logo-white.png" alt="SecureGraph" className="h-16 w-16 object-contain" />
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-400">{meta.kicker}</p>
                 <h1 className="font-display text-3xl font-bold text-white">{doc?.title || meta.kicker}</h1>

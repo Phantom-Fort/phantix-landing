@@ -9,6 +9,10 @@ import {
   HowItWorks,
   VerificationGate,
   PentestAgent,
+  PlatformTeaser,
+  WhyWeBuilt,
+  Lifecycle,
+  Coverage,
 } from "@/components/sections-v3";
 import { Pricing, FinalCTA } from "@/components/Pricing";
 import SandboxSection from "@/components/SandboxSection";
@@ -18,10 +22,11 @@ import { FAQ } from "@/components/FAQ";
 /*
  * Landing — v3 structure (see PHANTIX_LANDING_V3_PLAN.md §5).
  *
- * Cut from 15 sections to 11. The old page argued the same point four times
- * (ProblemCards, Outcomes, BoardFluency and TrustDoctrine all restated "security
- * is fragmented and we fix it"); this one states it once and spends the rest of
- * the page on proof — real screens from the running Command Centre.
+ * Seventeen blocks, one intent each, ordered hook → proof → close. The old page
+ * argued the same point four times (ProblemCards, Outcomes, BoardFluency and
+ * TrustDoctrine all restated "security is fragmented and we fix it"); this one
+ * states it once and spends the rest of the page on proof — real screens from
+ * the running Command Centre.
  *
  * Retired: ProblemCards, OutcomesSection, BoardFluency, AIGovernance, Pipeline,
  * TrustDoctrine, ContributorsSection (its entries were literal placeholders),
@@ -49,11 +54,17 @@ export default function Landing() {
         {/* 3 — What you get, shown rather than described */}
         <Capabilities />
 
+        {/* 3b — Doorway into the per-surface platform pages */}
+        <PlatformTeaser />
+
         {/* 4 — The four non-negotiables */}
         <Principles />
 
         {/* 5 — Privacy model: the core differentiator */}
         <PrivacyModel />
+
+        {/* 5b — The lifecycle a finding travels, engine by engine */}
+        <Lifecycle />
 
         {/* 6 — The real onboarding journey */}
         <HowItWorks />
@@ -63,6 +74,12 @@ export default function Landing() {
 
         {/* 8 — The AI pentest agent */}
         <PentestAgent />
+
+        {/* 8b — Why this exists: the one-person security team */}
+        <WhyWeBuilt />
+
+        {/* 8c — Full coverage matrix, grouped by outcome and labelled by plan */}
+        <Coverage />
 
         {/* 9 — Sandbox cohort (real programme, real seat count) */}
         <SandboxSection />

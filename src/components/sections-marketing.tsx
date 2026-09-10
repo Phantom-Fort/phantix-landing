@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Section, SectionHeading, fadeUp } from "./Section";
 
-// ── Engineering doctrine (from the Phantix Implementation Manifest) ───────────
+// ── Engineering doctrine (from the SecureGraph Implementation Manifest) ───────────
 export function Doctrine() {
   const items = [
     {
@@ -50,7 +50,7 @@ export function Doctrine() {
         ))}
       </div>
       <motion.p {...fadeUp} className="mt-6 text-center text-xs text-slate-600">
-        From the Phantix engineering doctrine — the same rules that govern the platform govern the product you use.
+        From the SecureGraph engineering doctrine — the same rules that govern the platform govern the product you use.
       </motion.p>
     </Section>
   );
@@ -143,7 +143,7 @@ export function PrivacyModel() {
   const cols = [
     {
       icon: <Eye size={20} />,
-      title: "Phantix platform",
+      title: "SecureGraph platform",
       tone: "blue" as const,
       points: ["Tenancy & auth realms", "Encrypted connection credentials", "Dual-control metadata", "Billing & audit pointers"],
     },
@@ -166,7 +166,7 @@ export function PrivacyModel() {
         <SectionHeading
           kicker="The privacy-first model"
           title={<>Your security data lives in <span className="text-gold-300">your</span> database</>}
-          body="Phantix runs the tooling in the cloud — scanners, AI, orchestration — while every asset, finding, risk and evidence row is written only to a dedicated database you own."
+          body="SecureGraph runs the tooling in the cloud — scanners, AI, orchestration — while every asset, finding, risk and evidence row is written only to a dedicated database you own."
         />
       </motion.div>
       <div ref={ref} className="mt-16 grid grid-cols-1 items-stretch gap-5 lg:grid-cols-3">
@@ -179,7 +179,7 @@ export function PrivacyModel() {
             className={`card relative overflow-hidden p-6 ${col.tone === "gold" ? "border-gold-400/30 shadow-glow" : ""}`}
           >
             <div className={`absolute inset-x-0 top-0 h-1 ${col.tone === "gold" ? "bg-gradient-to-r from-gold-400 to-gold-600" : col.tone === "red" ? "bg-gradient-to-r from-severity-critical/70 to-transparent" : "bg-gradient-to-r from-phantix-400 to-transparent"}`} />
-            <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${col.tone === "gold" ? "bg-gold-400/15 text-gold-400" : col.tone === "red" ? "bg-severity-critical/12 text-severity-critical" : "bg-phantix-600/30 text-phantix-300"}`}>
+            <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-xl ${col.tone === "gold" ? "bg-gold-400/15 text-gold-400" : col.tone === "red" ? "bg-severity-critical/[0.12] text-severity-critical" : "bg-phantix-600/30 text-phantix-300"}`}>
               {col.icon}
             </div>
             <h3 className="font-display text-lg font-semibold text-white">{col.title}</h3>
@@ -218,7 +218,7 @@ export function BoardFluency() {
         <SectionHeading
           kicker="Built for SMEs"
           title="Boardroom-fluent, SOC-grade underneath"
-          body="Security fails when it can't be understood. Phantix speaks both languages — the exec summary your board reads, and the evidence your engineer acts on."
+          body="Security fails when it can't be understood. SecureGraph speaks both languages — the exec summary your board reads, and the evidence your engineer acts on."
         />
       </motion.div>
       <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -334,7 +334,7 @@ export function Modularity() {
             One monolith, eleven engines, zero spaghetti
           </h2>
           <p className="mt-4 text-[15px] leading-7 text-slate-400">
-            Phantix is a <span className="text-slate-200">modular monolith</span> — every domain is an engine
+            SecureGraph is a <span className="text-slate-200">modular monolith</span> — every domain is an engine
             with its own tables and contracts, communicating <span className="text-slate-200">only through events</span>.
             No engine calls another directly. An engine graduates to its own deployment only when it earns it:
             independent scaling, deployment needs, or its own team.
@@ -343,7 +343,7 @@ export function Modularity() {
             <p className="font-display text-lg italic leading-7 text-gold-300">
               "Optimize for modularity before distribution."
             </p>
-            <p className="mt-2 text-xs text-slate-500">— the pinned principle of the Phantix Architecture Vault</p>
+            <p className="mt-2 text-xs text-slate-500">— the pinned principle of the SecureGraph Architecture Vault</p>
           </div>
         </motion.div>
         <motion.div {...fadeUp} className="card p-7">
@@ -383,7 +383,7 @@ export function ProblemCards() {
   return (
     <Section className="py-20">
       <motion.div {...fadeUp}>
-        <SectionHeading kicker="The problem" title="Security fails when it's noisy, opaque, or lives on someone else's laptop" body="Three gaps every team faces — before Phantix." />
+        <SectionHeading kicker="The problem" title="Security fails when it's noisy, opaque, or lives on someone else's laptop" body="Three gaps every team faces — before SecureGraph." />
       </motion.div>
       <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
         {items.map((it, i) => (
@@ -401,10 +401,10 @@ export function ProblemCards() {
 // ── Outcomes (not features) — 4 pillars ────────────────────────────────────────
 export function OutcomesSection() {
   const pillars = [
-    { icon: <Search size={19} />, label: "Know", title: "See your attack surface clearly", desc: "Continuous asset inventory — domains, subdomains, IPs, APIs, mobile. One dashboard. No surprises.", plan: "Free  >  Premium intel", accent: "blue" as const },
-    { icon: <Target size={19} />, label: "Test", title: "Assess apps, APIs, and hosts", desc: "Scoped scans, VAPT campaigns, web/API/infra testing. Run what you need, when you need it — with time budgets.", plan: "Premium + engagements", accent: "gold" as const },
-    { icon: <TrendingUp size={19} />, label: "Prioritize", title: "Fix what matters first", desc: "Hybrid LikelihoodxImpact scoring + rules engine. P1—P5 priority queue tells you exactly where to start.", plan: "Premium", accent: "red" as const },
-    { icon: <CheckCircle2 size={19} />, label: "Prove", title: "Show the board and the auditor", desc: "Verified-only PDF/DOCX reports, compliance mapping, and a remediation tracker. Walk into every meeting with confidence.", plan: "Premium + packs", accent: "green" as const },
+    { icon: <Search size={19} />, label: "Know", title: "See your attack surface clearly", desc: "Continuous asset inventory — domains, subdomains, IPs, APIs, mobile. One dashboard. No surprises.", plan: "Free  >  Starter intel", accent: "blue" as const },
+    { icon: <Target size={19} />, label: "Test", title: "Assess apps, APIs, and hosts", desc: "Scoped scans, VAPT campaigns, web/API/infra testing. Run what you need, when you need it — with time budgets.", plan: "Starter + engagements", accent: "gold" as const },
+    { icon: <TrendingUp size={19} />, label: "Prioritize", title: "Fix what matters first", desc: "Hybrid LikelihoodxImpact scoring + rules engine. P1—P5 priority queue tells you exactly where to start.", plan: "Starter", accent: "red" as const },
+    { icon: <CheckCircle2 size={19} />, label: "Prove", title: "Show the board and the auditor", desc: "Verified-only PDF/DOCX reports, compliance mapping, and a remediation tracker. Walk into every meeting with confidence.", plan: "Starter + packs", accent: "green" as const },
   ];
   const colors = { blue: "from-phantix-400/20 to-transparent text-phantix-300", gold: "from-gold-400/20 to-transparent text-gold-400", red: "from-severity-critical/20 to-transparent text-severity-critical", green: "from-emerald-400/20 to-transparent text-emerald-400" };
   return (
@@ -432,7 +432,7 @@ export function OutcomesSection() {
 export function HowItWorks() {
   const steps = [
     { step: "01", title: "Register & verify", desc: "Create your organization on the Platform. Email OTP verification — no phone number required." },
-    { step: "02", title: "Connect security DB", desc: "Provision a dedicated Postgres. Phantix writes assets, scans, and findings there — never your production database." },
+    { step: "02", title: "Connect security DB", desc: "Provision a dedicated Postgres. SecureGraph writes assets, scans, and findings there — never your production database." },
     { step: "03", title: "Discover assets", desc: "Subdomain enumeration, IP discovery, port scanning, API docs, APK uploads. One inventory, always current." },
     { step: "04", title: "Run assessments", desc: "Scoped scans and VAPT campaigns. Permissioned, sandboxed, one active job per org. No unintended exposure." },
     { step: "05", title: "Ship the report", desc: "Verified findings become a board-ready PDF. Risk scores, compliance maps, and a remediation tracker in one package." },
@@ -476,7 +476,7 @@ export function ContributorsSection() {
         <SectionHeading
           kicker="Community"
           title="Advisors & Contributors"
-          body="Built with input from the Nigerian security community — practitioners and leaders who helped shape how Phantix works and what ships."
+          body="Built with input from the Nigerian security community — practitioners and leaders who helped shape how SecureGraph works and what ships."
         />
       </motion.div>
 
@@ -505,7 +505,7 @@ export function ContributorsSection() {
       <motion.div {...fadeUp} className="mx-auto mt-8 flex max-w-xl items-center justify-center gap-2 rounded-2xl border border-phantix-700/40 bg-phantix-900/30 px-4 py-3 text-center">
         <Users size={14} className="shrink-0 text-gold-400" />
         <p className="text-xs leading-5 text-slate-400">
-          Contributors are listed with their explicit permission. Interested in reviewing Phantix or shaping a module?
+          Contributors are listed with their explicit permission. Interested in reviewing SecureGraph or shaping a module?
           <a href="mailto:posiayoola102@gmail.com?subject=Contributor" className="ml-1 font-semibold text-gold-400 hover:text-gold-300">Get in touch</a>.
         </p>
         <ShieldCheck size={14} className="shrink-0 text-gold-400" />
