@@ -10,6 +10,8 @@ import Trust from "@/pages/Trust";
 import BusinessLeaders from "@/pages/solutions/BusinessLeaders";
 import SecurityTeams from "@/pages/solutions/SecurityTeams";
 import Developers from "@/pages/solutions/Developers";
+import Cookies from "@/pages/Cookies";
+import CookieConsent from "@/components/CookieConsent";
 import { SANDBOX_APPLY_URL } from "@/lib/links";
 
 /** Old /sandbox-apply bookmarks → Command Centre public form */
@@ -73,8 +75,10 @@ export default function App() {
           <Route path="/terms" element={<LegalPage docKey="terms" />} />
           <Route path="/aup" element={<LegalPage docKey="aup" />} />
           <Route path="/privacy" element={<LegalPage docKey="privacy" />} />
+          <Route path="/cookies" element={<Cookies />} />
           <Route path="*" element={<Landing />} />
         </Routes>
+        <CookieConsent />
       </MotionConfig>
     </BrowserRouter>
   );

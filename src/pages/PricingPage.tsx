@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Scale } from "lucide-react";
 import PageShell from "@/components/PageShell";
 import { BackLink } from "@/components/BackLink";
 import { Section, fadeUp } from "@/components/Section";
@@ -13,11 +12,10 @@ export default function PricingPage() {
     <PageShell>
       <Section className="pb-6 pt-28 md:pt-36">
         <BackLink />
-        <motion.div {...fadeUp} className="mx-auto mt-10 max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-gold-400/10 px-4 py-2 text-xs font-medium text-gold-300">
-            <Scale size={13} /> Pricing
-          </span>
-          <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
+        {/* De-centred (Hallmark fix): left-biased block, no eyebrow pill —
+            the heading carries the page's identity on its own. */}
+        <motion.div {...fadeUp} className="mt-10 max-w-2xl">
+          <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
             Simple pricing for continuous product security
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">

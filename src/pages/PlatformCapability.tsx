@@ -26,15 +26,17 @@ export default function PlatformCapability() {
       <Section className="pb-14 pt-28 md:pt-36">
         <BackLink />
 
-        <motion.div {...fadeUp} className="mx-auto mt-10 max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-gold-400/10 px-4 py-2 text-xs font-medium text-gold-300">
-            {page.icon} {page.eyebrow}
-          </span>
-          <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
+        {/* De-centred (Hallmark fix): left-biased column, no eyebrow pill —
+            the icon + headline carry the "which surface" context on their own. */}
+        <motion.div {...fadeUp} className="mt-10 max-w-2xl">
+          <h1 className="flex items-center gap-3 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
+              {page.icon}
+            </span>
             {page.headline}
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">{page.intro}</p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
               Get started free <ArrowRight size={16} />
             </a>
@@ -79,32 +81,35 @@ export default function PlatformCapability() {
         </motion.p>
       </Section>
 
-      {/* Cross-links to the other platform pages */}
+      {/* Cross-links to the other platform pages — a dense row list with the
+          icon inline beside the heading, not a grid of identical icon-tiles. */}
       <Section className="pb-20">
-        <motion.div {...fadeUp} className="mx-auto max-w-2xl text-center">
-          <p className="eyebrow text-gold-400">Also on the platform</p>
-          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-white">
+        <motion.div {...fadeUp} className="max-w-2xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-white">
             Every surface, one command centre
           </h2>
         </motion.div>
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="mt-8 divide-y divide-phantix-700/40 border-y border-phantix-700/40">
           {siblings.map((s, i) => (
             <motion.div key={s.slug} {...fadeUp} transition={{ ...fadeUp.transition, delay: i * 0.06 }}>
               <Link
                 to={`/platform/${s.slug}`}
                 className={cx(
-                  "card-edge card-lift group block h-full p-5 transition-colors",
+                  "group flex items-center justify-between gap-4 py-5 transition-colors hover:bg-phantix-900/40",
                 )}
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
-                  {s.icon}
+                <span className="flex items-center gap-3.5">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
+                    {s.icon}
+                  </span>
+                  <span className="font-display text-[15px] font-semibold text-white group-hover:text-gold-300">
+                    {s.navLabel}
+                  </span>
                 </span>
-                <h3 className="mt-3.5 font-display text-[15px] font-semibold text-white group-hover:text-gold-300">
-                  {s.navLabel}
-                </h3>
-                <span className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-gold-400 opacity-0 transition-opacity group-hover:opacity-100">
-                  Explore <ArrowRight size={12} />
-                </span>
+                <ArrowRight
+                  size={16}
+                  className="shrink-0 text-gold-400 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                />
               </Link>
             </motion.div>
           ))}

@@ -47,7 +47,14 @@ export default {
         black: "rgb(var(--color-black) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["'Geist Variable'", "system-ui", "sans-serif"],
+        /*
+         * Hallmark fix — display and body no longer resolve to the same face.
+         * Geist Mono Variable (already self-hosted for the brand's technical
+         * accents: "AI-Powered Security", the footer route stats) is promoted
+         * to the display role, giving headings a distinct, on-brand register
+         * from Geist Variable body copy — no new font dependency required.
+         */
+        display: ["'Geist Mono Variable'", "ui-monospace", "monospace"],
         sans: ["'Geist Variable'", "system-ui", "sans-serif"],
         mono: ["'Geist Mono Variable'", "ui-monospace", "monospace"],
       },

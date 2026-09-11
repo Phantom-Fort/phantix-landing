@@ -10,7 +10,7 @@
 
     /* Neutral zinc scale — matches Command Centre / Platform / Staff Portal
        exactly, so the marketing page and the product read as one system. */
-    --phantix-950: 0 0 0;        /* canvas: true black  #000000 */
+    --phantix-950: 9 8 6;        /* canvas: near-black tinted toward gold at very low chroma, not literal #000000 */
     --phantix-900: 10 10 10;     /* flat card fill      #0A0A0A */
     --phantix-850: 16 16 16;
     --phantix-800: 24 24 27;     /* zinc-900 */
@@ -50,7 +50,7 @@
 
     /* Border-first surface tokens (Xalgorix-style). Cards read as flat
        surfaces outlined by their 1px border instead of tinted/glassy fills. */
-    --surface: 0 0 0;
+    --surface: 9 8 6;
     --surface-card: 10 10 10;
     --surface-inset: 9 9 11;
     --border-subtle: 63 63 70;
@@ -387,29 +387,25 @@ p {
   }
 
   /*
-   * Hero heading — the ONE gradient permitted anywhere in the design system
-   * (redesign plan B4/B5), and it lives on text only, never on a background.
+   * Hero heading — Hallmark fix: no gradient fill. Solid ink, theme-aware via
+   * the --color-white token (white on dark, near-black ink on light). Weight
+   * and the display face carry the emphasis a gradient used to fake.
    */
   .hero-heading {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(90deg, #ffffff 0%, #d4d4d8 100%);
-  }
-
-  :root[data-theme="light"] .hero-heading {
-    background-image: linear-gradient(90deg, #000000 0%, #444444 100%);
+    color: rgb(var(--color-white));
   }
 
   /*
-   * Accent half of the two-tone headline. Gold rather than the reference's blue —
-   * gold-on-black is the Phantix signature and the one thing worth protecting.
+   * Accent half of the two-tone headline — a single plain gold, not a
+   * gradient fill. Gold rather than the reference's blue — gold-on-black is
+   * the Phantix signature and the one thing worth protecting.
    */
   .hero-accent {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(90deg, #f0c96b 0%, #e8b54d 45%, #c9922f 100%);
+    color: rgb(var(--gold-400));
   }
 
   :root[data-theme="light"] .hero-accent {
-    background-image: linear-gradient(90deg, #9a6716 0%, #8f5f13 100%);
+    color: #8f5f13;
   }
 
   /* Atmospheric depth — ambient glow bloom used behind hero/section visuals. */

@@ -284,6 +284,16 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
   );
 }
 
+/*
+ * Nav — N5 Floating pill (see component-cookbook.md § Navigation).
+ *
+ * Previous nav: N1-shaped full-width bar (wordmark left / inline links /
+ * CTA right) — the generic "AI nav" fingerprint, genre-blind on a site with
+ * 6+ real destinations. This build: a detached, rounded pill with a blur
+ * backdrop, because the site already leans atmospheric (gold bloom, starfield,
+ * near-black canvas) and the floating pill is the archetype that sells that
+ * mood rather than fighting it.
+ */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -294,19 +304,21 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={cx(
-        "fixed inset-x-0 top-0 z-50 border-b backdrop-blur-xl transition-all duration-300",
-        scrolled ? "border-white/10 bg-phantix-950/85 py-0" : "border-white/5 bg-phantix-950/60",
-      )}
-    >
-      <div className="mx-auto flex max-w-7xl items-center gap-3 px-6 py-3.5">
-        <BrandLogo className="h-11 w-12" lightSrc="/logo-transparent.png" />
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4">
+      <div
+        className={cx(
+          "mx-auto flex max-w-6xl items-center gap-3 rounded-full border px-4 py-2.5 backdrop-blur-xl transition-all duration-300 sm:px-5",
+          scrolled
+            ? "border-white/10 bg-phantix-950/90 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.75)]"
+            : "border-white/5 bg-phantix-950/70 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.6)]",
+        )}
+      >
+        <BrandLogo className="h-9 w-10" lightSrc="/logo-transparent.png" />
         <div className="leading-tight">
-          <p className="font-display text-[15px] font-bold text-white">SecureGraph</p>
-          <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-gold-400">AI-Powered Security</p>
+          <p className="font-display text-[14px] font-bold text-white">SecureGraph</p>
+          <p className="text-[8.5px] font-semibold uppercase tracking-[0.22em] text-gold-400">AI-Powered Security</p>
         </div>
-        <nav className="ml-8 hidden items-center gap-5 text-sm text-slate-400 xl:flex">
+        <nav className="ml-6 hidden items-center gap-5 text-sm text-slate-400 xl:flex">
           <MegaMenu label="Platform" config={PLATFORM_MENU} />
           <MegaMenu label="Solutions" config={SOLUTIONS_MENU} />
           <Link to="/trust" className="transition-colors hover:text-white">Trust</Link>
@@ -321,7 +333,7 @@ export function Nav() {
             href={SANDBOX_APPLY_URL}
             title="Sandbox"
             aria-label="Sandbox"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-gold-400/40 hover:text-gold-300"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-gold-400/40 hover:text-gold-300 sm:inline-flex"
           >
             <FlaskConical size={16} />
           </a>
@@ -329,12 +341,12 @@ export function Nav() {
             href={APP_DOCS_URL}
             title="Documentation"
             aria-label="Documentation"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-phantix-500/50 hover:text-white"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-phantix-500/50 hover:text-white sm:inline-flex"
           >
             <BookOpen size={16} />
           </a>
-          <a href={APP_LOGIN_URL} className="btn-secondary hidden !px-3.5 !py-2 sm:inline-flex">Sign in</a>
-          <Link to="/demo" className="btn-primary !px-3.5 !py-2">
+          <a href={APP_LOGIN_URL} className="btn-secondary hidden !rounded-full !px-3.5 !py-2 sm:inline-flex">Sign in</a>
+          <Link to="/demo" className="btn-primary !rounded-full !px-3.5 !py-2">
             <CalendarClock size={15} /> <span className="hidden sm:inline">Request a demo</span>
           </Link>
         </div>
@@ -343,64 +355,96 @@ export function Nav() {
   );
 }
 
+/** One footer link — internal route via `to`, external/anchor via `href`. */
+interface FootLink {
+  label: string;
+  to?: string;
+  href?: string;
+}
+
+/** A category run as flowing text — a colophon row, not a boxed column. */
+function FooterLinkRow({ label, links }: { label: string; links: FootLink[] }) {
+  return (
+    <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1.5">
+      <span className="mr-1 shrink-0 text-slate-300">{label}</span>
+      {links.map((l, i) => (
+        <React.Fragment key={l.label}>
+          {l.to ? (
+            <Link to={l.to} className="text-slate-500 transition-colors hover:text-slate-200">
+              {l.label}
+            </Link>
+          ) : (
+            <a href={l.href} className="text-slate-500 transition-colors hover:text-slate-200">
+              {l.label}
+            </a>
+          )}
+          {i < links.length - 1 && <span className="text-phantix-700">·</span>}
+        </React.Fragment>
+      ))}
+    </p>
+  );
+}
+
+const FOOTER_PLATFORM_LINKS: FootLink[] = [
+  ...PLATFORM_PAGES.map((p) => ({ label: p.navLabel, to: `/platform/${p.slug}` })),
+  { label: "AI pentest agent", href: "/#ai" },
+];
+const FOOTER_SOLUTIONS_LINKS: FootLink[] = [
+  { label: "Business leaders", to: "/solutions/business-leaders" },
+  { label: "Security teams", to: "/solutions/security-teams" },
+  { label: "Developers", to: "/solutions/developers" },
+  { label: "Trust & security", to: "/trust" },
+  { label: "Pricing", to: "/pricing" },
+];
+const FOOTER_SURFACE_LINKS: FootLink[] = [
+  { label: "app.phantixlabs.com", href: APP_URL },
+  { label: "platform.phantixlabs.com", href: PLATFORM_URL },
+  { label: "Documentation", href: APP_DOCS_URL },
+];
+const FOOTER_START_LINKS: FootLink[] = [
+  { label: "Request a demo", to: "/demo" },
+  { label: "Sandbox apply", href: SANDBOX_APPLY_URL },
+  { label: "Sign in", href: APP_LOGIN_URL },
+  { label: "Register", href: `${PLATFORM_URL}/register` },
+];
+const FOOTER_LEGAL_LINKS: FootLink[] = [
+  { label: "Terms of Service", href: "/terms" },
+  { label: "Acceptable Use Policy", href: "/aup" },
+  { label: "Privacy Notice", href: "/privacy" },
+];
+
+/*
+ * Footer — Statement (Ft5) + Dense colophon (Ft4), not the 4-column index
+ * grid + social row + copyright tail. Every link the old 5-column footer
+ * carried is still here — set as running text grouped by category, so the
+ * page closes with a line, not a sitemap.
+ */
 export function Footer() {
   return (
-    <footer className="border-t border-phantix-700/30 py-24 md:py-32">
+    <footer className="border-t border-phantix-700/30 pb-12 pt-20 md:pt-28">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-wrap items-start justify-between gap-x-12 gap-y-14">
-          <div className="max-w-md">
-            <div className="flex items-center gap-2.5">
-              <BrandLogo className="h-14 w-14" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
-              <div>
-                <p className="font-display text-lg font-semibold text-white">Phantix Security Solutions</p>
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
-              </div>
-            </div>
-            <p className="mt-5 text-sm leading-6 text-slate-400">
-              Privacy-first security operations. Your security data lives in your database — SecureGraph runs the
-              tooling, never touches the record.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-x-12 gap-y-10 text-sm text-slate-400 sm:grid-cols-3 lg:grid-cols-5">
-            <div className="space-y-3">
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Platform</p>
-              {PLATFORM_PAGES.map((p) => (
-                <Link key={p.slug} to={`/platform/${p.slug}`} className="block transition-colors hover:text-slate-200">
-                  {p.navLabel}
-                </Link>
-              ))}
-              <a href="/#ai" className="block transition-colors hover:text-slate-200">AI pentest agent</a>
-            </div>
-            <div className="space-y-3">
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Solutions</p>
-              <Link to="/solutions/business-leaders" className="block transition-colors hover:text-slate-200">Business leaders</Link>
-              <Link to="/solutions/security-teams" className="block transition-colors hover:text-slate-200">Security teams</Link>
-              <Link to="/solutions/developers" className="block transition-colors hover:text-slate-200">Developers</Link>
-              <Link to="/trust" className="block transition-colors hover:text-slate-200">Trust &amp; security</Link>
-              <Link to="/pricing" className="block transition-colors hover:text-slate-200">Pricing</Link>
-            </div>
-            <div className="space-y-3">
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Surfaces</p>
-              <a href={APP_URL} className="block transition-colors hover:text-slate-200">app.phantixlabs.com</a>
-              <a href={PLATFORM_URL} className="block transition-colors hover:text-slate-200">platform.phantixlabs.com</a>
-              <a href={APP_DOCS_URL} className="block transition-colors hover:text-slate-200">Documentation</a>
-            </div>
-            <div className="space-y-3">
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Start</p>
-              <Link to="/demo" className="block transition-colors hover:text-slate-200">Request a demo</Link>
-              <a href={SANDBOX_APPLY_URL} className="block transition-colors hover:text-slate-200">Sandbox apply</a>
-              <a href={APP_LOGIN_URL} className="block transition-colors hover:text-slate-200">Sign in</a>
-              <a href={`${PLATFORM_URL}/register`} className="block transition-colors hover:text-slate-200">Register</a>
-            </div>
-            <div className="space-y-3">
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">Legal</p>
-              <a href="/terms" className="block transition-colors hover:text-slate-200">Terms of Service</a>
-              <a href="/aup" className="block transition-colors hover:text-slate-200">Acceptable Use Policy</a>
-              <a href="/privacy" className="block transition-colors hover:text-slate-200">Privacy Notice</a>
-            </div>
+        <p className="max-w-2xl font-display text-2xl font-semibold leading-snug text-white sm:text-[28px]">
+          Privacy-first security operations. Your security data lives in your
+          database — SecureGraph runs the tooling, never touches the record.
+        </p>
+
+        <div className="mt-7 flex items-center gap-2.5">
+          <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
+          <div className="leading-tight">
+            <p className="font-display text-sm font-semibold text-white">Phantix Security Solutions</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
           </div>
         </div>
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-10 text-xs text-slate-400">
+
+        <div className="mt-14 space-y-3 border-t border-phantix-700/30 pt-10 font-mono text-[12.5px] leading-6 text-slate-500">
+          <FooterLinkRow label="Platform" links={FOOTER_PLATFORM_LINKS} />
+          <FooterLinkRow label="Solutions" links={FOOTER_SOLUTIONS_LINKS} />
+          <FooterLinkRow label="Surfaces" links={FOOTER_SURFACE_LINKS} />
+          <FooterLinkRow label="Start" links={FOOTER_START_LINKS} />
+          <FooterLinkRow label="Legal" links={FOOTER_LEGAL_LINKS} />
+        </div>
+
+        <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-8 text-xs text-slate-500">
           <span>© 2026 Phantix Security Solutions</span>
           <span className="font-mono">api/v1 · 326 routes · 11 engines</span>
         </div>

@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ShieldCheck, ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, PlayCircle } from "lucide-react";
 import { PLATFORM_REGISTER_URL } from "@/lib/links";
 import { useTheme } from "@/lib/theme";
 import { GlowBloom } from "@/components/effects";
@@ -185,22 +185,11 @@ function HeroVisual({
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto w-full max-w-5xl"
+      className="relative w-full"
     >
-      {/* Bloom sits in the negative space around the frame, never on it. */}
+      {/* Bloom sits in the negative space around the frame, never on it —
+          on-token gold, the only ambient glow the visual carries. */}
       <GlowBloom className="-inset-x-20 -top-12 bottom-0 h-[70%]" tone="gold" />
-
-      {/* Bright yellow neon glow — hugs the top of the dashboard and spills upward. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-8 left-1/2 z-0 h-44 w-[78%] -translate-x-1/2"
-        style={{
-          background:
-            "radial-gradient(ellipse 55% 100% at 50% 0%, rgba(255,240,0,0.60) 0%, rgba(255,214,0,0.28) 45%, transparent 72%)",
-          filter: "blur(24px)",
-          mixBlendMode: "screen",
-        }}
-      />
 
       <div style={{ perspective: 1400 }}>
         <motion.div
@@ -292,91 +281,91 @@ export default function Hero() {
   }, [paused, reduce, annotate]);
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col items-center justify-start overflow-hidden px-6 pb-20 pt-36 md:pt-44">
-      {/* Brand chip */}
-      <aside className="mb-8 inline-flex items-center gap-2 rounded-full border border-gold-400/25 bg-gold-400/10 px-4 py-2 text-xs font-medium text-gold-300">
-        <ShieldCheck size={13} />
-        Phantix Security Solutions
-      </aside>
+    <section className="relative overflow-hidden px-6 pb-20 pt-36 md:pt-44">
+      {/*
+       * De-centred hero (Hallmark fix): a left-biased copy column against a
+       * wider right-biased product column, instead of every element stacked
+       * on one centred vertical axis. Height follows content — no forced
+       * 100svh — and the section naturally collapses to a single column
+       * below lg, copy first.
+       */}
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
+        <div>
+          <h1 className="max-w-xl font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.1rem]">
+            <span className="hero-heading">{HEADLINE.lead}</span>{" "}
+            <span className="hero-accent">{HEADLINE.highlight}</span>
+          </h1>
 
-      {/* Gradient headline */}
-      <h1 className="max-w-4xl text-center font-display text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-        <span className="hero-heading">{HEADLINE.lead}</span>
-        <br/>
-        <span className="hero-accent">{HEADLINE.highlight}</span>
-      </h1>
+          <p className="mt-6 max-w-md text-sm text-slate-400 md:text-base">
+            AI-powered end-to-end security operations — from setup to continuous security —
+            built for security professionals by security professionals.
+          </p>
 
-      {/* Subtitle */}
-      <p className="mt-6 max-w-2xl text-center text-sm text-slate-400 md:text-base">
-        AI-powered end-to-end security operations — from setup to continuous security —
-        built for security professionals by security professionals.
-      </p>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
+              Get started free <ArrowRight size={16} />
+            </a>
+            <Link to="/demo" className="btn-secondary !px-6 !py-3 !text-base">
+              <PlayCircle size={16} /> Watch demo
+            </Link>
+          </div>
 
-      {/* CTAs */}
-      <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-        <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
-          Get started free <ArrowRight size={16} />
-        </a>
-        <Link to="/demo" className="btn-secondary !px-6 !py-3 !text-base">
-          <PlayCircle size={16} /> Watch demo
-        </Link>
-      </div>
+          {/* The three claims are the tour controls, not decoration — a
+              left-aligned legend that annotates the visual beside it. */}
+          <div
+            role="tablist"
+            aria-label="What the Command Centre enforces"
+            className="mt-10 flex flex-col gap-2"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {CLAIMS.map((c, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={c.value}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActive(i)}
+                  onFocus={() => {
+                    setActive(i);
+                    setPaused(true);
+                  }}
+                  onBlur={() => setPaused(false)}
+                  className={`group relative rounded-md border px-4 py-2.5 text-left transition-colors duration-200 ${
+                    isActive
+                      ? "border-gold-400/45 bg-gold-400/[0.07]"
+                      : "border-phantix-700 bg-phantix-900/60 hover:border-phantix-600"
+                  }`}
+                >
+                  <span
+                    className={`block font-display text-base font-semibold transition-colors ${
+                      isActive ? "text-white" : "text-slate-300"
+                    }`}
+                  >
+                    {c.value}
+                  </span>
+                  <span className="mt-0.5 block text-[11px] text-slate-500">{c.label}</span>
 
-      {/* The three claims are the tour controls, not decoration. */}
-      <div
-        role="tablist"
-        aria-label="What the Command Centre enforces"
-        className="mt-12 flex flex-wrap justify-center gap-2 sm:gap-3"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {CLAIMS.map((c, i) => {
-          const isActive = i === active;
-          return (
-            <button
-              key={c.value}
-              role="tab"
-              aria-selected={isActive}
-              onClick={() => setActive(i)}
-              onFocus={() => {
-                setActive(i);
-                setPaused(true);
-              }}
-              onBlur={() => setPaused(false)}
-              className={`group relative rounded-md border px-4 py-2.5 text-left transition-colors duration-200 ${
-                isActive
-                  ? "border-gold-400/45 bg-gold-400/[0.07]"
-                  : "border-phantix-700 bg-phantix-900/60 hover:border-phantix-600"
-              }`}
-            >
-              <span
-                className={`block font-display text-base font-semibold transition-colors ${
-                  isActive ? "text-white" : "text-slate-300"
-                }`}
-              >
-                {c.value}
-              </span>
-              <span className="mt-0.5 block text-[11px] text-slate-500">{c.label}</span>
+                  {/* Progress bar doubles as the "which tab am I on" affordance. */}
+                  <span className="absolute inset-x-3 bottom-1 h-px overflow-hidden rounded-full bg-phantix-700">
+                    {isActive && (
+                      <motion.span
+                        key={`${c.value}-${paused}`}
+                        className="block h-full bg-gold-400"
+                        initial={{ width: reduce || paused ? "100%" : "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: reduce || paused ? 0 : ROTATE_MS / 1000, ease: "linear" }}
+                      />
+                    )}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
-              {/* Progress bar doubles as the "which tab am I on" affordance. */}
-              <span className="absolute inset-x-3 bottom-1 h-px overflow-hidden rounded-full bg-phantix-700">
-                {isActive && (
-                  <motion.span
-                    key={`${c.value}-${paused}`}
-                    className="block h-full bg-gold-400"
-                    initial={{ width: reduce || paused ? "100%" : "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: reduce || paused ? 0 : ROTATE_MS / 1000, ease: "linear" }}
-                  />
-                )}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Interactive dashboard preview */}
-      <div className="mt-12 w-full max-w-5xl">
+        {/* Interactive dashboard preview — the wider, right-biased column. */}
         <HeroVisual
           active={active}
           onPause={() => setPaused(true)}
