@@ -22,10 +22,10 @@ const GROUPS: Group[] = [
     title: "Pricing & AI credits",
     rows: [
       // Values overridden at render from live GET /billing/plans (see listPriceCells).
-      { label: "List price (NGN / mo)", values: ["₦0", "₦19,900", "₦49,900", "Quote"] },
+      { label: "List price (NGN / mo)", values: ["₦0", "₦9,900", "₦19,900", "Quote"] },
       { label: "Yearly billing", values: ["—", "10× monthly", "10× monthly", "Custom"] },
-      { label: "AI credits / mo (allowance)", values: ["100", "3,000", "10,000", "Custom"] },
-      { label: "Onboarding allotment (one-time)", values: ["—", "3,000", "10,000", "Custom"] },
+      { label: "AI credits (monthly allowance)", values: ["—", "5,000", "20,000", "Custom"] },
+      { label: "AI credits (one-time onboarding)", values: ["500", "5,000", "20,000", "Custom"] },
       { label: "Credit top-ups (500 / 2k / 5k)", values: ["yes", "yes", "yes", "yes"] },
       { label: "Shared AI credit pool", values: ["yes", "yes", "yes", "yes"] },
     ],
@@ -33,8 +33,8 @@ const GROUPS: Group[] = [
   {
     title: "Engine & AI — identical quality on every paid plan",
     rows: [
-      { label: "Threat modelling & product context", values: ["no", "yes", "yes", "yes"] },
-      { label: "Doc & architecture imports (draw.io)", values: ["no", "yes", "yes", "yes"] },
+      { label: "Threat modelling & product context", values: ["1 project", "yes", "yes", "yes"] },
+      { label: "Doc & architecture imports (draw.io)", values: ["yes", "yes", "yes", "yes"] },
       {
         label: "Six-layer code security (SAST / SCA / IaC / secrets / pipeline / malware)",
         values: ["no", "yes", "yes", "yes"],
@@ -42,18 +42,19 @@ const GROUPS: Group[] = [
       { label: "Context-aware AI triage", values: ["no", "yes", "yes", "yes"] },
       { label: "Authenticated / role-aware testing", values: ["no", "yes", "yes", "yes"] },
       { label: "AI AutoFix (credit-metered)", values: ["no", "yes", "yes", "yes"] },
+      { label: "Agentic branch / PR review", values: ["yes", "yes", "yes", "yes"] },
     ],
   },
   {
     title: "Scale & continuity",
     rows: [
-      { label: "Projects", values: ["0", "1", "5", "Unlimited / custom"] },
-      { label: "PR / MR reviews / mo", values: ["—", "10", "Continuous", "Custom"] },
+      { label: "Projects", values: ["1", "1", "5", "Unlimited / custom"] },
+      { label: "PR / MR reviews / mo", values: ["Credit-metered", "10", "Continuous", "Custom"] },
       { label: "On-demand assessments / mo", values: ["—", "3", "20", "Custom"] },
       { label: "Model refreshes / mo", values: ["—", "1", "10", "Custom"] },
       {
         label: "Web / API / mobile assessment",
-        values: ["Limited / free tools", "On demand", "Recurring", "Custom"],
+        values: ["Web + API + scanner", "On demand", "Recurring", "Custom"],
       },
       { label: "Continuous PR review", values: ["no", "no", "yes", "yes"] },
       { label: "Continuous / recurring pentest", values: ["no", "no", "yes", "yes"] },
@@ -75,7 +76,7 @@ const GROUPS: Group[] = [
     rows: [
       {
         label: "Reports",
-        values: ["JSON / CSV", "PDF · MD · HTML", "PDF · MD · HTML", "Custom / white-label"],
+        values: ["Every type & format", "Every type & format", "Every type & format", "Custom / white-label"],
       },
       {
         label: "Support",
@@ -92,8 +93,8 @@ const GROUPS: Group[] = [
 
 const PRICE_FALLBACK: Record<string, string> = {
   free: "NGN 0",
-  starter: "NGN 19,900/mo",
-  growth: "NGN 49,900/mo",
+  starter: "NGN 9,900/mo",
+  growth: "NGN 19,900/mo",
   enterprise: "Custom quote",
 };
 
@@ -114,7 +115,7 @@ function listPriceCells(tiers: PricingTier[]): [Cell, Cell, Cell, Cell] {
     if (t.monthly_ngn === 0) return "₦0";
     return `₦${t.monthly_ngn.toLocaleString()}`;
   };
-  return [cell("free", "₦0"), cell("starter", "₦19,900"), cell("growth", "₦49,900"), "Quote"];
+  return [cell("free", "₦0"), cell("starter", "₦9,900"), cell("growth", "₦19,900"), "Quote"];
 }
 
 function CellView({ value }: { value: Cell }) {

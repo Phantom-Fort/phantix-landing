@@ -24,9 +24,10 @@ export default function PricingPage() {
             quoted. Engagements cover the work that needs people, not just engines.
           </p>
           <p className="mt-4 text-[13px] leading-6 text-slate-500">
-            Hero numbers are <strong className="font-medium text-slate-400">AI credits / month</strong> —
-            the shared pool for Understand, Analyze and Remediate. Dual control, MFA and the immutable
-            audit trail are free on every plan.
+            Hero numbers are <strong className="font-medium text-slate-400">AI credits</strong> — the
+            shared pool for Understand, Analyze and Remediate. Free starts with a one-time 500-credit
+            allotment, then continues on free open-source models; paid plans add a monthly allowance and
+            an onboarding allotment. Dual control, MFA and the immutable audit trail are free on every plan.
           </p>
         </motion.div>
       </Section>

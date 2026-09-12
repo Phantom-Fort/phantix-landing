@@ -14,7 +14,7 @@ const OUTCOMES = [
   { icon: Eye, title: "Visibility", body: "A current inventory of the domains, apps, APIs and critical systems that are actually in scope." },
   { icon: FileCheck, title: "Credible findings", body: "Issues that passed verification — not a raw dump of scanner output with your logo on the cover." },
   { icon: TrendingUp, title: "Business impact", body: "Every reportable finding carries what's at stake, not only a severity label an executive can't act on." },
-  { icon: Presentation, title: "Board-ready packages", body: "PDF and structured reports built for leadership review, available on Starter and Growth." },
+  { icon: Presentation, title: "Board-ready packages", body: "PDF and structured reports built for leadership review — every report type and format is free on every plan." },
   { icon: Users, title: "Governance", body: "Sensitive actions can require dual control — no single person runs an unreviewed high-risk test." },
   { icon: Database, title: "Data control", body: "Findings and assets live in your own dedicated security database, and leave with you if you go." },
 ];
@@ -30,7 +30,7 @@ const QUESTIONS = [
   },
   {
     q: "What do Starter and Growth actually buy?",
-    a: "Continuous assurance: deeper assessment workflows including VAPT campaigns, stronger reporting formats, AI-assisted explanations, richer alerts and intelligence surfaces. Free gets you surface visibility without a card.",
+    a: "Depth and continuity. Free already gives you asset inventory, vulnerability and web/API scanning, VAPT campaigns, one threat-modelling project and every report type. Starter adds the full engine, mobile and code security, AI AutoFix, more projects and a monthly AI credit allowance. Growth adds continuous PR review and continuous pentesting, cloud and Kubernetes posture, blocking policies, the compliance workbench and the SOC alert console. Engagements cover the work that needs people.",
   },
   {
     q: "Can we start without committing to a project?",

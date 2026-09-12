@@ -7,9 +7,9 @@ export interface PricingTier {
   id: string;
   name: string;
   tagline: string;
-  /** Big number above the price (e.g. "3,000"). */
+  /** Big number above the price (e.g. "5,000"). */
   heroMetric: string;
-  /** Unit under the hero number (e.g. "AI credits / month"). */
+  /** Unit under the hero number (e.g. "AI credits / month (+ 5,000 allotment)"). */
   heroUnit: string;
   monthly_ngn: number | null;
   first_month_ngn?: number | null;
@@ -47,34 +47,41 @@ interface BillingPricingResponse {
 }
 
 const freeFeatures = [
-  "Baseline / hygiene scans & asset inventory (fair use)",
-  "Integrations Hub (free connectors)",
-  "JSON & CSV exports",
-  "Dual control, MFA, immutable audit — free on every plan",
+  "Asset inventory + discovery (domain, nmap, GitHub, OpenAPI)",
+  "VAPT campaigns + vulnerability / web / API scanner",
+  "1 threat-modelling project from your product context",
+  "PR / branch review and channel alerts (WhatsApp / Telegram) — metered by AI credits",
+  "Every report type and format — free on every plan",
+  "500 one-time AI credits, then free open-source models (admin opt-in)",
+  "Dual control, MFA, immutable audit, evidence redaction — free on every plan",
   "Community support",
-  "Not included: threat-model projects, continuous PR, cloud posture, board PDFs",
 ];
 
 const starterFeatures = [
-  "1 security project / product context",
-  "Full engine — six-layer code security, threat modelling, web/API assessment",
+  "Everything in Free",
+  "Full engine — six-layer code security, mobile, cloud & supply-chain scanners",
+  "Threat modelling & product context — more projects and monthly model refreshes",
   "10 PR / MR security reviews / mo",
   "3 on-demand assessments / mo · 1 model refresh / mo",
-  "PDF · Markdown · HTML reports + email support",
+  "5,000 AI credits / mo + 5,000 onboarding allotment",
+  "AI AutoFix (credit-metered) · email support",
 ];
 
 const growthFeatures = [
-  "5 projects · continuous PR / MR review (fair use)",
-  "Continuous / recurring pentest",
-  "20 on-demand assessments / mo · 10 model refreshes / mo",
-  "Multi-cloud + Kubernetes posture",
+  "Everything in Starter",
+  "Continuous PR / MR review and continuous / recurring pentest",
+  "5 projects · 20 on-demand assessments / mo · 10 model refreshes / mo",
+  "Multi-cloud + Kubernetes posture · blocking policies & path rules",
   "Compliance workbench · SOC alert console",
+  "20,000 AI credits / mo + 20,000 onboarding allotment",
+  "Guided onboarding",
 ];
 
 const enterpriseFeatures = [
   "Everything in Growth, at custom volume",
   "Unlimited / negotiated projects & assessments",
   "Org-wide governance & audit views",
+  "Multi-company groups, custom branding & report retention",
   "Priority support · dedicated success (deal-dependent)",
   "Partner / white-label reports + custom SLA (deal-dependent)",
 ];
@@ -138,32 +145,32 @@ function pickFeatures(raw: string[] | undefined, curated: string[] | undefined):
 
 export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTier[] {
   const fallback = raw ?? {
-    monthly_list_price_ngn: 19_900,
-    first_month_price_ngn: 9_900,
-    yearly_price_ngn: 199_000,
-    growth_monthly_price_ngn: 49_900,
+    monthly_list_price_ngn: 9_900,
+    first_month_price_ngn: 4_900,
+    yearly_price_ngn: 99_000,
+    growth_monthly_price_ngn: 19_900,
     first_month_discount_percent: 50,
   };
 
   if (Array.isArray(fallback.plans) && fallback.plans.length > 0) {
     const defaults: Record<string, Partial<PricingTier>> = {
       free: {
-        heroMetric: "100",
-        heroUnit: "AI credits / month",
+        heroMetric: "500",
+        heroUnit: "one-time AI credits",
         tagline: "For teams exploring SecureGraph with no card",
         features: freeFeatures,
         cta: "Get started free",
       },
       starter: {
-        heroMetric: "3,000",
-        heroUnit: "AI credits / month (+ 3,000 allotment)",
+        heroMetric: "5,000",
+        heroUnit: "AI credits / month (+ 5,000 allotment)",
         tagline: "Full engine, starter coverage",
         features: starterFeatures,
         cta: "Get started",
       },
       growth: {
-        heroMetric: "10,000",
-        heroUnit: "AI credits / month (+ 10,000 allotment)",
+        heroMetric: "20,000",
+        heroUnit: "AI credits / month (+ 20,000 allotment)",
         tagline: "Continuous security for teams shipping every week",
         features: growthFeatures,
         highlighted: true,
@@ -222,8 +229,8 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
       id: "free",
       name: "Free",
       tagline: "For teams exploring SecureGraph with no card",
-      heroMetric: "100",
-      heroUnit: "AI credits / month",
+      heroMetric: "500",
+      heroUnit: "one-time AI credits",
       monthly_ngn: 0,
       first_month_ngn: 0,
       yearly_note: "No card required",
@@ -234,8 +241,8 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
       id: "starter",
       name: "Starter",
       tagline: "Full engine, starter coverage",
-      heroMetric: "3,000",
-      heroUnit: "AI credits / month (+ 3,000 allotment)",
+      heroMetric: "5,000",
+      heroUnit: "AI credits / month (+ 5,000 allotment)",
       monthly_ngn: starterMonthly,
       first_month_ngn: starterFirstMonth,
       yearly_price_ngn: starterYearly,
@@ -247,8 +254,8 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
       id: "growth",
       name: "Growth",
       tagline: "Continuous security for teams shipping every week",
-      heroMetric: "10,000",
-      heroUnit: "AI credits / month (+ 10,000 allotment)",
+      heroMetric: "20,000",
+      heroUnit: "AI credits / month (+ 20,000 allotment)",
       monthly_ngn: growthMonthly,
       yearly_price_ngn: growthMonthly * 10,
       yearly_note: yearsNote(growthMonthly),
@@ -294,7 +301,7 @@ export async function loadPricing(force = false): Promise<PricingTier[]> {
         const list = Array.isArray(plansJson) ? plansJson : plansJson?.plans;
         if (Array.isArray(list) && list.length) {
           data = {
-            monthly_list_price_ngn: 19_900,
+            monthly_list_price_ngn: 9_900,
             plans: list.map(
               (p: {
                 key?: string;
