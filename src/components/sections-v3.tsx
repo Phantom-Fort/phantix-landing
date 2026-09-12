@@ -27,7 +27,7 @@ import {
 import { PLATFORM_PAGES } from "@/lib/platform-content";
 import { Section, fadeUp } from "./Section";
 import { GlowBloom } from "./effects";
-import PrivacyDiagram from "./PrivacyDiagram";
+import PrivacyVideo from "./PrivacyVideo";
 import { useTheme } from "@/lib/theme";
 import { sceneImg } from "@/lib/scene-image";
 
@@ -331,7 +331,7 @@ export function PrivacyModel() {
         </motion.div>
 
         <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }} className="relative">
-          <PrivacyDiagram />
+          <PrivacyVideo />
         </motion.div>
       </div>
     </Section>

@@ -48,14 +48,26 @@ export default {
       },
       fontFamily: {
         /*
-         * Hallmark fix — display and body no longer resolve to the same face.
-         * Geist Mono Variable (already self-hosted for the brand's technical
-         * accents: "AI-Powered Security", the footer route stats) is promoted
-         * to the display role, giving headings a distinct, on-brand register
-         * from Geist Variable body copy — no new font dependency required.
+         * Headlines are set in Geist Sans, not Geist Mono.
+         *
+         * The previous config promoted the monospace face to the display role to
+         * give headings a distinct register. It cost legibility at headline
+         * sizes, which is the one place legibility matters most: monospace forces
+         * every glyph into the same advance width, so an `i` carries as much
+         * space as an `m`, word shapes flatten out and long marketing headings
+         * stop being scannable. Landing pages at this tier all set headlines in a
+         * neo-grotesque sans and reserve mono for code and technical accents —
+         * Vercel (Geist Sans), Linear and Supabase (Inter), Stripe (Söhne),
+         * GitHub (Mona Sans), and aikido.dev, whose headings are a geometric
+         * grotesque with mono nowhere in the copy.
+         *
+         * Distinction now comes from weight, size and tracking (see `.h-hero` /
+         * `font-display` usages) rather than from swapping to a face that is
+         * harder to read. Mono keeps its real job: the technical accents and the
+         * footer route stats.
          */
-        display: ["'Geist Mono Variable'", "ui-monospace", "monospace"],
-        sans: ["'Geist Variable'", "system-ui", "sans-serif"],
+        display: ["'Geist Variable'", "Inter", "system-ui", "sans-serif"],
+        sans: ["'Geist Variable'", "Inter", "system-ui", "sans-serif"],
         mono: ["'Geist Mono Variable'", "ui-monospace", "monospace"],
       },
       boxShadow: {

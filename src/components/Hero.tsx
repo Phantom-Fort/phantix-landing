@@ -281,7 +281,7 @@ export default function Hero() {
   }, [paused, reduce, annotate]);
 
   return (
-    <section className="relative overflow-hidden px-6 pb-20 pt-36 md:pt-44">
+    <section className="relative overflow-hidden px-6 pb-20 pt-28 md:pt-32">
       {/*
        * De-centred hero (Hallmark fix): a left-biased copy column against a
        * wider right-biased product column, instead of every element stacked
@@ -301,7 +301,7 @@ export default function Hero() {
             built for security professionals by security professionals.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
               Get started free <ArrowRight size={16} />
             </a>
@@ -310,58 +310,54 @@ export default function Hero() {
             </Link>
           </div>
 
-          {/* The three claims are the tour controls, not decoration — a
-              left-aligned legend that annotates the visual beside it. */}
+          {/* The claims are the tour controls, not decoration — a compact
+              pill row (not a stacked wall of boxes) that annotates the
+              visual beside it. One caption line carries the detail for
+              whichever claim is active. */}
           <div
-            role="tablist"
-            aria-label="What the Command Centre enforces"
-            className="mt-10 flex flex-col gap-2"
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            {CLAIMS.map((c, i) => {
-              const isActive = i === active;
-              return (
-                <button
-                  key={c.value}
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setActive(i)}
-                  onFocus={() => {
-                    setActive(i);
-                    setPaused(true);
-                  }}
-                  onBlur={() => setPaused(false)}
-                  className={`group relative rounded-md border px-4 py-2.5 text-left transition-colors duration-200 ${
-                    isActive
-                      ? "border-gold-400/45 bg-gold-400/[0.07]"
-                      : "border-phantix-700 bg-phantix-900/60 hover:border-phantix-600"
-                  }`}
-                >
-                  <span
-                    className={`block font-display text-base font-semibold transition-colors ${
-                      isActive ? "text-white" : "text-slate-300"
+            <div role="tablist" aria-label="What the Command Centre enforces" className="mt-6 flex flex-wrap gap-1.5">
+              {CLAIMS.map((c, i) => {
+                const isActive = i === active;
+                return (
+                  <button
+                    key={c.value}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActive(i)}
+                    onFocus={() => {
+                      setActive(i);
+                      setPaused(true);
+                    }}
+                    onBlur={() => setPaused(false)}
+                    className={`rounded-full border px-3.5 py-1.5 font-display text-xs font-semibold transition-colors duration-200 ${
+                      isActive
+                        ? "border-gold-400/45 bg-gold-400/[0.1] text-white"
+                        : "border-phantix-700 bg-phantix-900/60 text-slate-400 hover:border-phantix-600 hover:text-slate-200"
                     }`}
                   >
                     {c.value}
-                  </span>
-                  <span className="mt-0.5 block text-[11px] text-slate-500">{c.label}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-                  {/* Progress bar doubles as the "which tab am I on" affordance. */}
-                  <span className="absolute inset-x-3 bottom-1 h-px overflow-hidden rounded-full bg-phantix-700">
-                    {isActive && (
-                      <motion.span
-                        key={`${c.value}-${paused}`}
-                        className="block h-full bg-gold-400"
-                        initial={{ width: reduce || paused ? "100%" : "0%" }}
-                        animate={{ width: "100%" }}
-                        transition={{ duration: reduce || paused ? 0 : ROTATE_MS / 1000, ease: "linear" }}
-                      />
-                    )}
-                  </span>
-                </button>
-              );
-            })}
+            {/* Progress bar doubles as the "which tab am I on" affordance. */}
+            <span className="mt-3 block h-px w-full max-w-xs overflow-hidden rounded-full bg-phantix-700">
+              <motion.span
+                key={`${CLAIMS[active].value}-${paused}`}
+                className="block h-full bg-gold-400"
+                initial={{ width: reduce || paused ? "100%" : "0%" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: reduce || paused ? 0 : ROTATE_MS / 1000, ease: "linear" }}
+              />
+            </span>
+
+            <p className="mt-2.5 max-w-sm text-xs leading-5 text-slate-500">
+              <span className="text-slate-300">{CLAIMS[active].label}</span> — {CLAIMS[active].detail}
+            </p>
           </div>
         </div>
 

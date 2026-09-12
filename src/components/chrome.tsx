@@ -309,8 +309,8 @@ export function Nav() {
         className={cx(
           "mx-auto flex max-w-6xl items-center gap-3 rounded-full border px-4 py-2.5 backdrop-blur-xl transition-all duration-300 sm:px-5",
           scrolled
-            ? "border-white/10 bg-phantix-950/90 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.75)]"
-            : "border-white/5 bg-phantix-950/70 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.6)]",
+            ? "border-white/15 bg-phantix-800/85 shadow-[0_16px_40px_-14px_rgba(0,0,0,0.85)]"
+            : "border-white/10 bg-phantix-800/55 shadow-[0_10px_34px_-16px_rgba(0,0,0,0.7)]",
         )}
       >
         <BrandLogo className="h-9 w-10" lightSrc="/logo-transparent.png" />
@@ -362,26 +362,27 @@ interface FootLink {
   href?: string;
 }
 
-/** A category run as flowing text — a colophon row, not a boxed column. */
-function FooterLinkRow({ label, links }: { label: string; links: FootLink[] }) {
+/** A category as a proper footer column — heading on top, links stacked below. */
+function FooterLinkColumn({ label, links }: { label: string; links: FootLink[] }) {
   return (
-    <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1.5">
-      <span className="mr-1 shrink-0 text-slate-300">{label}</span>
-      {links.map((l, i) => (
-        <React.Fragment key={l.label}>
-          {l.to ? (
-            <Link to={l.to} className="text-slate-500 transition-colors hover:text-slate-200">
-              {l.label}
-            </Link>
-          ) : (
-            <a href={l.href} className="text-slate-500 transition-colors hover:text-slate-200">
-              {l.label}
-            </a>
-          )}
-          {i < links.length - 1 && <span className="text-phantix-700">·</span>}
-        </React.Fragment>
-      ))}
-    </p>
+    <div>
+      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">{label}</p>
+      <ul className="mt-4 space-y-2.5">
+        {links.map((l) => (
+          <li key={l.label}>
+            {l.to ? (
+              <Link to={l.to} className="text-sm text-slate-500 transition-colors hover:text-slate-200">
+                {l.label}
+              </Link>
+            ) : (
+              <a href={l.href} className="text-sm text-slate-500 transition-colors hover:text-slate-200">
+                {l.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -414,34 +415,32 @@ const FOOTER_LEGAL_LINKS: FootLink[] = [
 ];
 
 /*
- * Footer — Statement (Ft5) + Dense colophon (Ft4), not the 4-column index
- * grid + social row + copyright tail. Every link the old 5-column footer
- * carried is still here — set as running text grouped by category, so the
- * page closes with a line, not a sitemap.
+ * Footer — a standard footer layout: brand block on the left, link columns
+ * grouped by category in a grid, and a copyright tail along the bottom.
  */
 export function Footer() {
   return (
-    <footer className="border-t border-phantix-700/30 pb-12 pt-20 md:pt-28">
+    <footer className="border-t border-phantix-700/30 pb-12 pt-16 md:pt-20">
       <div className="mx-auto max-w-7xl px-6">
-        <p className="max-w-2xl font-display text-2xl font-semibold leading-snug text-white sm:text-[28px]">
-          Privacy-first security operations. Your security data lives in your
-          database — SecureGraph runs the tooling, never touches the record.
-        </p>
-
-        <div className="mt-7 flex items-center gap-2.5">
-          <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
-          <div className="leading-tight">
-            <p className="font-display text-sm font-semibold text-white">Phantix Security Solutions</p>
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(5,1fr)] lg:gap-8">
+          <div className="max-w-xs">
+            <div className="flex items-center gap-2.5">
+              <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
+              <div className="leading-tight">
+                <p className="font-display text-sm font-semibold text-white">SecureGraph</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+              </div>
+            </div>
+            <p className="mt-5 text-sm leading-6 text-slate-500">
+              Privacy-first security operations platform built for lean security teams.
+            </p>
           </div>
-        </div>
 
-        <div className="mt-14 space-y-3 border-t border-phantix-700/30 pt-10 font-mono text-[12.5px] leading-6 text-slate-500">
-          <FooterLinkRow label="Platform" links={FOOTER_PLATFORM_LINKS} />
-          <FooterLinkRow label="Solutions" links={FOOTER_SOLUTIONS_LINKS} />
-          <FooterLinkRow label="Surfaces" links={FOOTER_SURFACE_LINKS} />
-          <FooterLinkRow label="Start" links={FOOTER_START_LINKS} />
-          <FooterLinkRow label="Legal" links={FOOTER_LEGAL_LINKS} />
+          <FooterLinkColumn label="Platform" links={FOOTER_PLATFORM_LINKS} />
+          <FooterLinkColumn label="Solutions" links={FOOTER_SOLUTIONS_LINKS} />
+          <FooterLinkColumn label="Surfaces" links={FOOTER_SURFACE_LINKS} />
+          <FooterLinkColumn label="Start" links={FOOTER_START_LINKS} />
+          <FooterLinkColumn label="Legal" links={FOOTER_LEGAL_LINKS} />
         </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-8 text-xs text-slate-500">
