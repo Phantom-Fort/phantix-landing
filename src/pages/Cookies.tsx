@@ -22,7 +22,7 @@ export default function Cookies() {
       </div>
 
       <Nav />
-      <main className="relative px-4 py-16">
+      <main className="relative px-4 pb-16 pt-28 md:pt-36">
         <div className="mx-auto max-w-3xl">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-200">
             <ArrowLeft size={15} /> Back to phantixlabs.com

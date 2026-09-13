@@ -9,7 +9,7 @@ import PageShell from "@/components/PageShell";
 import { BackLink } from "@/components/BackLink";
 import { Section, fadeUp } from "@/components/Section";
 import { GlowBloom } from "@/components/effects";
-import PrivacyDiagram from "@/components/PrivacyDiagram";
+import PrivacyVideo from "@/components/PrivacyVideo";
 
 /*
  * /trust — the full privacy & security model.
@@ -130,7 +130,7 @@ export default function Trust() {
             </p>
           </motion.div>
           <motion.div {...fadeUp} transition={{ ...fadeUp.transition, delay: 0.1 }}>
-            <PrivacyDiagram />
+            <PrivacyVideo />
           </motion.div>
         </div>
 

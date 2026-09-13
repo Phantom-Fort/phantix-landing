@@ -49,6 +49,7 @@ type BillingCycle = "monthly" | "yearly";
  */
 export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
   const [tiers, setTiers] = useState<PricingTier[]>([]);
+  const [pricingLoading, setPricingLoading] = useState(true);
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
   const [engagementsOpen, setEngagementsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -57,7 +58,10 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
   const [modalDefaultMessage, setModalDefaultMessage] = useState<string | undefined>();
 
   useEffect(() => {
-    loadPricing(true).then(setTiers);
+    loadPricing(true).then((t) => {
+      setTiers(t);
+      setPricingLoading(false);
+    });
     const t = window.setInterval(() => {
       loadPricing(true).then(setTiers);
     }, 2 * 60_000);
@@ -147,7 +151,23 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
 
       {/* ── Paid plan cards ─────────────────────────────────────── */}
       <div className="mx-auto mt-12 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
-        {paid.map((t, i) => {
+        {pricingLoading && paid.length === 0
+          ? Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="card flex flex-col p-7">
+                <div className="skeleton h-5 w-28 rounded" />
+                <div className="skeleton mt-2.5 h-3.5 w-full max-w-[85%] rounded" />
+                <div className="mt-5 border-t border-phantix-700/40 pt-5">
+                  <div className="skeleton h-8 w-32 rounded" />
+                  <div className="skeleton mt-2 h-3 w-40 rounded" />
+                </div>
+                <div className="mt-6 space-y-2.5">
+                  {Array.from({ length: 5 }).map((__, j) => (
+                    <div key={j} className="skeleton h-3.5 rounded" style={{ width: `${85 - j * 6}%`, opacity: 1 - j * 0.12 }} />
+                  ))}
+                </div>
+              </div>
+            ))
+          : paid.map((t, i) => {
           const monthly = t.monthly_ngn;
           const yearly = isYearlyPrice(t);
           const elevated = t.highlighted || t.id === "growth";
@@ -276,7 +296,7 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
               )}
             </motion.div>
           );
-        })}
+            })}
       </div>
 
       {/* ── Free + full-detail row (Free is no longer a card) ─────── */}

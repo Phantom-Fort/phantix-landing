@@ -31,50 +31,50 @@ const HEADLINE= {
 
 /**
  * Each claim points at the real UI that enforces it. `x`/`y` are fractions of
- * the shipped screenshot, read off a percentage grid overlaid on the asset —
- * eyeballing them put two hotspots in the gaps between stat cards.
+ * the shipped screenshot (2000x1226), pixel-measured off command-centre-dashboard.jpg
+ * by scanning brightness edges for each card/widget's actual border box.
  */
 const CLAIMS = [
   {
     value: "Privacy-First",
     label: "security DB",
     detail: "Findings live in a Postgres you own — the app just reports its connection state.",
-    hotspot: { x: 0.703, y: 0.036 },
+    hotspot: { x: 0.775, y: 0.029 },
     align: "below" as const,
   },
   {
     value: "Verified Only",
     label: "findings that ship",
     detail: "Open findings are the verified ones. Heuristic noise never get here.",
-    hotspot: { x: 0.354, y: 0.405 },
+    hotspot: { x: 0.3795, y: 0.322 },
     align: "below" as const,
   },
   {
     value: "Real-Time",
     label: "live detection queue",
     detail: "Detections land in a triage queue the SOC engine keeps current — not a nightly digest.",
-    hotspot: { x: 0.679, y: 0.405 },
+    hotspot: { x: 0.65, y: 0.322 },
     align: "below" as const,
   },
   {
     value: "Tracked Fixes",
     label: "tracked to closure",
     detail: "Remediation is tracked to fixed, and anything that regresses comes straight back onto the queue.",
-    hotspot: { x: 0.841, y: 0.405 },
+    hotspot: { x: 0.79, y: 0.322 },
     align: "below" as const,
   },
   {
     value: "Daily Scoring",
     label: "composite posture",
     detail: "One composite score, recomputed every day, so you can show direction — not just a snapshot.",
-    hotspot: { x: 0.228, y: 0.497 },
+    hotspot: { x: 0.240, y: 0.322 },
     align: "below" as const,
   },
   {
     value: "Dual control",
     label: "sensitive actions",
     detail: "Protected mutations stay locked until an initiator and an authorizer both sign in.",
-    hotspot: { x: 0.044, y: 0.883 },
+    hotspot: { x: 0.022, y: 0.927 },
     align: "above" as const,
   },
 ];
@@ -292,7 +292,7 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
         <div>
           <h1 className="max-w-xl font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.1rem]">
-            <span className="hero-heading">{HEADLINE.lead}</span>{" "}
+            <span className="hero-heading">{HEADLINE.lead}</span> {"     "}
             <span className="hero-accent">{HEADLINE.highlight}</span>
           </h1>
 

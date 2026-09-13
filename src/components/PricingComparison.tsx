@@ -126,9 +126,13 @@ function CellView({ value }: { value: Cell }) {
 
 export function PricingComparison() {
   const [tiers, setTiers] = useState<PricingTier[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadPricing().then(setTiers);
+    loadPricing().then((t) => {
+      setTiers(t);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -166,9 +170,13 @@ export function PricingComparison() {
                         Most popular
                       </span>
                     )}
-                    <span className="font-mono text-[11px] text-slate-400">
-                      {priceLabel(tiers, name.toLowerCase())}
-                    </span>
+                    {loading ? (
+                      <span className="skeleton inline-block h-3 w-16 rounded" />
+                    ) : (
+                      <span className="font-mono text-[11px] text-slate-400">
+                        {priceLabel(tiers, name.toLowerCase())}
+                      </span>
+                    )}
                   </div>
                 </th>
               ))}
@@ -199,7 +207,11 @@ export function PricingComparison() {
                         key={i}
                         className={cx("px-4 py-3 text-center", i === 2 && "bg-gold-400/5")}
                       >
-                        <CellView value={v} />
+                        {loading && row.label === "List price (NGN / mo)" ? (
+                          <span className="skeleton mx-auto block h-3 w-10 rounded" />
+                        ) : (
+                          <CellView value={v} />
+                        )}
                       </td>
                     ))}
                   </tr>

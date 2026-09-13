@@ -5,26 +5,43 @@ import PrivacyDiagram from "./PrivacyDiagram";
 /*
  * Privacy model artwork — the "your database" loop, per theme.
  *
- * The claim in this section is the page's core argument, so the artwork has to
- * read as product footage rather than decoration: a 16:9 frame that matches the
- * product captures elsewhere on the page, chrome that says what is on screen,
- * and no controls to invite interaction with what is really a diagram in motion.
+ * The source loops are flat line art: white on pure #000 (dark) and black on
+ * pure #FFF (light). The page canvas is neither — `--phantix-950` is 9 8 6 in
+ * dark and 244 246 250 in light — so dropping the video in as a plain element
+ * would read as a black (or white) rectangle pasted onto a near-black (or
+ * off-white) page, with a visible seam on all four sides.
  *
- * Captured in both themes (dark canonical, `-light` variant), because a dark
- * loop on a light page looks like a missing asset. If the light capture is
- * missing the element falls back to the dark one rather than rendering nothing.
+ * Two ways to reconcile that. Compositing the flat background out with
+ * `mix-blend-mode` (screen in dark, multiply in light) looks the most
+ * integrated, but it blends against the nearest stacking context — and the
+ * section wraps this in a framer-motion `transform`, which creates one. The
+ * knockout would then blend against an empty context instead of the page and
+ * silently render the raw box. Not something to ship on a guess.
+ *
+ * So the panel owns the video's exact background instead (#000 dark, #fff
+ * light). The edge becomes a deliberate inset card rather than a seam — the
+ * language the rest of the page already uses, and the language the SVG diagram
+ * this replaces already used. It renders identically everywhere.
+ *
+ * The labels are DOM text, not baked pixels: crisp at any zoom, translatable,
+ * themable, and readable by a screen reader — the meaning the old SVG carried in
+ * `<text>` nodes is kept rather than lost to a video.
  *
  * Accessibility and weight:
- * - `prefers-reduced-motion` renders the static SVG diagram instead. The
- *   diagram carries the same meaning, so reduced motion loses nothing.
- * - The video only loads once the section is near the viewport; it sits well
- *   below the fold and must not compete with the hero for bandwidth.
- * - Muted + `playsInline` are required for autoplay to be allowed at all on
- *   iOS and in Chrome's autoplay policy.
+ * - `prefers-reduced-motion` renders the static SVG diagram instead. It states
+ *   the same thing, so reduced motion loses no information.
+ * - The video is only fetched near the viewport; it sits below the fold and must
+ *   not compete with the hero for bandwidth.
+ * - Muted + `playsInline` are what make autoplay permissible at all under the
+ *   iOS and Chrome autoplay policies.
  */
 
 const SRC_DARK = "/scenes/privacy-your-database.mp4";
 const SRC_LIGHT = "/scenes/privacy-your-database-light.mp4";
+//: First-frame stills, so the panel shows the artwork immediately instead of a
+//: flat fill while `preload="metadata"` decides whether to paint a frame.
+const POSTER_DARK = "/scenes/privacy-your-database-poster.jpg";
+const POSTER_LIGHT = "/scenes/privacy-your-database-light-poster.jpg";
 
 export default function PrivacyVideo() {
   const { theme } = useTheme();
@@ -62,53 +79,54 @@ export default function PrivacyVideo() {
     return () => observer.disconnect();
   }, [visible]);
 
-  // Swapping `src` on an already-playing element needs an explicit load()/play()
-  // — React updating the attribute alone leaves the previous theme's frames up.
+  // Switching theme swaps the source. React updating the attribute is not
+  // enough on an element that is already playing — without an explicit
+  // load()/play() the previous theme's frames stay on screen.
   useEffect(() => {
     const el = videoRef.current;
     if (!el || !visible || reduceMotion) return;
     el.load();
-    const play = el.play();
-    if (play && typeof play.catch === "function") play.catch(() => {});
+    const started = el.play();
+    if (started && typeof started.catch === "function") started.catch(() => {});
   }, [theme, visible, reduceMotion]);
 
   if (reduceMotion || failed) {
     return <PrivacyDiagram />;
   }
 
-  const src = theme === "light" ? SRC_LIGHT : SRC_DARK;
+  const isLight = theme === "light";
+  const src = isLight ? SRC_LIGHT : SRC_DARK;
 
   return (
-    <div
+    <figure
       ref={wrapRef}
-      className="relative overflow-hidden rounded-md border border-phantix-700 bg-phantix-950 shadow-[0_0_0_1px_rgba(232,181,77,0.18),0_1px_2px_0_rgba(0,0,0,0.5)]"
+      className="relative m-0 overflow-hidden rounded-md border border-phantix-700 shadow-[0_0_0_1px_rgba(232,181,77,0.14),0_1px_2px_0_rgba(0,0,0,0.5)]"
     >
-      {/* Chrome: names the surface, the way the product captures on this page do. */}
-      <div className="flex items-center gap-2 border-b border-phantix-800 bg-phantix-900/60 px-3.5 py-2.5">
-        <span className="h-1.5 w-1.5 rounded-full bg-gold-400/80" />
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500">
-          your dedicated security database
-        </span>
-      </div>
-
-      <div className="relative aspect-video w-full bg-phantix-950">
+      {/* The panel matches the source's own flat background exactly, so there is
+          no lighter/darker band around the artwork inside the card. */}
+      <div
+        className="relative aspect-video w-full"
+        style={{ backgroundColor: isLight ? "#ffffff" : "#000000" }}
+      >
         {visible ? (
           <video
             ref={videoRef}
             key={src}
             src={src}
-            className="absolute inset-0 block h-full w-full object-cover"
+            poster={isLight ? POSTER_LIGHT : POSTER_DARK}
+            className="absolute inset-0 block h-full w-full object-contain"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-            aria-label="Assets, scans and findings being written into your own dedicated security database; nothing flows back out"
+            aria-hidden="true"
+            tabIndex={-1}
             onError={() => {
               // A missing light capture must not leave a hole in the section:
-              // fall back to the dark loop, and to the diagram if that fails too.
+              // fall back to the dark loop, then to the diagram.
               const el = videoRef.current;
-              if (el && theme === "light" && !el.src.endsWith(SRC_DARK)) {
+              if (el && isLight && !el.src.endsWith(SRC_DARK)) {
                 el.src = SRC_DARK;
                 el.load();
                 void el.play().catch(() => {});
@@ -118,13 +136,24 @@ export default function PrivacyVideo() {
             }}
           />
         ) : (
-          <div className="absolute inset-0 animate-pulse bg-phantix-900/40" />
+          <div className="absolute inset-0" aria-hidden="true" />
         )}
       </div>
 
-      <p className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[11px] text-slate-600">
-        one direction only · nothing leaves the boundary
-      </p>
-    </div>
+      {/* Labels the video does not carry, kept as text so they stay legible and
+          readable — the same two endpoints the SVG diagram names. */}
+      <div className="flex items-start justify-between gap-4 border-t border-phantix-800 px-4 py-2.5">
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500">
+          your database
+        </span>
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500">
+          securegraph engine
+        </span>
+      </div>
+
+      <figcaption className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[11px] text-slate-600">
+        Your data flows in one direction only · nothing leaves the boundary
+      </figcaption>
+    </figure>
   );
 }
