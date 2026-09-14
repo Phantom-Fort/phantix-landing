@@ -108,7 +108,7 @@ export default function PlatformCapability() {
                 </span>
                 <ArrowRight
                   size={16}
-                  className="shrink-0 text-gold-400 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
+                  className="shrink-0 text-gold-400 opacity-100 transition-all sm:opacity-0 sm:group-hover:translate-x-1 sm:group-hover:opacity-100"
                 />
               </Link>
             </motion.div>

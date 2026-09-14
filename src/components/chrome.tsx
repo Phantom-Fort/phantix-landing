@@ -398,11 +398,11 @@ const FOOTER_SOLUTIONS_LINKS: FootLink[] = [
   { label: "Pricing", to: "/pricing" },
 ];
 const FOOTER_SURFACE_LINKS: FootLink[] = [
-  { label: "Core — app.phantixlabs.com", href: APP_URL },
-  { label: "Attack — attack.phantixlabs.com", href: ATTACK_URL },
-  { label: "Defend — defend.phantixlabs.com", href: DEFEND_URL },
-  { label: "Code — code.phantixlabs.com", href: CODE_URL },
-  { label: "Platform — platform.phantixlabs.com", href: PLATFORM_URL },
+  { label: "Core Application", href: APP_URL },
+  { label: "Attack", href: ATTACK_URL },
+  { label: "Defend", href: DEFEND_URL },
+  { label: "Code", href: CODE_URL },
+  { label: "Platform", href: PLATFORM_URL },
   { label: "Documentation", href: APP_DOCS_URL },
 ];
 const FOOTER_START_LINKS: FootLink[] = [
@@ -447,7 +447,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-8 text-xs text-slate-500">
-          <span>© 2026 Phantix Security Solutions</span>
+          <span>© {new Date().getFullYear()} Phantix Security Solutions</span>
           <span className="font-mono">api/v1 · 600+ routes · 13 engines · 10+ AI agents</span>
         </div>
       </div>
