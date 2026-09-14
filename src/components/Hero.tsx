@@ -211,7 +211,7 @@ function HeroVisual({
           {theme === "light" ? (
             <img
               src="/scenes/command-centre-dashboard-light.jpg"
-              alt="The SecureGraph Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
+              alt="SecureGraph Core: posture score, open findings, risk trend and critical assets for a live organization"
               width={2000}
               height={1225}
               className="block w-full"
@@ -226,7 +226,7 @@ function HeroVisual({
               <source srcSet="/scenes/command-centre-dashboard.webp" type="image/webp" />
               <img
                 src="/scenes/command-centre-dashboard.jpg"
-                alt="The SecureGraph Command Centre: posture score, open findings, risk trend and critical assets for a live organization"
+                alt="SecureGraph Core: posture score, open findings, risk trend and critical assets for a live organization"
                 width={2000}
                 height={1225}
                 className="block w-full"
@@ -318,7 +318,7 @@ export default function Hero() {
             onMouseEnter={() => setPaused(true)}
             onMouseLeave={() => setPaused(false)}
           >
-            <div role="tablist" aria-label="What the Command Centre enforces" className="mt-6 flex flex-wrap gap-1.5">
+            <div role="tablist" aria-label="What SecureGraph enforces" className="mt-6 flex flex-wrap gap-1.5">
               {CLAIMS.map((c, i) => {
                 const isActive = i === active;
                 return (

@@ -439,8 +439,10 @@ export function FinalCTA() {
           </a>
         </div>
         <p className="relative mt-5 text-[12px] leading-5 text-slate-400">
-          Registration happens on <strong>platform.phantixlabs.com</strong>. After setup, you generate
-          login links from the Platform — your team signs in on <strong>app.phantixlabs.com</strong>.
+          Registration and administration happen on <strong>platform.phantixlabs.com</strong>, where
+          you also choose which applications your organization uses. After setup you generate login
+          links from there; your team signs in once on <strong>app.phantixlabs.com</strong> and
+          lands on a picker with every application their role allows.
         </p>
       </motion.div>
     </Section>

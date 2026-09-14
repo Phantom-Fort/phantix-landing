@@ -1,4 +1,12 @@
-export { LANDING_URL, PLATFORM_URL, APP_URL, SANDBOX_APPLY_URL } from "./config";
+export {
+  LANDING_URL,
+  PLATFORM_URL,
+  APP_URL,
+  ATTACK_URL,
+  DEFEND_URL,
+  CODE_URL,
+  SANDBOX_APPLY_URL,
+} from "./config";
 import { PLATFORM_URL, APP_URL, SANDBOX_APPLY_URL } from "./config";
 
 export const APP_DEMO_URL = `${APP_URL}/demo`;

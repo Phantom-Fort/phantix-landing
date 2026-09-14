@@ -13,6 +13,7 @@ import {
   WhyWeBuilt,
   Lifecycle,
   Coverage,
+  Applications,
 } from "@/components/sections-v3";
 import { Pricing, FinalCTA } from "@/components/Pricing";
 import SandboxSection from "@/components/SandboxSection";
@@ -53,6 +54,9 @@ export default function Landing() {
 
         {/* 3 — What you get, shown rather than described */}
         <Capabilities />
+
+        {/* 3a — How the product is packaged: one graph, four applications */}
+        <Applications />
 
         {/* 3b — Doorway into the per-surface platform pages */}
         <PlatformTeaser />

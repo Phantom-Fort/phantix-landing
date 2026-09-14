@@ -184,7 +184,7 @@ export function Capabilities() {
           eyebrow="What you get"
           lead="From blind spots to"
           accent="board-ready proof"
-          body="Four surfaces, one command centre. Every screen below is the real product, not a mockup."
+          body="Four surfaces, one security graph. Every screen below is the real product, not a mockup."
         />
       </motion.div>
 
@@ -515,7 +515,7 @@ export function PlatformTeaser() {
                 {p.navLabel}
               </h3>
               <p className="mt-2 text-[13px] leading-6 text-slate-500">{p.headline}</p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-gold-400 opacity-0 transition-opacity group-hover:opacity-100">
+              <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-gold-400 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
                 Explore <ArrowRight size={12} />
               </span>
             </Link>
@@ -792,6 +792,105 @@ export function WhyWeBuilt() {
           </div>
         </motion.div>
       </div>
+    </Section>
+  );
+}
+
+/**
+ * The four applications.
+ *
+ * The product used to be described as one console. It now ships as four
+ * applications over one security graph, each on its own host, and the page has
+ * to say so plainly — an operator buying "Attack" should see what that is and
+ * what it does not include.
+ */
+export function Applications() {
+  const apps = [
+    {
+      key: "core",
+      name: "Core",
+      tagline: "Connect the security picture",
+      body: "The shared security graph: findings, risk, reports, alerts and the AI assistant. Always included — the other three hang off it.",
+      points: ["Overview", "Findings", "Risk", "Reports", "AI assistant"],
+      accent: "border-gold-400/40 text-gold-300",
+      dot: "bg-gold-400",
+      base: true,
+    },
+    {
+      key: "attack",
+      name: "Attack",
+      tagline: "Test your security",
+      body: "Offensive work: scoped VAPT campaigns, web, API and mobile scans, pentest scope and the autonomous pentest agent.",
+      points: ["Targets", "VAPT", "Web & API", "Mobile", "Pentest scope"],
+      accent: "border-severity-critical/40 text-severity-critical",
+      dot: "bg-severity-critical",
+    },
+    {
+      key: "defend",
+      name: "Defend",
+      tagline: "Protect and monitor continuously",
+      body: "Defensive posture: assets and exposure, cloud, compliance, the risk register, SOC operations and threat intelligence.",
+      points: ["Assets", "Exposure", "Cloud", "Compliance", "SOC"],
+      accent: "border-severity-low/40 text-severity-low",
+      dot: "bg-severity-low",
+    },
+    {
+      key: "code",
+      name: "Code",
+      tagline: "Design and build it securely",
+      body: "Secure code review with the fix as a pull request, plus the design-time work: threat models and product context.",
+      points: ["Code review", "Repositories", "AutoFix PRs", "Threat models"],
+      accent: "border-severity-info/40 text-severity-info",
+      dot: "bg-severity-info",
+    },
+  ];
+
+  return (
+    <Section id="applications" className="py-20">
+      <motion.div {...fadeUp}>
+        <Heading
+          eyebrow="One graph, four applications"
+          lead="Buy the part you need,"
+          accent="not the whole console"
+          body="Every application reads and writes the same security graph, so a finding raised by a scan is the same finding your report cites. Your administrator decides which ones your organization uses, and each person's role decides which ones they can open."
+        />
+      </motion.div>
+
+      <motion.div
+        {...fadeUp}
+        className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+      >
+        {apps.map((a) => (
+          <div
+            key={a.key}
+            className={`card flex flex-col gap-3 border p-5 ${a.accent.split(" ")[0]}`}
+          >
+            <div className="flex items-center gap-2">
+              <span className={`h-1.5 w-1.5 rounded-full ${a.dot}`} />
+              <span className="font-display text-lg font-bold text-white">{a.name}</span>
+              {a.base && (
+                <span className="ml-auto rounded bg-phantix-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-400">
+                  included
+                </span>
+              )}
+            </div>
+            <p className={`text-xs font-medium ${a.accent.split(" ")[1]}`}>{a.tagline}</p>
+            <p className="flex-1 text-[13px] leading-6 text-slate-400">{a.body}</p>
+            <ul className="mt-1 space-y-1 border-t border-phantix-700/40 pt-3">
+              {a.points.map((p) => (
+                <li key={p} className="text-[11px] text-slate-500">
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </motion.div>
+
+      <motion.p {...fadeUp} className="mx-auto mt-8 max-w-2xl text-center text-[13px] leading-6 text-slate-500">
+        Signing in once opens whichever applications you are entitled to — moving between them
+        carries your session, and nothing you did in one is invisible to the others.
+      </motion.p>
     </Section>
   );
 }

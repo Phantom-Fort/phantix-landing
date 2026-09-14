@@ -5,7 +5,7 @@ import {
   ArrowRight, BookOpen, CalendarClock, ChevronDown, Code2, FlaskConical, Layers,
   Presentation, ShieldCheck, Sparkles, Terminal, Users,
 } from "lucide-react";
-import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL } from "@/lib/links";
+import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL, ATTACK_URL, DEFEND_URL, CODE_URL} from "@/lib/links";
 import { PLATFORM_PAGES } from "@/lib/platform-content";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -398,8 +398,11 @@ const FOOTER_SOLUTIONS_LINKS: FootLink[] = [
   { label: "Pricing", to: "/pricing" },
 ];
 const FOOTER_SURFACE_LINKS: FootLink[] = [
-  { label: "app.phantixlabs.com", href: APP_URL },
-  { label: "platform.phantixlabs.com", href: PLATFORM_URL },
+  { label: "Core — app.phantixlabs.com", href: APP_URL },
+  { label: "Attack — attack.phantixlabs.com", href: ATTACK_URL },
+  { label: "Defend — defend.phantixlabs.com", href: DEFEND_URL },
+  { label: "Code — code.phantixlabs.com", href: CODE_URL },
+  { label: "Platform — platform.phantixlabs.com", href: PLATFORM_URL },
   { label: "Documentation", href: APP_DOCS_URL },
 ];
 const FOOTER_START_LINKS: FootLink[] = [
