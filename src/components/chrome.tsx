@@ -448,7 +448,7 @@ export function Footer() {
 
         <div className="mt-14 flex flex-wrap items-center justify-between gap-4 border-t border-phantix-700/30 pt-8 text-xs text-slate-500">
           <span>© {new Date().getFullYear()} Phantix Security Solutions</span>
-          <span className="font-mono">api/v1 · 600+ routes · 13 engines · 10+ AI agents</span>
+          <span className="font-mono">13 engines · 10+ AI agents · 600+ checks</span>
         </div>
       </div>
     </footer>
