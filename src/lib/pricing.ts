@@ -47,10 +47,10 @@ interface BillingPricingResponse {
 }
 
 const freeFeatures = [
-  "Asset inventory + discovery (domain, nmap, GitHub, OpenAPI)",
-  "VAPT campaigns + vulnerability / web / API scanner",
+  "All four applications — Core, Attack, Defend and Code — at no cost",
+  "The full exposure loop: inventory, DNS/network/VAPT scanning, risk, alerts and reports",
   "1 threat-modelling project from your product context",
-  "PR / branch review and channel alerts (WhatsApp / Telegram) — metered by AI credits",
+  "PR / branch review, AutoFix and channel alerts — metered by AI credits",
   "Every report type and format — free on every plan",
   "500 one-time AI credits, then free open-source models (admin opt-in)",
   "Dual control, MFA, immutable audit, evidence redaction — free on every plan",
@@ -59,10 +59,9 @@ const freeFeatures = [
 
 const starterFeatures = [
   "Everything in Free",
-  "Full engine — six-layer code security, mobile, cloud & supply-chain scanners",
-  "Threat modelling & product context — more projects and monthly model refreshes",
-  "10 PR / MR security reviews / mo",
-  "3 on-demand assessments / mo · 1 model refresh / mo",
+  "Every section unlocked — cloud posture, compliance, SOC, threat intel, mobile and the pentest agent",
+  "Capped assessments, projects and model refreshes (raise the cap on Growth)",
+  "10 PR / MR security reviews / mo · 3 on-demand assessments / mo",
   "5,000 AI credits / mo + 5,000 onboarding allotment",
   "AI AutoFix (credit-metered) · email support",
 ];
@@ -72,7 +71,7 @@ const growthFeatures = [
   "Continuous PR / MR review and continuous / recurring pentest",
   "5 projects · 20 on-demand assessments / mo · 10 model refreshes / mo",
   "Multi-cloud + Kubernetes posture · blocking policies & path rules",
-  "Compliance workbench · SOC alert console",
+  "Compliance workbench depth · SOC console depth",
   "20,000 AI credits / mo + 20,000 onboarding allotment",
   "Guided onboarding",
 ];
