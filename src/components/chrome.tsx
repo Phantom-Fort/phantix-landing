@@ -49,14 +49,14 @@ const PLATFORM_MENU: MegaConfig = {
   })),
   cols: 2,
   promo: {
-    eyebrow: "AI pentest agent",
-    title: "Never reports a vulnerability without a finding ID.",
-    body: "Domain specialists route to the engines — they explain, they don't invent.",
+    eyebrow: "Start with VAPT",
+    title: "Assess like an attacker. Verify. Fix. Keep testing.",
+    body: "One subscription for the platform — turn modules on when you need them. AI never invents findings.",
     linkLabel: "See how it works",
-    linkTo: "/#ai",
+    linkTo: "/#capabilities",
     icon: <Sparkles size={16} />,
   },
-  footNote: "Every surface lands in one register, one queue, one audit trail.",
+  footNote: "Vulnerability assessment & penetration testing first — continuous security on Growth.",
   width: "w-[920px]",
 };
 
@@ -435,7 +435,8 @@ export function Footer() {
               </div>
             </div>
             <p className="mt-5 text-sm leading-6 text-slate-500">
-              Privacy-first security operations platform built for lean security teams.
+              Vulnerability assessment and penetration testing for lean teams — continuous security,
+              verified findings, and data you control.
             </p>
           </div>
 

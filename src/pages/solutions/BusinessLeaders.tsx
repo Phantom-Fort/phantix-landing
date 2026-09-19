@@ -30,11 +30,11 @@ const QUESTIONS = [
   },
   {
     q: "What do Starter and Growth actually buy?",
-    a: "Depth and continuity. Free already gives you asset inventory, vulnerability and web/API scanning, VAPT campaigns, one threat-modelling project and every report type. Starter adds the full engine, mobile and code security, AI AutoFix, more projects and a monthly AI credit allowance. Growth adds continuous PR review and continuous pentesting, cloud and Kubernetes posture, blocking policies, the compliance workbench and the SOC alert console. Engagements cover the work that needs people.",
+    a: "Starter (₦19,900/mo) is full vulnerability assessment and penetration testing with verified findings, remediation guidance, and board-ready output. Growth (₦49,900/mo) adds continuous / recurring testing and continuous PR review, plus deeper cloud, Kubernetes, compliance and SOC options when you turn them on. Free is the limited entry surface — inventory and light hygiene — not a substitute for Starter. Engagements cover human-led work.",
   },
   {
     q: "Can we start without committing to a project?",
-    a: "Yes. Free is designed for safe onboarding — inventory a small scope, run a light assessment, see a report. You grow into Starter and Growth, and optional engagements, when the business is ready, not before.",
+    a: "Yes. Free is safe onboarding — inventory a small scope, run light checks. Move to Starter when you need real VAPT and verified reporting, and to Growth when you need continuous coverage. Engagements are optional.",
   },
 ];
 
@@ -48,11 +48,12 @@ export default function BusinessLeaders() {
             <Presentation size={13} /> For business leaders
           </span>
           <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
-            You don't need another dashboard. You need assurance.
+            You don't need another dashboard. You need real tests — and proof.
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">
-            Know the risk, fix what matters, and show directors and auditors evidence that stands up to a
-            second question. That's the whole job — and it's what the product is organised around.
+            Run vulnerability assessment and penetration testing, keep testing when the business needs
+            continuous coverage, fix what matters, and show directors evidence that stands up to a second
+            question. Compliance mapping is available when you need it — it is not the reason to buy.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link to="/demo" className="btn-primary btn-shine !px-6 !py-3 !text-base">

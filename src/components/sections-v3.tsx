@@ -148,6 +148,13 @@ export function Capabilities() {
   const { theme } = useTheme();
   const cards = [
     {
+      icon: Crosshair,
+      title: "Test it like an attacker would",
+      body: "Scoped vulnerability assessment and penetration testing (VAPT) — approval-gated campaigns that end in verified findings, not a noisy scanner dump.",
+      shot: "vapt",
+      alt: "VAPT campaigns view showing scoped assessments and their progress",
+    },
+    {
       icon: Radar,
       title: "See every asset you own",
       body: "Domains, subdomains, IPs, APIs and mobile builds discovered continuously — not a spreadsheet someone updates quarterly.",
@@ -155,23 +162,16 @@ export function Capabilities() {
       alt: "Attack-surface inventory listing discovered domains and APIs with verification state",
     },
     {
-      icon: Crosshair,
-      title: "Test it like an attacker would",
-      body: "Approval-gated VAPT campaigns run the full pipeline across every engine, ending in staff-verified findings.",
-      shot: "vapt",
-      alt: "VAPT campaigns view showing scoped assessments and their progress",
-    },
-    {
       icon: ShieldAlert,
       title: "Know what to fix first",
-      body: "Risks are scored with explainable Likelihood×Impact and ordered P1–P5, so the queue reflects real exposure.",
+      body: "Risks are prioritised with clear business impact and tracked to closure — remediation guidance, not another unread PDF.",
       shot: "risks",
       alt: "Risk register ordered by priority with P1 to P5 scoring and treatment states",
     },
     {
       icon: Scale,
-      title: "Prove it to the board",
-      body: "Compliance mapping and board-ready reports built from verified findings only — evidence, not adjectives.",
+      title: "Prove it to leadership",
+      body: "Board-ready reports built from verified findings only — evidence you can stand behind, with compliance mapping when you need it.",
       shot: "compliance",
       alt: "Compliance view mapping verified findings to framework controls",
     },
@@ -182,9 +182,9 @@ export function Capabilities() {
       <motion.div {...fadeUp}>
         <Heading
           eyebrow="What you get"
-          lead="From blind spots to"
-          accent="board-ready proof"
-          body="Four surfaces, one security graph. Every screen below is the real product, not a mockup."
+          lead="Assess. Fix."
+          accent="Prove."
+          body="Start with vulnerability assessment and penetration testing, keep testing continuously, and show leadership evidence — not adjectives. Screens below are the real product."
         />
       </motion.div>
 
@@ -804,87 +804,173 @@ export function WhyWeBuilt() {
  * to say so plainly — an operator buying "Attack" should see what that is and
  * what it does not include.
  */
-export function Applications() {
-  const apps = [
-    {
-      key: "core",
-      name: "Core",
-      tagline: "Connect the security picture",
-      body: "The shared security graph: findings, risk, reports, alerts and the AI assistant. Always included — the other three hang off it.",
-      points: ["Overview", "Findings", "Risk", "Reports", "AI assistant"],
-      accent: "border-gold-400/40 text-gold-300",
-      dot: "bg-gold-400",
-      base: true,
-    },
-    {
-      key: "attack",
-      name: "Attack",
-      tagline: "Test your security",
-      body: "Offensive work: scoped VAPT campaigns, web, API and mobile scans, pentest scope and the autonomous pentest agent.",
-      points: ["Targets", "VAPT", "Web & API", "Mobile", "Pentest scope"],
-      accent: "border-severity-critical/40 text-severity-critical",
-      dot: "bg-severity-critical",
-    },
-    {
-      key: "defend",
-      name: "Defend",
-      tagline: "Protect and monitor continuously",
-      body: "Defensive posture: assets and exposure, cloud, compliance, the risk register, SOC operations and threat intelligence.",
-      points: ["Assets", "Exposure", "Cloud", "Compliance", "SOC"],
-      accent: "border-severity-low/40 text-severity-low",
-      dot: "bg-severity-low",
-    },
-    {
-      key: "code",
-      name: "Code",
-      tagline: "Design and build it securely",
-      body: "Secure code review with the fix as a pull request, plus the design-time work: threat models and product context.",
-      points: ["Code review", "Repositories", "AutoFix PRs", "Threat models"],
-      accent: "border-severity-info/40 text-severity-info",
-      dot: "bg-severity-info",
-    },
-  ];
+interface AppPoint {
+  label: string;
+  hint: string;
+}
 
+interface AppDef {
+  key: string;
+  name: string;
+  tagline: string;
+  body: string;
+  points: AppPoint[];
+  accent: string;
+  dot: string;
+  base?: boolean;
+}
+
+const CORE_APP: AppDef = {
+  key: "core",
+  name: "Core",
+  tagline: "Connect the security picture",
+  body: "The shared security graph: findings, risk, reports, alerts and the AI assistant. Always included — the other three hang off it.",
+  points: [
+    { label: "Overview", hint: "Launcher and at-a-glance status across every connected engine." },
+    { label: "Findings", hint: "Every finding from every engine, deduplicated onto one graph." },
+    { label: "Risk", hint: "Business-impact risk register scored from live findings, not a spreadsheet." },
+    { label: "Reports", hint: "Generate, track and view verified-findings reports — VAPT, executive, compliance and more." },
+    { label: "AI assistant", hint: "Ask the graph directly: findings, posture, remediation guidance, cited to evidence." },
+  ],
+  accent: "border-gold-400/40 text-gold-300",
+  dot: "bg-gold-400",
+  base: true,
+};
+
+const BRANCH_APPS: AppDef[] = [
+  {
+    key: "attack",
+    name: "Attack",
+    tagline: "Test your security",
+    body: "Offensive work: scoped VAPT campaigns, web, API and mobile scans, pentest scope and the autonomous pentest agent.",
+    points: [
+      { label: "Targets", hint: "Scope the hosts, domains and repos an engagement is allowed to touch." },
+      { label: "VAPT", hint: "Scoped penetration-test campaigns with an auditable step-by-step run." },
+      { label: "Web & API", hint: "Automated web and API scanning against the assets you've verified you own." },
+      { label: "Mobile", hint: "Static and dynamic analysis of Android/iOS builds for exploitable issues." },
+      { label: "Pentest scope", hint: "The rules of engagement an authorizer signs off before a campaign can start." },
+    ],
+    accent: "border-severity-critical/40 text-severity-critical",
+    dot: "bg-severity-critical",
+  },
+  {
+    key: "defend",
+    name: "Defend",
+    tagline: "Protect and monitor continuously",
+    body: "Defensive posture: assets and exposure, cloud, compliance, the risk register, SOC operations and threat intelligence.",
+    points: [
+      { label: "Assets", hint: "The living inventory every other Defend page reads from — discovered and verified." },
+      { label: "Exposure", hint: "What's actually reachable from the internet, ranked by real blast radius." },
+      { label: "Cloud", hint: "Cloud posture and misconfiguration findings across connected providers." },
+      { label: "Compliance", hint: "Control mapping and evidence collection against the frameworks you're audited on." },
+      { label: "SOC", hint: "Case management, alert triage and threat intelligence in one operating view." },
+    ],
+    accent: "border-severity-low/40 text-severity-low",
+    dot: "bg-severity-low",
+  },
+  {
+    key: "code",
+    name: "Code",
+    tagline: "Design and build it securely",
+    body: "Secure code review with the fix as a pull request, plus the design-time work: threat models and product context.",
+    points: [
+      { label: "Code review", hint: "AI-assisted review that flags real vulnerabilities inline, not style nits." },
+      { label: "Repositories", hint: "Connected repos, their branches and where AutoFix is enabled." },
+      { label: "AutoFix PRs", hint: "A finding becomes a pull request with the fix, not just a ticket." },
+      { label: "Threat models", hint: "Design-time modeling so architecture risk is caught before code ships." },
+    ],
+    accent: "border-severity-info/40 text-severity-info",
+    dot: "bg-severity-info",
+  },
+];
+
+/** One page/feature pill — hover or focus reveals what it actually does. */
+function PointPill({ point, ring }: { point: AppPoint; ring: string }) {
+  return (
+    <div className="group/pill relative">
+      <button
+        type="button"
+        className={`rounded-full border border-phantix-700/60 bg-phantix-900/60 px-2.5 py-1 text-[11px] text-slate-400 transition-colors hover:text-white focus:outline-none focus-visible:text-white ${ring}`}
+      >
+        {point.label}
+      </button>
+      <div
+        role="tooltip"
+        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-52 -translate-x-1/2 rounded-lg border border-phantix-700 bg-phantix-950/95 p-2.5 text-[11px] leading-5 text-slate-300 opacity-0 shadow-card backdrop-blur-sm transition-opacity duration-150 group-hover/pill:opacity-100 group-focus-within/pill:opacity-100"
+      >
+        {point.hint}
+      </div>
+    </div>
+  );
+}
+
+function AppCard({ a, hub = false }: { a: AppDef; hub?: boolean }) {
+  return (
+    <div
+      className={`card flex flex-col gap-3 border p-5 ${a.accent.split(" ")[0]} ${hub ? "sm:max-w-sm sm:mx-auto" : ""}`}
+    >
+      <div className="flex items-center gap-2">
+        <span className={`h-1.5 w-1.5 rounded-full ${a.dot}`} />
+        <span className="font-display text-lg font-bold text-white">{a.name}</span>
+        {a.base && (
+          <span className="ml-auto rounded bg-phantix-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-400">
+            included
+          </span>
+        )}
+      </div>
+      <p className={`text-xs font-medium ${a.accent.split(" ")[1]}`}>{a.tagline}</p>
+      <p className="flex-1 text-[13px] leading-6 text-slate-400">{a.body}</p>
+      <div className="mt-1 flex flex-wrap gap-1.5 border-t border-phantix-700/40 pt-3">
+        {a.points.map((p) => (
+          <PointPill key={p.label} point={p} ring={a.accent.split(" ")[0].replace("border-", "hover:border-")} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Core sits at the trunk, Attack / Defend / Code branch off it — a literal
+ * reading of "one graph, four applications" instead of four equal cards, so
+ * the relationship the copy already describes ("the other three hang off
+ * it") is something you see, not just read.
+ */
+export function Applications() {
   return (
     <Section id="applications" className="py-20">
       <motion.div {...fadeUp}>
         <Heading
-          eyebrow="One graph, four applications"
-          lead="Buy the part you need,"
-          accent="not the whole console"
-          body="Every application reads and writes the same security graph, so a finding raised by a scan is the same finding your report cites. Your administrator decides which ones your organization uses, and each person's role decides which ones they can open."
+          eyebrow="One subscription, modules you can leave off"
+          lead="Start with Attack (VAPT)."
+          accent="Add Defend and Code when ready."
+          body="One security graph under the hood. Subscription covers the platform; unused modules stay off. Attack is the assessment front door — Defend and Code deepen continuous coverage when you need them."
         />
       </motion.div>
 
-      <motion.div
-        {...fadeUp}
-        className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-      >
-        {apps.map((a) => (
-          <div
-            key={a.key}
-            className={`card flex flex-col gap-3 border p-5 ${a.accent.split(" ")[0]}`}
-          >
-            <div className="flex items-center gap-2">
-              <span className={`h-1.5 w-1.5 rounded-full ${a.dot}`} />
-              <span className="font-display text-lg font-bold text-white">{a.name}</span>
-              {a.base && (
-                <span className="ml-auto rounded bg-phantix-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-400">
-                  included
-                </span>
-              )}
+      <motion.div {...fadeUp} className="mt-12">
+        <AppCard a={CORE_APP} hub />
+
+        {/* Trunk stub, hidden below md where cards stack and proximity alone
+            reads as "grouped under Core". */}
+        <div className="mx-auto hidden h-8 w-px bg-phantix-700/60 md:block" aria-hidden="true" />
+        {/* Branch line spanning the row, each card dropping its own stub up
+            to meet it — an org-chart connector built from plain borders,
+            not an svg that has to track the grid's real column centers. */}
+        <div className="relative hidden md:block" aria-hidden="true">
+          <div className="absolute inset-x-0 top-0 h-px bg-phantix-700/60" />
+        </div>
+
+        <div className="mt-0 grid grid-cols-1 gap-4 md:mt-0 md:grid-cols-3">
+          {BRANCH_APPS.map((a) => (
+            <div key={a.key} className="relative">
+              <div
+                className="absolute -top-8 left-1/2 hidden h-8 w-px -translate-x-1/2 bg-phantix-700/60 md:block"
+                aria-hidden="true"
+              />
+              <AppCard a={a} />
             </div>
-            <p className={`text-xs font-medium ${a.accent.split(" ")[1]}`}>{a.tagline}</p>
-            <p className="flex-1 text-[13px] leading-6 text-slate-400">{a.body}</p>
-            <ul className="mt-1 space-y-1 border-t border-phantix-700/40 pt-3">
-              {a.points.map((p) => (
-                <li key={p} className="text-[11px] text-slate-500">
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+          ))}
+        </div>
       </motion.div>
 
       <motion.p {...fadeUp} className="mx-auto mt-8 max-w-2xl text-center text-[13px] leading-6 text-slate-500">

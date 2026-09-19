@@ -67,11 +67,12 @@ export default function SecurityTeams() {
             <Terminal size={13} /> For security teams
           </span>
           <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
-            Built for people burned by noisy scanners
+            VAPT that ends in verified findings — not another noise pile
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">
-            If you've spent a week disproving findings someone else's tool was confident about, you already
-            know the problem isn't coverage. It's what gets through the gate — and who had to sign off.
+            Run scoped vulnerability assessment and penetration testing, keep testing continuously on
+            Growth, and only promote what passed verification. If you have spent a week disproving
+            someone else&apos;s scanner, you already know the problem is the gate — not more coverage.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">

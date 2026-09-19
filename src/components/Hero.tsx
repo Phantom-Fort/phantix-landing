@@ -24,50 +24,52 @@ import { GlowBloom } from "@/components/effects";
  * tilt is additionally gated behind a fine pointer — it's meaningless on touch.
  */
 
-const HEADLINE= {
-  lead: "Privacy-first security operations platform.",
-  highlight: "Built for lean security teams.",
+const HEADLINE = {
+  lead: "Find real weaknesses.",
+  highlight_1:"Fix what matters.",
+  highlight_2: "Keep testing.",
 };
 
 /**
  * Each claim points at the real UI that enforces it. `x`/`y` are fractions of
  * the shipped screenshot (2000x1226), pixel-measured off command-centre-dashboard.jpg
  * by scanning brightness edges for each card/widget's actual border box.
+ * Order matches the united-front spine: Assess → Verify → Fix → Continuous → Trust.
  */
 const CLAIMS = [
   {
-    value: "Privacy-First",
-    label: "security DB",
-    detail: "Findings live in a Postgres you own — the app just reports its connection state.",
-    hotspot: { x: 0.775, y: 0.029 },
-    align: "below" as const,
-  },
-  {
-    value: "Verified Only",
-    label: "findings that ship",
-    detail: "Open findings are the verified ones. Heuristic noise never get here.",
+    value: "Assess",
+    label: "VAPT campaigns",
+    detail: "Scoped vulnerability assessment and penetration testing — approval-gated, not a one-off PDF vendor.",
     hotspot: { x: 0.3795, y: 0.322 },
     align: "below" as const,
   },
   {
-    value: "Real-Time",
-    label: "live detection queue",
-    detail: "Detections land in a triage queue the SOC engine keeps current — not a nightly digest.",
-    hotspot: { x: 0.65, y: 0.322 },
+    value: "Verified only",
+    label: "findings that ship",
+    detail: "Open findings are the verified ones. Heuristic noise never gets here.",
+    hotspot: { x: 0.3795, y: 0.322 },
     align: "below" as const,
   },
   {
-    value: "Tracked Fixes",
+    value: "Fix guidance",
     label: "tracked to closure",
-    detail: "Remediation is tracked to fixed, and anything that regresses comes straight back onto the queue.",
+    detail: "Remediation is prioritised and tracked to fixed — and regressions come straight back onto the queue.",
     hotspot: { x: 0.79, y: 0.322 },
     align: "below" as const,
   },
   {
-    value: "Daily Scoring",
-    label: "composite posture",
-    detail: "One composite score, recomputed every day, so you can show direction — not just a snapshot.",
-    hotspot: { x: 0.240, y: 0.322 },
+    value: "Continuous",
+    label: "keep testing",
+    detail: "Growth keeps assessments and PR review running — continuous security, not a yearly scramble.",
+    hotspot: { x: 0.65, y: 0.322 },
+    align: "below" as const,
+  },
+  {
+    value: "Your data",
+    label: "security DB",
+    detail: "Security evidence lives in a database you control — not a shared vulnerability lake.",
+    hotspot: { x: 0.775, y: 0.029 },
     align: "below" as const,
   },
   {
@@ -292,13 +294,15 @@ export default function Hero() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
         <div>
           <h1 className="max-w-xl font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.1rem]">
-            <span className="hero-heading">{HEADLINE.lead}</span> {"     "}
-            <span className="hero-accent">{HEADLINE.highlight}</span>
+            <span className="hero-heading block">{HEADLINE.lead}</span>
+            <span className="hero-accent block">{HEADLINE.highlight_1}</span>
+            <span className="hero-accent block">{HEADLINE.highlight_2}</span>
           </h1>
 
           <p className="mt-6 max-w-md text-sm text-slate-400 md:text-base">
-            AI-powered end-to-end security operations — from setup to continuous security —
-            built for security professionals by security professionals.
+            SecureGraph runs vulnerability assessment and penetration testing for lean teams,
+            keeps testing continuously, and helps you fix and prove what matters — with verified
+            findings and security data in a database you control.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">

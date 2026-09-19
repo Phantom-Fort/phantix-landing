@@ -46,44 +46,40 @@ export default function Landing() {
 
       <Nav />
       <main className="relative">
-        {/* 1 — Hook: clean centred hero over the real Command Centre */}
+        {/* 1 — Hook: VAPT + continuous + fix (united front) */}
         <Hero />
 
         {/* 2 — Sector marquee */}
         <Marquee />
 
-        {/* 3 — What you get, shown rather than described */}
+        {/* 3 — What you get: Assess → Fix → Prove (VAPT-first) */}
         <Capabilities />
 
-        {/* 3a — How the product is packaged: one graph, four applications */}
-        <Applications />
-
-        {/* 3b — Doorway into the per-surface platform pages */}
-        <PlatformTeaser />
-
-        {/* 4 — The four non-negotiables */}
-        <Principles />
-
-        {/* 5 — Privacy model: the core differentiator */}
-        <PrivacyModel />
-
-        {/* 5b — The lifecycle a finding travels, engine by engine */}
-        <Lifecycle />
-
-        {/* 6 — The real onboarding journey */}
+        {/* 4 — How you get a verified report */}
         <HowItWorks />
 
-        {/* 7 — Verification gate: strongest proof point */}
+        {/* 5 — Verification gate: strongest proof point */}
         <VerificationGate />
 
-        {/* 8 — The AI pentest agent */}
+        {/* 6 — AI pentest agent reinforces the same assess story */}
         <PentestAgent />
 
-        {/* 8b — Why this exists: the one-person security team */}
+        {/* 7 — Trust: privacy & dual control (supporting, not the hook) */}
+        <Principles />
+        <PrivacyModel />
+
+        {/* 8 — Finding lifecycle (engines as proof, not the pitch) */}
+        <Lifecycle />
+
+        {/* 9 — Why this exists: the one-person security team */}
         <WhyWeBuilt />
 
-        {/* 8c — Full coverage matrix, grouped by outcome and labelled by plan */}
+        {/* 10 — Coverage by plan (entry → continuous) */}
         <Coverage />
+
+        {/* 11 — One platform, modules you can leave off (after the entry story) */}
+        <Applications />
+        <PlatformTeaser />
 
         {/* 9 — Sandbox cohort (real programme, real seat count) */}
         <SandboxSection />

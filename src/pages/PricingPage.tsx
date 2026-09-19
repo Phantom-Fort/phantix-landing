@@ -16,18 +16,18 @@ export default function PricingPage() {
             the heading carries the page's identity on its own. */}
         <motion.div {...fadeUp} className="mt-10 max-w-2xl">
           <h1 className="font-display text-4xl font-semibold leading-[1.1] tracking-tight text-white sm:text-5xl">
-            Simple pricing for continuous product security
+            Simple pricing for assessment and continuous security
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">
-            Free is a genuine starter surface — not a countdown to a sales call. Starter adds full
-            engine depth and board-ready output; Growth adds continuous security. Enterprise is
-            quoted. Engagements cover the work that needs people, not just engines.
+            Free helps you know your surface. Starter (₦19,900/mo) runs vulnerability assessment and
+            penetration testing with verified findings. Growth (₦49,900/mo) keeps testing continuously.
+            Enterprise is quoted. Engagements cover human-led work on the same platform.
           </p>
           <p className="mt-4 text-[13px] leading-6 text-slate-500">
-            Hero numbers are <strong className="font-medium text-slate-400">AI credits</strong> — the
-            shared pool for Understand, Analyze and Remediate. Free starts with a one-time 500-credit
-            allotment, then continues on free open-source models; paid plans add a monthly allowance and
-            an onboarding allotment. Dual control, MFA and the immutable audit trail are free on every plan.
+            Hero numbers are <strong className="font-medium text-slate-400">AI credits</strong> for
+            write-ups, triage and AutoFix. Free starts with a one-time 500-credit allotment; paid plans
+            add a monthly allowance. Dual control, MFA and the immutable audit trail are free on every plan.
+            One subscription — unused modules can stay off.
           </p>
         </motion.div>
       </Section>

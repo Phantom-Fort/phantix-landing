@@ -47,33 +47,31 @@ interface BillingPricingResponse {
 }
 
 const freeFeatures = [
-  "All four applications — Core, Attack, Defend and Code — at no cost",
-  "The full exposure loop: inventory, DNS/network/VAPT scanning, risk, alerts and reports",
-  "1 threat-modelling project from your product context",
-  "PR / branch review, AutoFix and channel alerts — metered by AI credits",
-  "Every report type and format — free on every plan",
+  "Know your surface — asset inventory with fair-use caps (no card required)",
+  "Light hygiene scans (DNS / network) to see what's exposed",
+  "Dual control, MFA and immutable audit — free on every plan",
+  "Basic exports (JSON / Markdown) so you can leave with your data",
   "500 one-time AI credits, then free open-source models (admin opt-in)",
-  "Dual control, MFA, immutable audit, evidence redaction — free on every plan",
   "Community support",
+  "Not included: full VAPT campaigns, continuous testing, private-repo depth, board PDF packs",
 ];
 
 const starterFeatures = [
   "Everything in Free",
-  "Every section unlocked — cloud posture, compliance, SOC, threat intel, mobile and the pentest agent",
-  "Capped assessments, projects and model refreshes (raise the cap on Growth)",
+  "Vulnerability assessment & penetration testing (VAPT) — scoped, approval-gated campaigns",
+  "Verified findings with remediation guidance — not a raw scanner dump",
   "10 PR / MR security reviews / mo · 3 on-demand assessments / mo",
-  "5,000 AI credits / mo + 5,000 onboarding allotment",
-  "AI AutoFix (credit-metered) · email support",
+  "Full engine quality: web/API, code security, mobile static, AI AutoFix (credit-metered)",
+  "5,000 AI credits / mo + 5,000 onboarding allotment · email support",
 ];
 
 const growthFeatures = [
   "Everything in Starter",
-  "Continuous PR / MR review and continuous / recurring pentest",
+  "Continuous / recurring pentest and continuous PR / MR review",
   "5 projects · 20 on-demand assessments / mo · 10 model refreshes / mo",
   "Multi-cloud + Kubernetes posture · blocking policies & path rules",
-  "Compliance workbench depth · SOC console depth",
-  "20,000 AI credits / mo + 20,000 onboarding allotment",
-  "Guided onboarding",
+  "Compliance workbench and SOC console depth when you need them",
+  "20,000 AI credits / mo + 20,000 onboarding allotment · guided onboarding",
 ];
 
 const enterpriseFeatures = [
@@ -144,10 +142,10 @@ function pickFeatures(raw: string[] | undefined, curated: string[] | undefined):
 
 export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTier[] {
   const fallback = raw ?? {
-    monthly_list_price_ngn: 9_900,
-    first_month_price_ngn: 4_900,
-    yearly_price_ngn: 99_000,
-    growth_monthly_price_ngn: 19_900,
+    monthly_list_price_ngn: 19_900,
+    first_month_price_ngn: 9_950,
+    yearly_price_ngn: 199_000,
+    growth_monthly_price_ngn: 49_900,
     first_month_discount_percent: 50,
   };
 
@@ -163,14 +161,14 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
       starter: {
         heroMetric: "5,000",
         heroUnit: "AI credits / month (+ 5,000 allotment)",
-        tagline: "Full engine, starter coverage",
+        tagline: "Assess like an attacker — VAPT with verified findings",
         features: starterFeatures,
         cta: "Get started",
       },
       growth: {
         heroMetric: "20,000",
         heroUnit: "AI credits / month (+ 20,000 allotment)",
-        tagline: "Continuous security for teams shipping every week",
+        tagline: "Keep testing — continuous security every week",
         features: growthFeatures,
         highlighted: true,
         badge: "Most popular",
@@ -220,8 +218,7 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
   const starterMonthly = fallback.monthly_list_price_ngn;
   const starterFirstMonth = fallback.first_month_price_ngn ?? 0;
   const starterYearly = fallback.yearly_price_ngn ?? starterMonthly * 10;
-  const growthMonthly =
-    fallback.growth_monthly_price_ngn ?? Math.round(starterMonthly * (49_900 / 19_900));
+  const growthMonthly = fallback.growth_monthly_price_ngn ?? 49_900;
 
   return [
     {
@@ -239,7 +236,7 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
     {
       id: "starter",
       name: "Starter",
-      tagline: "Full engine, starter coverage",
+      tagline: "Assess like an attacker — VAPT with verified findings",
       heroMetric: "5,000",
       heroUnit: "AI credits / month (+ 5,000 allotment)",
       monthly_ngn: starterMonthly,
@@ -252,7 +249,7 @@ export function buildPricingTiers(raw: BillingPricingResponse | null): PricingTi
     {
       id: "growth",
       name: "Growth",
-      tagline: "Continuous security for teams shipping every week",
+      tagline: "Keep testing — continuous security every week",
       heroMetric: "20,000",
       heroUnit: "AI credits / month (+ 20,000 allotment)",
       monthly_ngn: growthMonthly,
@@ -300,7 +297,8 @@ export async function loadPricing(force = false): Promise<PricingTier[]> {
         const list = Array.isArray(plansJson) ? plansJson : plansJson?.plans;
         if (Array.isArray(list) && list.length) {
           data = {
-            monthly_list_price_ngn: 9_900,
+            monthly_list_price_ngn: 19_900,
+            growth_monthly_price_ngn: 49_900,
             plans: list.map(
               (p: {
                 key?: string;
