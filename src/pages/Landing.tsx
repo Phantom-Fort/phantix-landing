@@ -18,6 +18,7 @@ import {
 import { Pricing, FinalCTA } from "@/components/Pricing";
 import SandboxSection from "@/components/SandboxSection";
 import IntegrationsMarquee from "@/components/IntegrationsMarquee";
+import TestPentestTerminal from "@/components/TestPentestTerminal";
 import { FAQ } from "@/components/FAQ";
 
 /*
@@ -93,7 +94,17 @@ export default function Landing() {
         {/* 12 — FAQ before final CTA */}
         <FAQ />
 
-        {/* 13 — Close: the card version (demo-first, register secondary) */}
+        {/* 13 — Free test pentest: terminal capture, immediately before the close */}
+        <section className="px-6 py-16 md:py-20">
+          <div className="mx-auto max-w-2xl">
+            <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
+              Pentest a domain you own for free
+            </h2>
+            <TestPentestTerminal />
+          </div>
+        </section>
+
+        {/* 14 — Close: the card version (demo-first, register secondary) */}
         <FinalCTA />
       </main>
       <Footer />
