@@ -16,7 +16,7 @@ export default function SandboxSeats() {
           <FlaskConical size={26} />
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-400">BETA design partners</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.2em] text-gold-400">BETA design partners</p>
           <h2 className="mt-1 font-display text-2xl font-bold text-white sm:text-3xl">
             Sandbox cohort · up to <span className="text-gold-300">20</span> organizations
           </h2>

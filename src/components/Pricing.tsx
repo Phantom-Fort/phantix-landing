@@ -141,7 +141,7 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.2 }}
-              className="ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-gold-400/50 bg-gold-400/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-gold-300"
+              className="ml-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-gold-400/50 bg-gold-400/15 px-3 py-1 text-[12px] font-bold uppercase tracking-wider text-gold-300"
             >
               Save ~{savePct}% · 2 months free
             </motion.span>
@@ -222,7 +222,7 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
               )}
             >
               {elevated && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-4 py-1 text-[11px] font-bold uppercase tracking-wider text-phantix-950 shadow-glow">
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-gold-400 to-gold-600 px-4 py-1 text-[12px] font-bold uppercase tracking-wider text-phantix-950 shadow-glow">
                   {t.badge ?? "Most popular"}
                 </span>
               )}

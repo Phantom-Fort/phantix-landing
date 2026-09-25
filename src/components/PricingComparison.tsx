@@ -173,7 +173,7 @@ export function PricingComparison() {
                     {loading ? (
                       <span className="skeleton inline-block h-3 w-16 rounded" />
                     ) : (
-                      <span className="font-mono text-[11px] text-slate-400">
+                      <span className="font-mono text-[12px] text-slate-400">
                         {priceLabel(tiers, name.toLowerCase())}
                       </span>
                     )}
@@ -188,7 +188,7 @@ export function PricingComparison() {
                 <tr className="border-b border-phantix-700/20 bg-phantix-800/20">
                   <td
                     colSpan={5}
-                    className="px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-slate-400"
+                    className="px-5 py-2.5 text-[12px] font-semibold uppercase tracking-wider text-slate-400"
                   >
                     {group.title}
                   </td>

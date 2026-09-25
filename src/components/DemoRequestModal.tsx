@@ -278,7 +278,7 @@ export function DemoRequestModal({ open, onClose, source, title, defaultMessage 
                     "Request a live demo"
                   )}
                 </button>
-                <p className="mt-3 text-center text-[11px] leading-4 text-slate-600">
+                <p className="mt-3 text-center text-[12px] leading-4 text-slate-600">
                   No spam. We'll only use this to reach out about your demo.
                 </p>
               </form>

@@ -38,8 +38,8 @@
     --slate-200: 228 228 231;
     --slate-300: 212 212 216;
     --slate-400: 161 161 170;
-    --slate-500: 113 113 122;
-    --slate-600: 82 82 91;
+    --slate-500: 138 138 148;
+    --slate-600: 130 130 140;
     --slate-700: 63 63 70;
     --slate-800: 39 39 42;
     --slate-900: 24 24 27;
@@ -93,7 +93,7 @@
     --slate-300: 71 85 105;
     --slate-400: 85 99 122;   /* darkened: 100 116 139 measured 4.40:1 on the light canvas, under AA */
     --slate-500: 85 99 122;   /* was 148 163 184 (~2.5:1, failed AA) — matches 400, still darker than old ramp */
-    --slate-600: 148 163 184; /* was 203 213 225 (~1.4:1) — now the old 500 value */
+    --slate-600: 100 112 134; /* was 148 163 184 (~2.5:1 on white, failed AA) */
     --slate-700: 203 213 225;
     --slate-800: 226 232 240;
     --slate-900: 237 241 248;
@@ -547,7 +547,7 @@ p {
 
   /* Product microtype — the label style used across all three apps. */
   .eyebrow {
-    @apply text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500;
+    @apply text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-400;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -586,7 +586,7 @@ p {
   }
 
   .th {
-    @apply px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-slate-400;
+    @apply px-4 py-3 text-left text-[12px] font-semibold uppercase tracking-wider text-slate-400;
   }
 
   .td {

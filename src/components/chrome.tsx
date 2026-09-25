@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight, BookOpen, CalendarClock, ChevronDown, Code2, FlaskConical, Layers,
-  Presentation, ShieldCheck, Sparkles, Terminal, Users,
+  Menu, Presentation, ShieldCheck, Sparkles, Terminal, Users, X,
 } from "lucide-react";
 import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL, ATTACK_URL, DEFEND_URL, CODE_URL} from "@/lib/links";
 import { PLATFORM_PAGES } from "@/lib/platform-content";
@@ -163,7 +163,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={cx("flex items-center gap-1 transition-colors", open ? "text-white" : "hover:text-white")}
+        className={cx("flex items-center gap-1 rounded-md px-2.5 py-2 transition-colors", open ? "bg-white/5 text-white" : "hover:bg-white/5 hover:text-white")}
       >
         {label}
         <ChevronDown size={13} className={cx("transition-transform duration-200", open && "rotate-180")} />
@@ -192,7 +192,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
                     <span className="flex h-9 w-9 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
                       {config.intro.icon}
                     </span>
-                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-400">
+                    <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.18em] text-gold-400">
                       {config.intro.eyebrow}
                     </p>
                     <p className="mt-2 font-display text-[15px] font-semibold leading-6 text-white">
@@ -212,7 +212,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
 
                 {/* Item grid */}
                 <div className="p-6">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-500">
                     {config.itemsEyebrow}
                   </p>
                   <div className={cx("mt-4 grid gap-1", config.cols === 2 ? "grid-cols-2" : "grid-cols-1")}>
@@ -230,7 +230,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
                           <span className="block text-[13.5px] font-semibold text-slate-200 transition-colors group-hover:text-white">
                             {item.label}
                           </span>
-                          <span className="mt-0.5 block text-[11.5px] leading-4 text-slate-500">{item.desc}</span>
+                          <span className="mt-0.5 block text-[12px] leading-4 text-slate-500">{item.desc}</span>
                         </span>
                       </MegaLink>
                     ))}
@@ -255,7 +255,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
                     <span className="flex h-9 w-9 items-center justify-center rounded-md border border-gold-400/40 bg-gold-400/15 text-gold-300">
                       {config.promo.icon}
                     </span>
-                    <p className="mt-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-400">
+                    <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.18em] text-gold-400">
                       {config.promo.eyebrow}
                     </p>
                     <p className="mt-2 font-display text-[15px] font-semibold leading-6 text-white">
@@ -272,7 +272,7 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
 
               {/* Quiet footer strip — the line that ties the menu together. */}
               <div className="border-t border-phantix-800 bg-phantix-900/60 px-6 py-2.5">
-                <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-slate-600">
+                <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-slate-600">
                   {config.footNote}
                 </p>
               </div>
@@ -294,8 +294,80 @@ function MegaMenu({ label, config }: { label: string; config: MegaConfig }) {
  * near-black canvas) and the floating pill is the archetype that sells that
  * mood rather than fighting it.
  */
+/** A route that may carry a #fragment: in-app routes use Link, anchors a plain href. */
+function MenuLink({ to, className, children }: { to: string; className?: string; children: React.ReactNode }) {
+  return to.includes("#") ? (
+    <a href={to} className={className}>{children}</a>
+  ) : (
+    <Link to={to} className={className}>{children}</Link>
+  );
+}
+
+/** Below xl the inline nav is hidden; this sheet carries every destination instead. */
+function MobileMenu({ onClose }: { onClose: () => void }) {
+  const group = (title: string, items: MegaItem[]) => (
+    <div>
+      <p className="px-2 pb-1.5 font-mono text-[12px] uppercase tracking-[0.16em] text-slate-400">{title}</p>
+      <ul className="space-y-0.5">
+        {items.map((i) => (
+          <li key={i.to + i.label}>
+            <MenuLink to={i.to} className="flex items-start gap-3 rounded-xl px-2 py-2.5 hover:bg-white/5">
+              <span className="mt-0.5 shrink-0 text-gold-400">{i.icon}</span>
+              <span className="min-w-0">
+                <span className="block text-sm font-medium text-slate-100">{i.label}</span>
+                <span className="block text-[13px] leading-5 text-slate-400">{i.desc}</span>
+              </span>
+            </MenuLink>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+  const plain = "block rounded-xl px-2 py-2.5 text-sm font-medium text-slate-100 hover:bg-white/5";
+  return (
+    <motion.div
+      id="mobile-menu"
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.18 }}
+      className="mx-auto mt-2 max-h-[calc(100dvh-6.5rem)] max-w-6xl overflow-y-auto rounded-3xl border border-white/10 bg-phantix-900/95 p-3 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.9)] backdrop-blur-xl xl:hidden"
+      onClick={(e) => {
+        if ((e.target as HTMLElement).closest("a")) onClose();
+      }}
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
+        {group("Platform", PLATFORM_MENU.items)}
+        {group("Solutions", SOLUTIONS_MENU.items)}
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-1 border-t border-white/10 pt-3 sm:grid-cols-4">
+        <Link to="/trust" className={plain}>Trust</Link>
+        <a href="/#how-it-works" className={plain}>How it works</a>
+        <Link to="/pricing" className={plain}>Pricing</Link>
+        <a href={APP_DOCS_URL} className={plain}>Documentation</a>
+        <a href={SANDBOX_APPLY_URL} className={plain}>Sandbox</a>
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
+        <a href={APP_LOGIN_URL} className="btn-secondary !rounded-full !py-2.5">Sign in</a>
+        <Link to="/demo" className="btn-primary !rounded-full !py-2.5">
+          <CalendarClock size={15} /> Request a demo
+        </Link>
+      </div>
+    </motion.div>
+  );
+}
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+  useEffect(() => setMenuOpen(false), [location.pathname, location.hash]);
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", fn, { passive: true });
@@ -316,9 +388,9 @@ export function Nav() {
         <BrandLogo className="h-9 w-10" lightSrc="/logo-transparent.png" />
         <div className="leading-tight">
           <p className="font-display text-[14px] font-bold text-white">SecureGraph</p>
-          <p className="text-[8.5px] font-semibold uppercase tracking-[0.22em] text-gold-400">AI-Powered Security</p>
+          <p className="hidden whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-gold-400 sm:block">AI-Powered Security</p>
         </div>
-        <nav className="ml-6 hidden items-center gap-5 text-sm text-slate-400 xl:flex">
+        <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 xl:flex [&>a]:rounded-md [&>a]:px-2.5 [&>a]:py-2 [&>a:hover]:bg-white/5">
           <MegaMenu label="Platform" config={PLATFORM_MENU} />
           <MegaMenu label="Solutions" config={SOLUTIONS_MENU} />
           <Link to="/trust" className="transition-colors hover:text-white">Trust</Link>
@@ -346,11 +418,22 @@ export function Nav() {
             <BookOpen size={16} />
           </a>
           <a href={APP_LOGIN_URL} className="btn-secondary hidden !rounded-full !px-3.5 !py-2 sm:inline-flex">Sign in</a>
-          <Link to="/demo" className="btn-primary !rounded-full !px-3.5 !py-2">
+          <Link to="/demo" className="btn-primary !rounded-full !px-3.5 !py-2" aria-label="Request a demo">
             <CalendarClock size={15} /> <span className="hidden sm:inline">Request a demo</span>
           </Link>
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-300 transition-colors hover:border-phantix-500/50 hover:text-white xl:hidden"
+          >
+            {menuOpen ? <X size={17} /> : <Menu size={17} />}
+          </button>
         </div>
       </div>
+      <AnimatePresence>{menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}</AnimatePresence>
     </header>
   );
 }
@@ -366,7 +449,7 @@ interface FootLink {
 function FooterLinkColumn({ label, links }: { label: string; links: FootLink[] }) {
   return (
     <div>
-      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-400">{label}</p>
+      <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-slate-400">{label}</p>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.label}>
@@ -431,7 +514,7 @@ export function Footer() {
               <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
               <div className="leading-tight">
                 <p className="font-display text-sm font-semibold text-white">SecureGraph</p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+                <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
               </div>
             </div>
             <p className="mt-5 text-sm leading-6 text-slate-500">

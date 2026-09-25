@@ -143,15 +143,15 @@ export default function PrivacyVideo() {
       {/* Labels the video does not carry, kept as text so they stay legible and
           readable — the same two endpoints the SVG diagram names. */}
       <div className="flex items-start justify-between gap-4 border-t border-phantix-800 px-4 py-2.5">
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500">
+        <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-slate-500">
           your database
         </span>
-        <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-slate-500">
+        <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-slate-500">
           securegraph engine
         </span>
       </div>
 
-      <figcaption className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[11px] text-slate-600">
+      <figcaption className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[12px] text-slate-600">
         Your data flows in one direction only · nothing leaves the boundary
       </figcaption>
     </figure>

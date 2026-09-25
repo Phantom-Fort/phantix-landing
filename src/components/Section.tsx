@@ -42,7 +42,7 @@ export function SectionHeading({
   // rest of the one-page scroll (similarity rule — same role, same look).
   return (
     <div className="mx-auto max-w-2xl text-center">
-      <span className="inline-flex items-center gap-2 rounded-full border border-phantix-700 bg-phantix-900 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+      <span className="inline-flex items-center gap-2 rounded-full border border-phantix-700 bg-phantix-900 px-3.5 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate-400">
         {kicker}
       </span>
       <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight text-white sm:text-4xl">{title}</h2>
