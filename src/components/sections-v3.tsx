@@ -44,7 +44,7 @@ import { sceneImg } from "@/lib/scene-image";
 /** Pill badge above a section heading — the Agex/JumpBot signature. */
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-phantix-700 bg-phantix-900 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+    <span className="inline-flex items-center gap-2 rounded-full border border-phantix-700 bg-phantix-900 px-3.5 py-1.5 text-[12px] font-semibold uppercase tracking-[0.14em] text-slate-400">
       {children}
     </span>
   );
@@ -221,7 +221,7 @@ export function Capabilities() {
               >
                 {sceneImg(c.shot, theme, c.alt, "absolute inset-x-0 top-0 w-[150%] -translate-y-[5%]")}
                 <span className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-phantix-900 to-transparent" />
-                <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-phantix-600/60 bg-phantix-950/90 px-2.5 py-1 text-[10px] font-medium text-slate-300 opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover/shot:opacity-100">
+                <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-phantix-600/60 bg-phantix-950/90 px-2.5 py-1 text-[12px] font-medium text-slate-300 opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover/shot:opacity-100">
                   <Maximize2 size={11} /> Full size
                 </span>
               </a>
@@ -421,7 +421,7 @@ export function VerificationGate() {
                 <p className={`font-display text-4xl font-semibold ${f.tone}`}>
                   <CountUp to={f.value} />
                 </p>
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-slate-500">
+                <p className="mt-2 text-[12px] font-semibold uppercase tracking-wider text-slate-500">
                   {f.label}
                 </p>
               </motion.div>
@@ -601,9 +601,9 @@ export function Lifecycle() {
                 <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-md border border-gold-400/30 bg-phantix-900 text-gold-300">
                   <Icon size={17} />
                 </span>
-                <span className="mt-3 font-mono text-[10px] tracking-[0.16em] text-gold-400/80">{s.n}</span>
+                <span className="mt-3 font-mono text-[12px] tracking-[0.16em] text-gold-400/80">{s.n}</span>
                 <h3 className="mt-1 font-display text-[15px] font-semibold text-white">{s.name}</h3>
-                <p className="mt-1.5 font-mono text-[9.5px] uppercase tracking-[0.14em] text-slate-600">{s.engine}</p>
+                <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500">{s.engine}</p>
                 <p className="mt-2.5 text-[12.5px] leading-5 text-slate-500">{s.body}</p>
               </div>
             </motion.div>
@@ -720,14 +720,14 @@ export function Coverage() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-md border border-gold-400/30 bg-gold-400/10 text-gold-300">
                   <Icon size={16} />
                 </span>
-                <span className="font-mono text-[10px] text-slate-600">{g.items.length}</span>
+                <span className="font-mono text-[12px] text-slate-600">{g.items.length}</span>
               </div>
               <h3 className="mt-3.5 font-display text-[14px] font-semibold leading-5 text-white">{g.title}</h3>
               <ul className="mt-3.5 space-y-2 border-t border-phantix-800 pt-3.5">
                 {g.items.map(([name, plan]) => (
                   <li key={name}>
                     <span className="block text-[12.5px] leading-4 text-slate-300">{name}</span>
-                    <span className="mt-0.5 block font-mono text-[9.5px] uppercase tracking-[0.12em] text-slate-600">
+                    <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-[0.12em] text-slate-500">
                       {plan}
                     </span>
                   </li>
@@ -890,13 +890,13 @@ function PointPill({ point, ring }: { point: AppPoint; ring: string }) {
     <div className="group/pill relative">
       <button
         type="button"
-        className={`rounded-full border border-phantix-700/60 bg-phantix-900/60 px-2.5 py-1 text-[11px] text-slate-400 transition-colors hover:text-white focus:outline-none focus-visible:text-white ${ring}`}
+        className={`rounded-full border border-phantix-700/60 bg-phantix-900/60 px-2.5 py-1 text-[12px] text-slate-400 transition-colors hover:text-white focus:outline-none focus-visible:text-white ${ring}`}
       >
         {point.label}
       </button>
       <div
         role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-52 -translate-x-1/2 rounded-lg border border-phantix-700 bg-phantix-950/95 p-2.5 text-[11px] leading-5 text-slate-300 opacity-0 shadow-card backdrop-blur-sm transition-opacity duration-150 group-hover/pill:opacity-100 group-focus-within/pill:opacity-100"
+        className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-52 -translate-x-1/2 rounded-lg border border-phantix-700 bg-phantix-950/95 p-2.5 text-[12px] leading-5 text-slate-300 opacity-0 shadow-card backdrop-blur-sm transition-opacity duration-150 group-hover/pill:opacity-100 group-focus-within/pill:opacity-100"
       >
         {point.hint}
       </div>
@@ -913,7 +913,7 @@ function AppCard({ a, hub = false }: { a: AppDef; hub?: boolean }) {
         <span className={`h-1.5 w-1.5 rounded-full ${a.dot}`} />
         <span className="font-display text-lg font-bold text-white">{a.name}</span>
         {a.base && (
-          <span className="ml-auto rounded bg-phantix-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-400">
+          <span className="ml-auto rounded bg-phantix-800 px-1.5 py-0.5 text-[12px] uppercase tracking-wide text-slate-400">
             included
           </span>
         )}

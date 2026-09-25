@@ -19,15 +19,9 @@ export default function PricingPage() {
             Simple pricing for assessment and continuous security
           </h1>
           <p className="mt-5 text-[15px] leading-7 text-slate-400">
-            Free helps you know your surface. Starter (₦19,900/mo) runs vulnerability assessment and
-            penetration testing with verified findings. Growth (₦49,900/mo) keeps testing continuously.
-            Enterprise is quoted. Engagements cover human-led work on the same platform.
-          </p>
-          <p className="mt-4 text-[13px] leading-6 text-slate-500">
-            Hero numbers are <strong className="font-medium text-slate-400">AI credits</strong> for
-            write-ups, triage and AutoFix. Free starts with a one-time 500-credit allotment; paid plans
-            add a monthly allowance. Dual control, MFA and the immutable audit trail are free on every plan.
-            One subscription — unused modules can stay off.
+            Free helps you know your surface. Starter runs vulnerability assessment and
+            penetration testing with verified findings. Growth keeps testing continuously.
+            Enterprise is quoted.
           </p>
         </motion.div>
       </Section>

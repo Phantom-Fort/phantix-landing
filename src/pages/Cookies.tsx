@@ -24,7 +24,7 @@ export default function Cookies() {
       <Nav />
       <main className="relative px-4 pb-16 pt-28 md:pt-36">
         <div className="mx-auto max-w-3xl">
-          <Link to="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-200">
+          <Link to="/" className="-ml-2 inline-flex items-center gap-2 rounded-md px-2 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-slate-200">
             <ArrowLeft size={15} /> Back to phantixlabs.com
           </Link>
 
@@ -32,7 +32,7 @@ export default function Cookies() {
             <div className="flex items-center gap-4">
               <img src="/logo-white.png" alt="SecureGraph" className="h-16 w-16 object-contain" />
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-400">
+                <p className="text-[12px] font-semibold uppercase tracking-[0.22em] text-gold-400">
                   Cookies &amp; Analytics
                 </p>
                 <h1 className="mt-1 text-2xl font-semibold text-white">Cookies &amp; analytics policy</h1>

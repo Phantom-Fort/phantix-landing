@@ -49,7 +49,7 @@ export default function Marquee() {
 
   return (
     <section aria-label="Sectors SecureGraph is built for" className="relative border-y border-phantix-800/60 py-10">
-      <p className="mb-7 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+      <p className="mb-7 text-center text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-500">
         Built for security teams across
       </p>
 

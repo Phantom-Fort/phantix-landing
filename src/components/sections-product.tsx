@@ -154,7 +154,7 @@ export function VerificationGate() {
             ].map((s) => (
               <div key={s.l} className="rounded-2xl border border-phantix-700/50 bg-phantix-950/60 p-5 text-center">
                 <p className={`font-display text-4xl font-bold ${s.c}`}>{s.v}</p>
-                <p className="mt-1.5 text-[11px] font-medium uppercase tracking-wider text-slate-500">{s.l}</p>
+                <p className="mt-1.5 text-[12px] font-medium uppercase tracking-wider text-slate-500">{s.l}</p>
               </div>
             ))}
             <div className="col-span-3 rounded-2xl border border-gold-400/25 bg-gold-400/[0.06] p-4 text-center text-[13px] text-gold-300/90">
@@ -299,7 +299,7 @@ export function Surfaces() {
             transition={{ duration: 0.55, delay: i * 0.1 }}
           >
             <a href={s.href} className="card group block h-full p-6 transition-all duration-300 hover:-translate-y-1 hover:border-gold-400/40 hover:shadow-glow">
-              <p className="font-mono text-[10px] uppercase tracking-wider text-slate-500">{s.token}</p>
+              <p className="font-mono text-[12px] uppercase tracking-wider text-slate-500">{s.token}</p>
               <h3 className="mt-2 font-display text-lg font-semibold text-white group-hover:text-gold-300">{s.name}</h3>
               <p className="mt-2 text-[13px] leading-6 text-slate-400">{s.desc}</p>
               <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-gold-400 opacity-0 transition-opacity group-hover:opacity-100">

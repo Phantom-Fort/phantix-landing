@@ -83,7 +83,7 @@ export default function PrivacyDiagram() {
         </text>
       </svg>
 
-      <p className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[11px] text-slate-600">
+      <p className="border-t border-phantix-800 px-5 py-3 text-center font-mono text-[12px] text-slate-600">
         one direction only · nothing leaves the boundary
       </p>
     </div>

@@ -59,7 +59,7 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
       <Nav />
       <main className="relative px-4 pb-16 pt-28 md:pt-36">
         <div className="mx-auto max-w-3xl">
-          <a href="/" className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-200">
+          <a href="/" className="-ml-2 inline-flex items-center gap-2 rounded-md px-2 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-slate-200">
             <ArrowLeft size={15} /> Back to phantixlabs.com
           </a>
 
@@ -67,10 +67,10 @@ export default function LegalPage({ docKey }: { docKey: "terms" | "aup" | "priva
             <div className="flex items-center gap-4">
               <img src="/logo-white.png" alt="SecureGraph" className="h-16 w-16 object-contain" />
               <div>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-400">{meta.kicker}</p>
+                <p className="text-[12px] font-semibold uppercase tracking-[0.22em] text-gold-400">{meta.kicker}</p>
                 <h1 className="font-display text-3xl font-bold text-white">{doc?.title || meta.kicker}</h1>
                 <p className="mt-1 text-sm text-slate-500">{doc?.effective || doc?.summary}</p>
-                {doc?.version && <p className="mt-1 text-[11px] font-mono text-slate-600">version {doc.version}</p>}
+                {doc?.version && <p className="mt-1 text-[12px] font-mono text-slate-600">version {doc.version}</p>}
               </div>
             </div>
           </motion.div>

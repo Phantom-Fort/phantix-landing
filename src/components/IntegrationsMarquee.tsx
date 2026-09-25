@@ -94,7 +94,7 @@ export default function IntegrationsMarquee() {
 
   return (
     <section aria-label="SecureGraph integrations" className="relative border-y border-phantix-800/60 py-10">
-      <p className="mb-7 text-center text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">
+      <p className="mb-7 text-center text-[12px] font-semibold uppercase tracking-[0.18em] text-slate-500">
         200+ integrations · connect the tools you already run
       </p>
       <div className="space-y-7">

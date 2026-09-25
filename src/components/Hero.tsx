@@ -131,7 +131,7 @@ function Hotspot({
         >
           <span className="block rounded-md border border-gold-400/30 bg-phantix-950/95 px-3 py-2 text-left shadow-[0_0_0_1px_rgba(0,0,0,0.6)] backdrop-blur-sm">
             <span className="block font-display text-[12px] font-semibold text-gold-300">{value}</span>
-            <span className="mt-0.5 block text-[11px] leading-4 text-slate-400">{detail}</span>
+            <span className="mt-0.5 block text-[12px] leading-4 text-slate-400">{detail}</span>
           </span>
         </span>
       </span>
