@@ -10,6 +10,11 @@ export const APP_URL = "https://app.phantixlabs.com";
 export const ATTACK_URL = "https://attack.phantixlabs.com";
 export const DEFEND_URL = "https://defend.phantixlabs.com";
 export const CODE_URL = "https://code.phantixlabs.com";
+/**
+ * The SecureGraph Weekly — the public journal (separate host, its own Vercel
+ * project). Keep this in step with that project's production domain.
+ */
+export const BLOG_URL = "https://blog.phantixlabs.com";
 /** Public form on Command Centre (separate host). */
 export const SANDBOX_APPLY_URL = `${APP_URL}/sandbox-apply`;
 export const AGI_ENABLED = true;

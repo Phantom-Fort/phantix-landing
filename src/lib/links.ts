@@ -5,6 +5,7 @@ export {
   ATTACK_URL,
   DEFEND_URL,
   CODE_URL,
+  BLOG_URL,
   SANDBOX_APPLY_URL,
 } from "./config";
 import { PLATFORM_URL, APP_URL, SANDBOX_APPLY_URL } from "./config";

@@ -5,11 +5,11 @@ import {
   ArrowRight, BookOpen, CalendarClock, ChevronDown, Code2, FlaskConical, Layers,
   Menu, Presentation, ShieldCheck, Sparkles, Terminal, Users, X,
 } from "lucide-react";
-import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL, ATTACK_URL, DEFEND_URL, CODE_URL} from "@/lib/links";
+import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL, ATTACK_URL, DEFEND_URL, CODE_URL, BLOG_URL } from "@/lib/links";
 import { PLATFORM_PAGES } from "@/lib/platform-content";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { BrandLogo } from "@/components/BrandLogo";
+import { BrandWordmark } from "@/components/BrandLogo";
 
 interface MegaItem {
   label: string;
@@ -345,6 +345,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         <a href="/#how-it-works" className={plain}>How it works</a>
         <Link to="/pricing" className={plain}>Pricing</Link>
         <a href={APP_DOCS_URL} className={plain}>Documentation</a>
+        <a href={BLOG_URL} className={plain}>Blog</a>
         <a href={SANDBOX_APPLY_URL} className={plain}>Sandbox</a>
       </div>
       <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
@@ -385,10 +386,9 @@ export function Nav() {
             : "border-white/10 bg-phantix-800/55 shadow-[0_10px_34px_-16px_rgba(0,0,0,0.7)]",
         )}
       >
-        <BrandLogo className="h-9 w-10" lightSrc="/logo-transparent.png" />
-        <div className="leading-tight">
-          <p className="font-display text-[14px] font-bold text-white">SecureGraph</p>
-          <p className="hidden whitespace-nowrap text-[11px] font-semibold uppercase tracking-[0.16em] text-gold-400 sm:block">AI-Powered Security</p>
+        <div className="flex flex-col">
+          <BrandWordmark className="h-8 self-start" />
+          <p className="-mt-[0.46rem] hidden whitespace-nowrap pl-[2.25rem] text-[8px] font-semibold uppercase leading-none tracking-[0.26em] text-gold-400 sm:block">AI-Powered Security</p>
         </div>
         <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 xl:flex [&>a]:rounded-md [&>a]:px-2.5 [&>a]:py-2 [&>a:hover]:bg-white/5">
           <MegaMenu label="Platform" config={PLATFORM_MENU} />
@@ -398,6 +398,7 @@ export function Nav() {
               from a standalone page too. */}
           <a href="/#how-it-works" className="transition-colors hover:text-white">How it works</a>
           <Link to="/pricing" className="transition-colors hover:text-white">Pricing</Link>
+          <a href={BLOG_URL} className="transition-colors hover:text-white">Blog</a>
         </nav>
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
@@ -487,6 +488,7 @@ const FOOTER_SURFACE_LINKS: FootLink[] = [
   { label: "Code", href: CODE_URL },
   { label: "Platform", href: PLATFORM_URL },
   { label: "Documentation", href: APP_DOCS_URL },
+  { label: "Blog", href: BLOG_URL },
 ];
 const FOOTER_START_LINKS: FootLink[] = [
   { label: "Request a demo", to: "/demo" },
@@ -511,10 +513,9 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(5,1fr)] lg:gap-8">
           <div className="max-w-xs">
             <div className="flex items-center gap-2.5">
-              <BrandLogo className="h-10 w-10" lightSrc="/logo-transparent.png" darkSrc="/logo-white.png" />
-              <div className="leading-tight">
-                <p className="font-display text-sm font-semibold text-white">SecureGraph</p>
-                <p className="font-mono text-[12px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
+              <div className="flex flex-col">
+                <BrandWordmark className="h-8 self-start" />
+                <p className="mt-1 font-mono text-[12px] uppercase tracking-[0.2em] text-gold-400">Protect. Prevent. Perform.</p>
               </div>
             </div>
             <p className="mt-5 text-sm leading-6 text-slate-500">
