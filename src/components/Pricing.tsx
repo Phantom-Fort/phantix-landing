@@ -23,7 +23,7 @@ import {
 import type { EngagementOffer, PricingTier } from "@/lib/pricing";
 import { PLATFORM_REGISTER_URL, APP_DEMO_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
-import { BrandLogo } from "@/components/BrandLogo";
+import { BrandMark } from "@/components/BrandLogo";
 import { DemoRequestModal } from "@/components/DemoRequestModal";
 
 const engagementIcons = [
@@ -418,11 +418,7 @@ export function FinalCTA() {
         className="final-cta relative overflow-hidden rounded-3xl border border-gold-400/30 px-8 py-16 text-center shadow-glow"
       >
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-grid opacity-30 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_50%,black,transparent)]" />
-        <BrandLogo
-          className="relative mx-auto h-20 w-20"
-          lightSrc="/logo-white.png"
-          darkSrc="/logo-white.png"
-        />
+        <BrandMark className="relative mx-auto h-20 w-20" />
         <h2 className="relative mt-6 font-display text-4xl font-bold tracking-tight text-white">
           Take command of your security posture
         </h2>

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Cookie, RefreshCw, ShieldCheck } from "lucide-react";
 import { Nav, Footer } from "@/components/chrome";
 import { clearConsent, getConsent } from "@/lib/consent";
+import { BrandMark } from "@/components/BrandLogo";
 
 // ── Cookies & analytics policy (public) ──────────────────────────────────────
 
@@ -30,7 +31,7 @@ export default function Cookies() {
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
             <div className="flex items-center gap-4">
-              <img src="/logo-white.png" alt="SecureGraph" className="h-16 w-16 object-contain" />
+              <BrandMark className="h-16 w-16" />
               <div>
                 <p className="text-[12px] font-semibold uppercase tracking-[0.22em] text-gold-400">
                   Cookies &amp; Analytics
