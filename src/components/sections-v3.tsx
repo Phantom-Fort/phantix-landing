@@ -792,7 +792,7 @@ export function WhyWeBuilt() {
           <div className="mt-5 space-y-4">
             {shifts.map(([before, after]) => (
               <div key={before} className="border-b border-phantix-800 pb-4 last:border-0 last:pb-0">
-                <p className="text-[13px] leading-5 text-slate-600 line-through decoration-slate-700">{before}</p>
+                <p className="text-[13px] leading-5 text-slate-500 line-through decoration-severity-critical/80 decoration-2">{before}</p>
                 <p className="mt-1.5 flex items-start gap-2.5 text-[14px] leading-6 text-slate-200">
                   <Check size={15} className="mt-1 shrink-0 text-gold-400" />
                   {after}
