@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   motion,
   useMotionTemplate,
@@ -8,8 +7,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowRight, PlayCircle } from "lucide-react";
+import { ArrowRight, CalendarClock } from "lucide-react";
 import { PLATFORM_REGISTER_URL } from "@/lib/links";
+import { DemoRequestModal } from "@/components/DemoRequestModal";
 import { useTheme } from "@/lib/theme";
 import { GlowBloom } from "@/components/effects";
 
@@ -271,6 +271,7 @@ export default function Hero() {
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
   // No annotation below lg, so rotating there would be motion with no payload.
   const annotate = useMediaQuery("(min-width: 1024px)");
 
@@ -305,14 +306,24 @@ export default function Hero() {
             findings and security data in a database you control.
           </p>
 
+          {/* One primary path: self-serve. The demo is an accelerator for teams
+              that want a guided walkthrough, never a gate in front of signup —
+              so it opens in place instead of sending the visitor elsewhere. */}
           <div className="mt-7 flex flex-wrap items-center gap-4">
             <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
               Get started free <ArrowRight size={16} />
             </a>
-            <Link to="/demo" className="btn-secondary !px-6 !py-3 !text-base">
-              <PlayCircle size={16} /> Watch demo
-            </Link>
+            <button
+              type="button"
+              onClick={() => setDemoOpen(true)}
+              className="btn-secondary !px-6 !py-3 !text-base"
+            >
+              <CalendarClock size={16} /> Book a demo
+            </button>
           </div>
+          <p className="mt-3 text-xs text-slate-500">
+            Free plan · No credit card required · Set up in minutes
+          </p>
 
           {/* The claims are the tour controls, not decoration — a compact
               pill row (not a stacked wall of boxes) that annotates the
@@ -372,6 +383,12 @@ export default function Hero() {
           onResume={() => setPaused(false)}
         />
       </div>
+
+      <DemoRequestModal
+        open={demoOpen}
+        onClose={() => setDemoOpen(false)}
+        source="landing-hero-book-demo"
+      />
     </section>
   );
 }

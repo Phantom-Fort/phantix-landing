@@ -17,6 +17,10 @@ const faqs = [
     a: "Yes — no card, no countdown trial.\n\nFree is the entry surface: create your organisation, dual-control and MFA, inventory assets within fair-use caps, run light hygiene scans, and export basic formats. You get a one-time 500 AI credits, then free open-source models if enabled.\n\nFull VAPT campaigns, continuous testing, deep cloud/SOC packs, and board PDF packages are on Starter and Growth. Free is meant to help you know your surface before you spend — not to replace a paid assessment plan.",
   },
   {
+    q: "Do I need a demo before I can start?",
+    a: "No. Create a free account and use the product straight away — no call, no card.\n\nBook a demo if you'd like us to walk through how SecureGraph fits your environment, your team or your procurement process. Larger organizations that need SSO, custom contracts, SLAs or a private deployment can talk to sales from the Enterprise plan.",
+  },
+  {
     q: "How is this different from buying a scanner?",
     a: "A scanner dumps issues on your desk. You still need someone to retest, prioritise, fix, and explain to leadership.\n\nSecureGraph starts with scoped VAPT, verifies what is real, guides remediation, and can keep testing continuously on Growth — in one place. Optional compliance mapping and SOC depth are available when you need them; they are not the reason to buy.\n\nThe other difference is ownership: your security database stays yours.",
   },
@@ -38,7 +42,7 @@ const faqs = [
   },
   {
     q: "How do I get started?",
-    a: "Click Get started free, create your organisation, and connect a security database (bring your own Postgres, or ask about hosted options when available).\n\nInventory a small scope, run a light assessment on Free, then move to Starter when you need full VAPT and verified reporting, and to Growth when you need continuous testing. Many teams reach a first report quickly — no card required to begin.",
+    a: "Click Get started free, create your organization, and connect a security database (bring your own Postgres, or ask about hosted options when available).\n\nAdd a small set of assets and run your first assessment on Free. Move to Starter when you need full VAPT and verified reporting, and to Growth when you need continuous testing — no card required to begin.",
   },
 ];
 
@@ -92,7 +96,7 @@ export function FAQ() {
           Straight answers
         </h2>
         <p className="mt-3 text-[15px] leading-7 text-slate-400">
-          Assess. Keep testing. Fix what matters. Prove it — without drowning in jargon.
+          What decision-makers usually ask before they start.
         </p>
         <div className="mt-10">
           {faqs.map((f) => (
