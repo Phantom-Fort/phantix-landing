@@ -357,7 +357,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
   );
 }
 
-/** Section anchors for the focused (landing) nav — on-page only, no exits. */
+/** Section anchors for the focused (landing) nav, after Platform and Solutions. */
 const FOCUSED_LINKS = [
   { label: "How it works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
@@ -365,9 +365,9 @@ const FOCUSED_LINKS = [
 ];
 
 /**
- * `focused` is the landing-page variant: no mega-menus, no secondary offers and
- * no sign-in — a few on-page anchors and the one primary action, so every click
- * in the chrome either keeps the visitor reading or starts a free account.
+ * `focused` is the landing-page variant: Platform and Solutions menus, a few
+ * on-page anchors and the one primary action — no secondary offers, no docs
+ * shortcut and no sign-in.
  */
 export function Nav({ focused = false }: { focused?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
@@ -402,7 +402,9 @@ export function Nav({ focused = false }: { focused?: boolean }) {
           <p className="-mt-[0.46rem] hidden whitespace-nowrap pl-[2.25rem] text-[8px] font-semibold uppercase leading-none tracking-[0.26em] text-gold-400 sm:block">AI-Powered Security</p>
         </div>
         {focused ? (
-          <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 md:flex">
+          <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 xl:flex">
+            <MegaMenu label="Platform" config={PLATFORM_MENU} />
+            <MegaMenu label="Solutions" config={SOLUTIONS_MENU} />
             {FOCUSED_LINKS.map((l) => (
               <a key={l.href} href={l.href} className="rounded-md px-2.5 py-2 transition-colors hover:bg-white/5 hover:text-white">
                 {l.label}
@@ -434,26 +436,24 @@ export function Nav({ focused = false }: { focused?: boolean }) {
             </a>
           )}
           {/* The one primary action, identical on every page. */}
-          <a href={PLATFORM_REGISTER_URL} className="btn-primary !rounded-full !px-3.5 !py-2">
+          <a href={PLATFORM_REGISTER_URL} className="btn-primary whitespace-nowrap !rounded-full !px-3.5 !py-2">
             <span className="sm:hidden">Get started</span>
             <span className="hidden sm:inline">Get started free</span>
             <ArrowRight size={14} />
           </a>
-          {!focused && (
-            <button
-              type="button"
-              onClick={() => setMenuOpen((v) => !v)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-300 transition-colors hover:border-phantix-500/50 hover:text-white xl:hidden"
-            >
-              {menuOpen ? <X size={17} /> : <Menu size={17} />}
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-300 transition-colors hover:border-phantix-500/50 hover:text-white xl:hidden"
+          >
+            {menuOpen ? <X size={17} /> : <Menu size={17} />}
+          </button>
         </div>
       </div>
-      <AnimatePresence>{!focused && menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}</AnimatePresence>
+      <AnimatePresence>{menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}</AnimatePresence>
     </header>
   );
 }

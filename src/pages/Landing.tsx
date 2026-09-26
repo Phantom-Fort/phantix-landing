@@ -20,8 +20,8 @@ import { FAQ } from "@/components/FAQ";
  * register). "Book a demo" is the only secondary action and it opens in place,
  * as an accelerator for teams that want a guided walkthrough, never a gate in
  * front of signup. Enterprise buyers reach sales from the pricing card. There
- * is no sign-in anywhere on the page, and the nav is the focused variant: a
- * few on-page anchors plus the primary button.
+ * is no sign-in anywhere on the page, and the nav is the focused variant:
+ * Platform and Solutions menus, a few on-page anchors and the primary button.
  *
  * Written for the decision-maker who owns security but isn't a specialist, and
  * ordered problem → what you get → proof → trust → how to start → price → close.
