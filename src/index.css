@@ -710,3 +710,59 @@ p {
     opacity: 0;
   }
 }
+
+/* ── Free scan spotlight ──────────────────────────────────────────────────────
+   A gold highlight travels slowly around the panel's 1px rim, the eyebrow and
+   "live" dots ping, and the terminal glows (brighter while you type). All of it
+   stops for prefers-reduced-motion, leaving a static gold rim. */
+@property --freescan-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.freescan-rim {
+  background:
+    conic-gradient(
+      from var(--freescan-angle),
+      rgba(232, 181, 77, 0.18) 0deg,
+      rgba(232, 181, 77, 0.95) 40deg,
+      rgba(232, 181, 77, 0.18) 90deg,
+      rgba(232, 181, 77, 0.18) 360deg
+    );
+  box-shadow: 0 30px 80px -30px rgba(232, 181, 77, 0.35);
+  animation: freescan-orbit 6s linear infinite;
+}
+@keyframes freescan-orbit {
+  to {
+    --freescan-angle: 360deg;
+  }
+}
+.freescan-ping {
+  animation: freescan-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes freescan-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+.freescan-terminal {
+  box-shadow:
+    0 0 0 1px rgba(232, 181, 77, 0.08),
+    0 24px 60px -20px rgba(232, 181, 77, 0.28);
+}
+.freescan-terminal:focus-within {
+  box-shadow:
+    0 0 0 3px rgba(232, 181, 77, 0.18),
+    0 24px 70px -18px rgba(232, 181, 77, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+  .freescan-rim {
+    animation: none;
+    background: rgba(232, 181, 77, 0.5);
+  }
+  .freescan-ping {
+    animation: none;
+  }
+}
