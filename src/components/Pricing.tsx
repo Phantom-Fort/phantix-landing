@@ -418,7 +418,8 @@ export function FinalCTA() {
         className="final-cta relative overflow-hidden rounded-3xl border border-gold-400/30 px-8 py-16 text-center shadow-glow"
       >
         <div className="pointer-events-none absolute inset-0 bg-grid-faint bg-grid opacity-30 [mask-image:radial-gradient(ellipse_60%_80%_at_50%_50%,black,transparent)]" />
-        <BrandMark className="relative mx-auto h-20 w-20" />
+        {/* The FinalCTA panel is always navy, so the mark stays white in both themes. */}
+        <BrandMark surface="dark" className="relative mx-auto h-20 w-20" />
         <h2 className="relative mt-6 font-display text-4xl font-bold tracking-tight text-white">
           Take command of your security posture
         </h2>
