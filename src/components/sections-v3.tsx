@@ -25,6 +25,7 @@ import {
   Ban,
 } from "lucide-react";
 import { PLATFORM_PAGES } from "@/lib/platform-content";
+import { PLATFORM_REGISTER_URL } from "@/lib/links";
 import { Section, fadeUp } from "./Section";
 import { GlowBloom } from "./effects";
 import PrivacyVideo from "./PrivacyVideo";
@@ -343,8 +344,8 @@ export function HowItWorks() {
   const steps = [
     {
       n: "01",
-      title: "Register & verify",
-      body: "Create your organization on the Platform. Email OTP verification — no phone number required.",
+      title: "Create your free account",
+      body: "Register your organization and verify your email. No credit card, no phone number, no sales call.",
     },
     {
       n: "02",
@@ -364,6 +365,7 @@ export function HowItWorks() {
         <Heading eyebrow="How it works" lead="Three steps to a" accent="verified report" />
       </motion.div>
 
+
       <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3">
         {steps.map((s, i) => (
           <motion.div
@@ -378,6 +380,14 @@ export function HowItWorks() {
           </motion.div>
         ))}
       </div>
+
+      {/* The steps end where the funnel starts — step 01 is one click away. */}
+      <motion.div {...fadeUp} className="mt-10 flex flex-col items-center gap-3">
+        <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-6 !py-3 !text-base">
+          Start step 01 — it's free <ArrowRight size={16} />
+        </a>
+        <p className="text-xs text-slate-500">No credit card required</p>
+      </motion.div>
     </Section>
   );
 }
@@ -974,8 +984,8 @@ export function Applications() {
       </motion.div>
 
       <motion.p {...fadeUp} className="mx-auto mt-8 max-w-2xl text-center text-[13px] leading-6 text-slate-500">
-        Signing in once opens whichever applications you are entitled to — moving between them
-        carries your session, and nothing you did in one is invisible to the others.
+        Every organization can start on Free. Turn on Defend and Code when you need continuous
+        coverage — it's one graph, so everything you've already found carries over.
       </motion.p>
     </Section>
   );

@@ -1,38 +1,37 @@
 import React from "react";
 import { Nav, Footer } from "@/components/chrome";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
 import {
   Capabilities,
-  Principles,
   PrivacyModel,
   HowItWorks,
   VerificationGate,
-  PentestAgent,
-  PlatformTeaser,
   WhyWeBuilt,
-  Lifecycle,
-  Coverage,
   Applications,
 } from "@/components/sections-v3";
 import { Pricing, FinalCTA } from "@/components/Pricing";
-import SandboxSection from "@/components/SandboxSection";
 import IntegrationsMarquee from "@/components/IntegrationsMarquee";
-import FreeScanSection from "@/components/FreeScanSection";
 import { FAQ } from "@/components/FAQ";
 
 /*
- * Landing — v3 structure (see PHANTIX_LANDING_V3_PLAN.md §5).
+ * Landing — a single conversion funnel.
  *
- * Seventeen blocks, one intent each, ordered hook → proof → close. The old page
- * argued the same point four times (ProblemCards, Outcomes, BoardFluency and
- * TrustDoctrine all restated "security is fragmented and we fix it"); this one
- * states it once and spends the rest of the page on proof — real screens from
- * the running Command Centre.
+ * One primary action everywhere on this page: Get started free (Platform
+ * register). "Book a demo" is the only secondary action and it opens in place,
+ * as an accelerator for teams that want a guided walkthrough, never a gate in
+ * front of signup. Enterprise buyers reach sales from the pricing card. There
+ * is no sign-in anywhere on the page, and the nav is the focused variant: a
+ * few on-page anchors plus the primary button.
  *
- * Retired: ProblemCards, OutcomesSection, BoardFluency, AIGovernance, Pipeline,
- * TrustDoctrine, ContributorsSection (its entries were literal placeholders),
- * SocialProof (no real customers to cite yet — Marquee is the honest stand-in).
+ * Written for the decision-maker who owns security but isn't a specialist, and
+ * ordered problem → what you get → proof → trust → how to start → price → close.
+ *
+ * Retired from this page (components kept for other routes or future use):
+ * Marquee (sector list said nothing a buyer could act on), Principles (merged
+ * into PrivacyModel's argument), PentestAgent, Lifecycle, Coverage and
+ * PlatformTeaser (five sections restating Capabilities), SandboxSection and
+ * FreeScanSection (competing offers that split the funnel), and the pricing
+ * engagement band (still on /pricing).
  */
 
 export default function Landing() {
@@ -45,59 +44,39 @@ export default function Landing() {
         <div className="absolute right-[-200px] top-[45%] h-[420px] w-[420px] rounded-full bg-phantix-500/10 blur-[120px]" />
       </div>
 
-      <Nav />
+      <Nav focused />
       <main className="relative">
-        {/* 1 — Hook: VAPT + continuous + fix (united front) */}
+        {/* 1 — Hook: what it is, Get started free / Book a demo */}
         <Hero />
 
-        {/* 2 — Sector marquee */}
-        <Marquee />
-
-        {/* 3 — What you get: Assess → Fix → Prove (VAPT-first) */}
-        <Capabilities />
-
-        {/* 4 — How you get a verified report */}
-        <HowItWorks />
-
-        {/* 5 — Verification gate: strongest proof point */}
-        <VerificationGate />
-
-        {/* 6 — AI pentest agent reinforces the same assess story */}
-        <PentestAgent />
-
-        {/* 7 — Trust: privacy & dual control (supporting, not the hook) */}
-        <Principles />
-        <PrivacyModel />
-
-        {/* 8 — Finding lifecycle (engines as proof, not the pitch) */}
-        <Lifecycle />
-
-        {/* 9 — Why this exists: the one-person security team */}
+        {/* 2 — The problem, in the buyer's terms: security is one person deep */}
         <WhyWeBuilt />
 
-        {/* 10 — Coverage by plan (entry → continuous) */}
-        <Coverage />
+        {/* 3 — What you get: Assess → Fix → Prove, one section */}
+        <Capabilities />
 
-        {/* 11 — One platform, modules you can leave off (after the entry story) */}
+        {/* 4 — Proof on the biggest pain point: false positives */}
+        <VerificationGate />
+
+        {/* 5 — Start small, grow into it: Attack first, Defend and Code later */}
         <Applications />
-        <PlatformTeaser />
 
-        {/* 9 — Sandbox cohort (real programme, real seat count) */}
-        <SandboxSection />
+        {/* 6 — Trust: your security data stays in your database */}
+        <PrivacyModel />
 
-        {/* 10 — Integration hub: 200+ connectors, two counter-scrolling layers */}
+        {/* 7 — Objection: "will it work with our tools?" */}
         <IntegrationsMarquee />
 
-        {/* 11 — Pricing, live from the API in NGN */}
-        <Pricing />
+        {/* 8 — How to start, ending on the primary CTA */}
+        <HowItWorks />
 
-        {/* 12 — FAQ before final CTA */}
+        {/* 9 — Pricing: start free, upgrade, or talk to sales for Enterprise */}
+        <Pricing showEngagements={false} />
+
+        {/* 10 — Remaining objections */}
         <FAQ />
 
-        {/* 13 — Free test pentest: terminal capture, immediately before the close */}
-        <FreeScanSection />
-
-        {/* 14 — Close: the card version (demo-first, register secondary) */}
+        {/* 11 — Close: the same two actions as the hero */}
         <FinalCTA />
       </main>
       <Footer />

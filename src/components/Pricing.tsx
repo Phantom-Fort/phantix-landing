@@ -5,7 +5,7 @@ import {
   CheckCircle2,
   ArrowRight,
   ArrowDown,
-  PlayCircle,
+  CalendarClock,
   Crosshair,
   Smartphone,
   Sparkles,
@@ -21,7 +21,7 @@ import {
   yearlySavePercent,
 } from "@/lib/pricing";
 import type { EngagementOffer, PricingTier } from "@/lib/pricing";
-import { PLATFORM_REGISTER_URL, APP_DEMO_URL } from "@/lib/links";
+import { PLATFORM_REGISTER_URL } from "@/lib/links";
 import { cx } from "@/lib/utils";
 import { BrandMark } from "@/components/BrandLogo";
 import { DemoRequestModal } from "@/components/DemoRequestModal";
@@ -47,7 +47,18 @@ type BillingCycle = "monthly" | "yearly";
  *  - exactly five headline features per card — the long story lives in the
  *    compare matrix on /pricing#compare.
  */
-export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
+/**
+ * `showEngagements` — the project-engagement band (four quote requests) lives on
+ * /pricing. The landing page hides it so pricing stays a single decision:
+ * start free, upgrade later, or talk to sales for Enterprise.
+ */
+export function Pricing({
+  showHeading = true,
+  showEngagements = true,
+}: {
+  showHeading?: boolean;
+  showEngagements?: boolean;
+}) {
   const [tiers, setTiers] = useState<PricingTier[]>([]);
   const [pricingLoading, setPricingLoading] = useState(true);
   const [cycle, setCycle] = useState<BillingCycle>("monthly");
@@ -314,6 +325,7 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
       </motion.div>
 
       {/* ── Engagements — collapsible band ─────────────────────────── */}
+      {showEngagements && (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -394,6 +406,7 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
           </motion.div>
         )}
       </motion.div>
+      )}
 
       <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-5 text-slate-500">
         {pricingFootnote}
@@ -410,7 +423,14 @@ export function Pricing({ showHeading = true }: { showHeading?: boolean }) {
   );
 }
 
+/**
+ * The close — the same two paths as the hero and nothing else: start free
+ * (primary) or book a demo (secondary, opens in place). No live-demo launcher,
+ * no sign-in, no host-by-host setup explainer.
+ */
 export function FinalCTA() {
+  // null = closed; otherwise which lead the popup is capturing.
+  const [lead, setLead] = useState<null | "demo" | "enterprise">(null);
   return (
     <Section className="pb-28 pt-8">
       <motion.div
@@ -421,27 +441,42 @@ export function FinalCTA() {
         {/* The FinalCTA panel is always navy, so the mark stays white in both themes. */}
         <BrandMark surface="dark" className="relative mx-auto h-20 w-20" />
         <h2 className="relative mt-6 font-display text-4xl font-bold tracking-tight text-white">
-          Take command of your security posture
+          Find out what an attacker would find — first
         </h2>
         <p className="relative mx-auto mt-4 max-w-xl text-[15px] leading-7 text-slate-300">
-          Explore the product on a simulated demo tenant — no account needed. Ready for real work?
-          Register on the Platform and issue login links for your operators to access the Application.
+          Create your organization, add your assets and run your first assessment today. Upgrade when
+          you need continuous testing — or talk to us if you'd like a guided walkthrough first.
         </p>
         <div className="relative mt-7 flex flex-wrap items-center justify-center gap-5">
-          <a href={APP_DEMO_URL} className="btn-primary !px-7 !py-3 !text-[15px]">
-            <PlayCircle size={16} /> Launch the live demo
+          <a href={PLATFORM_REGISTER_URL} className="btn-primary btn-shine !px-7 !py-3 !text-[15px]">
+            Get started free <ArrowRight size={16} />
           </a>
-          <a href={PLATFORM_REGISTER_URL} className="btn-secondary !px-7 !py-3 !text-[15px]">
-            Register your organization
-          </a>
+          <button
+            type="button"
+            onClick={() => setLead("demo")}
+            className="btn-secondary !px-7 !py-3 !text-[15px]"
+          >
+            <CalendarClock size={16} /> Book a demo
+          </button>
         </div>
         <p className="relative mt-5 text-[12px] leading-5 text-slate-400">
-          Registration and administration happen on <strong>platform.phantixlabs.com</strong>, where
-          you also choose which applications your organization uses. After setup you generate login
-          links from there; your team signs in once on <strong>app.phantixlabs.com</strong> and
-          lands on a picker with every application their role allows.
+          Free plan · No credit card required · Enterprise needs SSO, SLAs or custom deployment?{" "}
+          <button
+            type="button"
+            onClick={() => setLead("enterprise")}
+            className="font-semibold text-gold-300 hover:text-gold-200"
+          >
+            Talk to sales
+          </button>
         </p>
       </motion.div>
+
+      <DemoRequestModal
+        open={lead !== null}
+        onClose={() => setLead(null)}
+        source={lead === "enterprise" ? "landing-final-enterprise" : "landing-final-book-demo"}
+        defaultMessage={lead === "enterprise" ? "[interest:enterprise_quote]" : undefined}
+      />
     </Section>
   );
 }

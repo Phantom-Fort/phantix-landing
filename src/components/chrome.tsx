@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight, BookOpen, CalendarClock, ChevronDown, Code2, FlaskConical, Layers,
+  ArrowRight, BookOpen, ChevronDown, Code2, Layers,
   Menu, Presentation, ShieldCheck, Sparkles, Terminal, Users, X,
 } from "lucide-react";
-import { APP_DOCS_URL, APP_LOGIN_URL, APP_URL, PLATFORM_URL, SANDBOX_APPLY_URL, ATTACK_URL, DEFEND_URL, CODE_URL, BLOG_URL } from "@/lib/links";
+import { APP_DOCS_URL, BLOG_URL, PLATFORM_REGISTER_URL } from "@/lib/links";
 import { PLATFORM_PAGES } from "@/lib/platform-content";
 import { cx } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -37,7 +37,7 @@ const PLATFORM_MENU: MegaConfig = {
     title: "One command centre for every surface you own.",
     body: "Assets, assessments, risk and evidence stay in a single register — under your keys.",
     linkLabel: "Explore the platform",
-    linkTo: "/#platform",
+    linkTo: "/#applications",
     icon: <Layers size={16} />,
   },
   itemsEyebrow: "Testing surfaces",
@@ -346,19 +346,30 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         <Link to="/pricing" className={plain}>Pricing</Link>
         <a href={APP_DOCS_URL} className={plain}>Documentation</a>
         <a href={BLOG_URL} className={plain}>Blog</a>
-        <a href={SANDBOX_APPLY_URL} className={plain}>Sandbox</a>
+        <Link to="/demo" className={plain}>Book a demo</Link>
       </div>
-      <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
-        <a href={APP_LOGIN_URL} className="btn-secondary !rounded-full !py-2.5">Sign in</a>
-        <Link to="/demo" className="btn-primary !rounded-full !py-2.5">
-          <CalendarClock size={15} /> Request a demo
-        </Link>
+      <div className="mt-3 border-t border-white/10 pt-3">
+        <a href={PLATFORM_REGISTER_URL} className="btn-primary w-full !rounded-full !py-2.5">
+          Get started free <ArrowRight size={15} />
+        </a>
       </div>
     </motion.div>
   );
 }
 
-export function Nav() {
+/** Section anchors for the focused (landing) nav — on-page only, no exits. */
+const FOCUSED_LINKS = [
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+];
+
+/**
+ * `focused` is the landing-page variant: no mega-menus, no secondary offers and
+ * no sign-in — a few on-page anchors and the one primary action, so every click
+ * in the chrome either keeps the visitor reading or starts a free account.
+ */
+export function Nav({ focused = false }: { focused?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -390,51 +401,59 @@ export function Nav() {
           <BrandWordmark className="h-8 self-start" />
           <p className="-mt-[0.46rem] hidden whitespace-nowrap pl-[2.25rem] text-[8px] font-semibold uppercase leading-none tracking-[0.26em] text-gold-400 sm:block">AI-Powered Security</p>
         </div>
-        <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 xl:flex [&>a]:rounded-md [&>a]:px-2.5 [&>a]:py-2 [&>a:hover]:bg-white/5">
-          <MegaMenu label="Platform" config={PLATFORM_MENU} />
-          <MegaMenu label="Solutions" config={SOLUTIONS_MENU} />
-          <Link to="/trust" className="transition-colors hover:text-white">Trust</Link>
-          {/* Anchors only resolve on the homepage — prefix with "/" so they work
-              from a standalone page too. */}
-          <a href="/#how-it-works" className="transition-colors hover:text-white">How it works</a>
-          <Link to="/pricing" className="transition-colors hover:text-white">Pricing</Link>
-          <a href={BLOG_URL} className="transition-colors hover:text-white">Blog</a>
-        </nav>
+        {focused ? (
+          <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 md:flex">
+            {FOCUSED_LINKS.map((l) => (
+              <a key={l.href} href={l.href} className="rounded-md px-2.5 py-2 transition-colors hover:bg-white/5 hover:text-white">
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        ) : (
+          <nav className="ml-6 hidden items-center gap-1 text-sm text-slate-300 xl:flex [&>a]:rounded-md [&>a]:px-2.5 [&>a]:py-2 [&>a:hover]:bg-white/5">
+            <MegaMenu label="Platform" config={PLATFORM_MENU} />
+            <MegaMenu label="Solutions" config={SOLUTIONS_MENU} />
+            <Link to="/trust" className="transition-colors hover:text-white">Trust</Link>
+            {/* Anchors only resolve on the homepage — prefix with "/" so they work
+                from a standalone page too. */}
+            <a href="/#how-it-works" className="transition-colors hover:text-white">How it works</a>
+            <Link to="/pricing" className="transition-colors hover:text-white">Pricing</Link>
+            <a href={BLOG_URL} className="transition-colors hover:text-white">Blog</a>
+          </nav>
+        )}
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
           <ThemeToggle />
-          <a
-            href={SANDBOX_APPLY_URL}
-            title="Sandbox"
-            aria-label="Sandbox"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-gold-400/40 hover:text-gold-300 sm:inline-flex"
-          >
-            <FlaskConical size={16} />
+          {!focused && (
+            <a
+              href={APP_DOCS_URL}
+              title="Documentation"
+              aria-label="Documentation"
+              className="hidden h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-phantix-500/50 hover:text-white sm:inline-flex"
+            >
+              <BookOpen size={16} />
+            </a>
+          )}
+          {/* The one primary action, identical on every page. */}
+          <a href={PLATFORM_REGISTER_URL} className="btn-primary !rounded-full !px-3.5 !py-2">
+            <span className="sm:hidden">Get started</span>
+            <span className="hidden sm:inline">Get started free</span>
+            <ArrowRight size={14} />
           </a>
-          <a
-            href={APP_DOCS_URL}
-            title="Documentation"
-            aria-label="Documentation"
-            className="hidden h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-400 transition-colors hover:border-phantix-500/50 hover:text-white sm:inline-flex"
-          >
-            <BookOpen size={16} />
-          </a>
-          <a href={APP_LOGIN_URL} className="btn-secondary hidden !rounded-full !px-3.5 !py-2 sm:inline-flex">Sign in</a>
-          <Link to="/demo" className="btn-primary !rounded-full !px-3.5 !py-2" aria-label="Request a demo">
-            <CalendarClock size={15} /> <span className="hidden sm:inline">Request a demo</span>
-          </Link>
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-300 transition-colors hover:border-phantix-500/50 hover:text-white xl:hidden"
-          >
-            {menuOpen ? <X size={17} /> : <Menu size={17} />}
-          </button>
+          {!focused && (
+            <button
+              type="button"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-phantix-700/50 bg-phantix-900/50 text-slate-300 transition-colors hover:border-phantix-500/50 hover:text-white xl:hidden"
+            >
+              {menuOpen ? <X size={17} /> : <Menu size={17} />}
+            </button>
+          )}
         </div>
       </div>
-      <AnimatePresence>{menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}</AnimatePresence>
+      <AnimatePresence>{!focused && menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}</AnimatePresence>
     </header>
   );
 }
@@ -472,7 +491,6 @@ function FooterLinkColumn({ label, links }: { label: string; links: FootLink[] }
 
 const FOOTER_PLATFORM_LINKS: FootLink[] = [
   ...PLATFORM_PAGES.map((p) => ({ label: p.navLabel, to: `/platform/${p.slug}` })),
-  { label: "AI pentest agent", href: "/#ai" },
 ];
 const FOOTER_SOLUTIONS_LINKS: FootLink[] = [
   { label: "Business leaders", to: "/solutions/business-leaders" },
@@ -481,20 +499,16 @@ const FOOTER_SOLUTIONS_LINKS: FootLink[] = [
   { label: "Trust & security", to: "/trust" },
   { label: "Pricing", to: "/pricing" },
 ];
-const FOOTER_SURFACE_LINKS: FootLink[] = [
-  { label: "Core Application", href: APP_URL },
-  { label: "Attack", href: ATTACK_URL },
-  { label: "Defend", href: DEFEND_URL },
-  { label: "Code", href: CODE_URL },
-  { label: "Platform", href: PLATFORM_URL },
+const FOOTER_RESOURCE_LINKS: FootLink[] = [
   { label: "Documentation", href: APP_DOCS_URL },
   { label: "Blog", href: BLOG_URL },
 ];
+/* Self-serve first, demo as the accelerator, sales for Enterprise — and no
+   sign-in: the marketing site only ever starts accounts. */
 const FOOTER_START_LINKS: FootLink[] = [
-  { label: "Request a demo", to: "/demo" },
-  { label: "Sandbox apply", href: SANDBOX_APPLY_URL },
-  { label: "Sign in", href: APP_LOGIN_URL },
-  { label: "Register", href: `${PLATFORM_URL}/register` },
+  { label: "Get started free", href: PLATFORM_REGISTER_URL },
+  { label: "Book a demo", to: "/demo" },
+  { label: "Enterprise pricing", to: "/pricing" },
 ];
 const FOOTER_LEGAL_LINKS: FootLink[] = [
   { label: "Terms of Service", href: "/terms" },
@@ -526,8 +540,8 @@ export function Footer() {
 
           <FooterLinkColumn label="Platform" links={FOOTER_PLATFORM_LINKS} />
           <FooterLinkColumn label="Solutions" links={FOOTER_SOLUTIONS_LINKS} />
-          <FooterLinkColumn label="Surfaces" links={FOOTER_SURFACE_LINKS} />
-          <FooterLinkColumn label="Start" links={FOOTER_START_LINKS} />
+          <FooterLinkColumn label="Resources" links={FOOTER_RESOURCE_LINKS} />
+          <FooterLinkColumn label="Get started" links={FOOTER_START_LINKS} />
           <FooterLinkColumn label="Legal" links={FOOTER_LEGAL_LINKS} />
         </div>
 
